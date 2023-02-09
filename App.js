@@ -7,6 +7,7 @@ import About from './src/screens/About';
 import Contact from './src/screens/Contact';
 import UserData from './src/screens/UserData';
 import Course from './src/screens/Course';
+import CourseDetails from './src/screens/CourseDetails';
 
 const App = () => {
   const Stack = createNativeStackNavigator();
@@ -32,6 +33,7 @@ const App = () => {
     options = {{
       headerTitleStyle: {
         fontSize: 25,
+        fontFamily: "Itim-Regular",
       },
       headerTitleAlign: "center",
     }} />
@@ -40,6 +42,7 @@ const App = () => {
     options = {{
       headerTitleStyle: {
         fontSize: 25,
+        fontFamily: "Itim-Regular",
       },
       headerTitleAlign: "center",
     }} />
@@ -48,9 +51,21 @@ const App = () => {
      options = {{
       headerTitleStyle: {
         fontSize: 25,
+        fontFamily: "Itim-Regular",
       },
       headerTitleAlign: "center",
     }} />
+
+     {/* CourseDetails Screen  */}
+     <Stack.Screen
+          name="CourseDetails" component={CourseDetails}
+          options = {{
+            headerTitleStyle: {
+              fontSize: 25,
+              fontFamily: "Itim-Regular",
+            },
+            headerTitleAlign: "center",
+          }} />
 
     </Stack.Navigator>
   </NavigationContainer>

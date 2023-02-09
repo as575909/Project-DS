@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, Image, TouchableOpacity, FlatList } from "react-native";
 import React from "react";
 import Courses from "../api/Course";
 
@@ -17,7 +17,7 @@ const CourseDetails = ({ navigation, route }) => {
         <View>
           <Image
             style={styles.cardImage}
-            source={selectedCourse.image}
+            source={selectedCourse.Image}
             resizeMode="contain"
           />
         </View>
@@ -48,6 +48,7 @@ const CourseDetails = ({ navigation, route }) => {
         </View>
       </View>
     </View>
+   
   );
 };
 

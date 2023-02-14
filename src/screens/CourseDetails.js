@@ -43,7 +43,7 @@ const CourseDetails = ({ navigation, route }) => {
           <TouchableOpacity
             style={styles.buttonStyle}
             onPress={() => navigation.navigate("Course")}>
-            <Text style={styles.buttonText}> Join Now </Text>
+            <Text style={styles.buttonText}> Buy Now </Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     display: "flex",
     alignSelf: "center",
     height: undefined,
-    aspectRatio: 1,
+    aspectRatio: 2,
   },
 
   mainHeader: {
@@ -87,9 +87,9 @@ const styles = StyleSheet.create({
     color: "#344055",
     textTransform: "uppercase",
     fontWeight: "500",
-    paddingTop: 10,
-    paddingBottom: 15,
-    fontFamily: "Nunito_700Bold",
+    paddingTop: 20,
+    paddingBottom: 10,
+    fontFamily: "Itim-Regular",
     textAlign: "center",
   },
 
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     textTransform: "uppercase",
     fontWeight: "500",
     paddingBottom: 15,
-    fontFamily: "WorkSans_400Regular",
+    fontFamily: "Itim-Regular",
     textAlign: "center",
   },
 
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#7d7d7d",
     paddingBottom: 20,
-    fontFamily: "WorkSans_400Regular",
+    fontFamily: "Itim-Regular",
     lineHeight: 20,
   },
   subCourse: {
@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 1,
     borderTopLeftRadius: 1,
     fontSize: 20,
-    fontFamily: "WorkSans_400Regular",
+    fontFamily: "Itim-Regular",
     textAlign: "center",
   },
   buttonStyle: {
@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 20,
     color: "#eee",
-    fontFamily: "WorkSans_400Regular",
+    fontFamily: "Itim-Regular",
   },
 });
 

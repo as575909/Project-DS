@@ -1,79 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Home from './src/screens/Home';
-import About from './src/screens/About';
-import Contact from './src/screens/Contact';
-import UserData from './src/screens/UserData';
-import Course from './src/screens/Course';
-import CourseDetails from './src/screens/CourseDetails';
+import Navigation from './src/screens/Navigation';
 
 const App = () => {
-  const Stack = createNativeStackNavigator();
-
-  return (
-  <NavigationContainer>
-    <Stack.Navigator initialRouteName='Home'>
-      {/* //HomeScreen */}
-    <Stack.Screen name="Home" options={{headerShown: false,}}>
-      {(props) => <Home {...props} channelName ={"EduoSkill!!"} />}
-      </Stack.Screen>
-      {/* CourseScreen */}
-    <Stack.Screen name='Course' component={Course}
-    options = {{
-      headerTitleStyle: {
-        fontSize: 25,
-      },
-      headerTitle: "Courses",
-      headerTitleAlign: "center",
-    }} />
-     {/* AboutScreen */}
-    <Stack.Screen name='About' component={About}
-    options = {{
-      headerTitleStyle: {
-        fontSize: 25,
-        fontFamily: "Itim-Regular",
-      },
-      headerTitleAlign: "center",
-    }} />
-      {/* ContactScreen */}
-    <Stack.Screen name='Contact' component={Contact}
-    options = {{
-      headerTitleStyle: {
-        fontSize: 25,
-        fontFamily: "Itim-Regular",
-      },
-      headerTitleAlign: "center",
-    }} />
-     {/* UserDataScreen */}
-     <Stack.Screen name='UserData' component={UserData}
-     options = {{
-      headerTitleStyle: {
-        fontSize: 25,
-        fontFamily: "Itim-Regular",
-      },
-      headerTitleAlign: "center",
-    }} />
-
-     {/* CourseDetails Screen  */}
-     <Stack.Screen
-          name="CourseDetails" component={CourseDetails}
-          options = {{
-            headerTitleStyle: {
-              fontSize: 25,
-              fontFamily: "Itim-Regular",
-            },
-            headerTitleAlign: "center",
-          }} />
-
-    </Stack.Navigator>
-  </NavigationContainer>
-  );
+  return <Navigation />;
 };
+
 export default App;
-
-
 
 
 

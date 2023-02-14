@@ -9,7 +9,7 @@ const Home = (props) => {
       <View style = {styles.homeTop}>
         <Image style = {styles.headerImage}
           resizeMode = "stretch"
-          source = {require("../../assets/logo.jpeg")}/>
+          source = {require("../../assets/logo1.jpg")}/>
         <Text style = {styles.mainHeader}> Welcome to </Text>
         <Text style = {[
           styles.mainHeader,
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 19,
     color: "#7d7d7d",
-    marginTop: 30,
+    marginTop: 40,
     paddingBottom: 50, 
     lineHeight: 26,
     fontFamily: "Itim-Regular",

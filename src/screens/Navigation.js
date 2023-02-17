@@ -6,13 +6,25 @@ import Contact from './Contact';
 import UserData from './UserData';
 import Course from './Course';
 import CourseDetails from './CourseDetails';
+import WelcomeScreen from './LoginSignupScreen/WelcomeScreen';
+import LoginScreen from './LoginSignupScreen/LoginScreen';
+import SignupScreen from './LoginSignupScreen/SignupScreen';
 
 const Navigation = () => {
   const Stack = createNativeStackNavigator();
 
   return (
   <NavigationContainer>
-    <Stack.Navigator initialRouteName='Home'>
+    <Stack.Navigator initialRouteName='welcomepage'>
+      <Stack.Screen name='welcomepage' component={WelcomeScreen}
+      options={{headerShown: false,}}
+       />
+      <Stack.Screen name='signup' component={SignupScreen}
+      options={{headerShown: false,}} 
+      />
+      <Stack.Screen name='login' component={LoginScreen}
+      options={{headerShown: false,}} 
+      />
       {/* //HomeScreen */}
     <Stack.Screen name="Home" options={{headerShown: false,}}>
       {(props) => <Home {...props} channelName ={"EduoSkill!!"} />}

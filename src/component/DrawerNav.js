@@ -11,10 +11,10 @@ function HomeScreen({ navigation }) {
   );
 }
 
-function NotificationsScreen({ navigation }) {
+function AboutScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-     <Text> Welcome to Notification Screen </Text>
+     <Text> Welcome to About Screen </Text>
     </View>
   );
 }
@@ -25,8 +25,8 @@ export default function App() {
   return (
     <NavigationContainer>
       <Drawer.Navigator useLegacyImplementation initialRouteName="Home">
-        <Drawer.Screen name="Home" component={HomeScreen} />
-        <Drawer.Screen name="Notifications" component={NotificationsScreen} />
+        <Drawer.Screen name="Home" component={Home} />
+        <Drawer.Screen name="About" component={About} />
       </Drawer.Navigator>
     </NavigationContainer>
   );

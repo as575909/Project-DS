@@ -1,25 +1,24 @@
 import { View, Text, FlatList, StyleSheet, Image } from "react-native";
 import React, { useState, useEffect } from "react";
+import axios from 'axios';
 
 const UserData = () => {
-  const [isLoaded, setIsLoaded] = useState(true);
+  const [isError, setIsError] = useState(true);
   const [myData, setMyData] = useState([]);
 
   const getUserData = async () => {
     try {
-      const response = await fetch(
+      const response = await axios.get(
         "https://thapatechnical.github.io/userapi/users.json"
       );
-      const realData = await response.json();
-      setMyData(realData);
-      setIsLoaded(false);
+      setMyData(response.data);
       // console.log(realData);
     } catch (error) {
-     console.log(error);
+     setIsError(error.message);
     }
   };
 
-  useEffect(() => getUserData(), []);
+  useEffect(() => { getUserData(); }, []);
 
   // render the students cards
   const showUserData = ({ item }) => {

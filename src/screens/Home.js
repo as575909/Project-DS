@@ -1,11 +1,14 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, StatusBar } from 'react-native';
 import Menu from '../component/Menu';
+import HomeHeadNav from '../component/HomeHeadNav';
 
 const Home = (props) => {
   const description = "Lorem ipsum dolor sit amet. Et commodi enim ut modi maxime quo minus rerum a nihil commodi et aspernatur officiis et repudiandae alias. Quo aperiam consequatur";
   return (
     <View style = {styles.mainContainer}>
+      <StatusBar />
+      <HomeHeadNav style={styles.header} />
       <View style = {styles.homeTop}>
         <Image style = {styles.headerImage}
           resizeMode = "stretch"
@@ -48,6 +51,11 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
 
+  header: {
+    display: 'flex',
+    width: '100%',
+  },
+
   homeTop: {
     display: "flex",
     justifyContent: "center",
@@ -77,8 +85,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 19,
     color: "#7d7d7d",
-    marginTop: 40,
-    paddingBottom: 50, 
+    marginTop: 20,
+    paddingBottom: 30, 
     lineHeight: 26,
     fontFamily: "Itim-Regular",
   },

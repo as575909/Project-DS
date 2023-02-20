@@ -9,6 +9,7 @@ import CourseDetails from './CourseDetails';
 import WelcomeScreen from './LoginSignupScreen/WelcomeScreen';
 import LoginScreen from './LoginSignupScreen/LoginScreen';
 import SignupScreen from './LoginSignupScreen/SignupScreen';
+import CartScreen from './CartScreen';
 
 const Navigation = () => {
   const Stack = createNativeStackNavigator();
@@ -23,6 +24,10 @@ const Navigation = () => {
       options={{headerShown: false,}} 
       />
       <Stack.Screen name='login' component={LoginScreen}
+      options={{headerShown: false,}} 
+      />
+      {/* Cart Screen */}
+      <Stack.Screen name='cart' component={CartScreen}
       options={{headerShown: false,}} 
       />
       {/* //HomeScreen */}
@@ -76,6 +81,8 @@ const Navigation = () => {
             },
             headerTitleAlign: "center",
           }} />
+
+
 
     </Stack.Navigator>
   </NavigationContainer>

@@ -1,9 +1,10 @@
 import React from 'react';
 import Navigation from './src/screens/Navigation';
-// import LoginScreen from './src/screens/LoginSignupScreen/LoginScreen';
+
 
 const App = () => {
   return <Navigation />;
+  
 };
 
 export default App;

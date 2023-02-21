@@ -3,20 +3,22 @@ import React from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { colors } from '../globals/style';
 import { useNavigation } from '@react-navigation/native';
-import {openDrawer} from '@react-navigation/drawer';
+import DrawerNav from './DrawerNav';
 
-const HomeHeadNav = (props) => {
+const HomeHeadNav = () => {
     const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => props.navigation.openDrawer()}>
+      <DrawerNav />
+      {/* <TouchableOpacity  onPress={() => navigation.navigate('DrawerNav')}>
         <Icon name="bars" size={24} color='black' style={styles.myicon} />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         <TextInput placeholder='Search' style={styles.mytext}></TextInput>
 
       <TouchableOpacity onPress={() => navigation.navigate('cart')} style={styles.containerin}>
-        <Icon name="cart-plus" size={24} color='black' style={styles.myicon} />
+        <Icon name="cart-plus" size={30} color='black' style={styles.myicon} />
       </TouchableOpacity>
+      
     </View>
   );
 };
@@ -27,6 +29,7 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
         width: '100%',
+        marginTop: 5,
         justifyContent: 'space-between',
         padding: 10,
         alignItems: 'center',
@@ -42,7 +45,7 @@ const styles = StyleSheet.create({
         
     },
     myicon: {
-        color: colors.text1,
+        //color: colors.text1,
         paddingRight: 5,
         
     },
@@ -51,6 +54,7 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontFamily: "Itim-Regular",
         width: '80%',
+        paddingLeft: 10,
        
     },
 })

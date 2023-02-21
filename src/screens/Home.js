@@ -8,7 +8,7 @@ const Home = (props) => {
   return (
     <View style = {styles.mainContainer}>
       <StatusBar />
-      <HomeHeadNav style={styles.header} />
+      <HomeHeadNav style={styles.header} />   
       <View style = {styles.homeTop}>
         <Image style = {styles.headerImage}
           resizeMode = "stretch"

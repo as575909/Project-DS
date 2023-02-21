@@ -1,33 +1,29 @@
 import React from 'react';
-import { View, Text } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
+import Profile from '../screens/Profile';
+import CartScreen from '../screens/CartScreen';
 
-function HomeScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-     <Text> Welcome to Home Screen </Text>
-    </View>
-  );
-}
-
-function AboutScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-     <Text> Welcome to About Screen </Text>
-    </View>
-  );
-}
+// function Open(props)
+// {
+//   return (
+//     <TouchableOpacity onPress={() => props.navigation.openDrawer()}>
+//         <Icon name="bars" size={24} color='black' style={styles.myicon} />
+//         </TouchableOpacity>
+//   );
+// }
 
 const Drawer = createDrawerNavigator();
 
-export default function App() {
+function DrawerNav() {
   return (
-    <NavigationContainer>
-      <Drawer.Navigator useLegacyImplementation initialRouteName="Home">
-        <Drawer.Screen name="Home" component={Home} />
-        <Drawer.Screen name="About" component={About} />
+      <NavigationContainer>
+      <Drawer.Navigator>
+        <Drawer.Screen name="Profile" component={Profile} />
+        <Drawer.Screen name="cart" component={CartScreen} />
       </Drawer.Navigator>
-    </NavigationContainer>
+      </NavigationContainer>
   );
 }
+
+export default DrawerNav;

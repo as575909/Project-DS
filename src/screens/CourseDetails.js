@@ -43,7 +43,7 @@ const CourseDetails = ({ navigation, route }) => {
           <TouchableOpacity
             style={styles.buttonStyle}
             onPress={() => navigation.navigate("Course")}>
-            <Text style={styles.buttonText}> Buy Now </Text>
+            <Text style={styles.buttonText}> Add to Cart </Text>
           </TouchableOpacity>
         </View>
       </View>

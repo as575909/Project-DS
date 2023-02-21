@@ -2,13 +2,16 @@ import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-nativ
 import React from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { colors } from '../globals/style';
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation } from '@react-navigation/native';
+import {openDrawer} from '@react-navigation/drawer';
 
-const HomeHeadNav = () => {
+const HomeHeadNav = (props) => {
     const navigation = useNavigation();
   return (
     <View style={styles.container}>
+      <TouchableOpacity onPress={() => props.navigation.openDrawer()}>
         <Icon name="bars" size={24} color='black' style={styles.myicon} />
+        </TouchableOpacity>
         <TextInput placeholder='Search' style={styles.mytext}></TextInput>
 
       <TouchableOpacity onPress={() => navigation.navigate('cart')} style={styles.containerin}>

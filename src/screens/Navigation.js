@@ -10,6 +10,7 @@ import WelcomeScreen from './LoginSignupScreen/WelcomeScreen';
 import LoginScreen from './LoginSignupScreen/LoginScreen';
 import SignupScreen from './LoginSignupScreen/SignupScreen';
 import CartScreen from './CartScreen';
+import DrawerNav from '../component/DrawerNav';
 
 const Navigation = () => {
   const Stack = createNativeStackNavigator();
@@ -28,6 +29,11 @@ const Navigation = () => {
       />
       {/* Cart Screen */}
       <Stack.Screen name='cart' component={CartScreen}
+      options={{headerShown: false,}} 
+      />
+
+      {/* Drawer Nav  */}
+      <Stack.Screen name='DrawerNav' component={DrawerNav}
       options={{headerShown: false,}} 
       />
       {/* //HomeScreen */}

@@ -1,6 +1,9 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity, FlatList } from "react-native";
 import React from "react";
 import Courses from "../api/Course";
+import {addToCart} from '../redux/action';
+import { useDispatch } from "react-redux";
+
 
 const CourseDetails = ({ navigation, route }) => {
   
@@ -10,6 +13,13 @@ const CourseDetails = ({ navigation, route }) => {
   const selectedCourse = Courses.find((element) => {
     return id === element.id;
   });
+  const dispatch = useDispatch();
+  const product = {
+    name:'I phone',
+    type: 'mobile',
+    price: 20000,
+    color: 'red',
+  }
 
   return (
     <View style={styles.mainContainer}>
@@ -42,7 +52,7 @@ const CourseDetails = ({ navigation, route }) => {
           <Text style={styles.price}> {selectedCourse.price} </Text>
           <TouchableOpacity
             style={styles.buttonStyle}
-            onPress={() => navigation.navigate("Course")}>
+            onPress={() => dispatch(addToCart(product))}>
             <Text style={styles.buttonText}> Add to Cart </Text>
           </TouchableOpacity>
         </View>

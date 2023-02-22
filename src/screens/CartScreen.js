@@ -1,10 +1,26 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { Button, StatusBar, StyleSheet, Text, View } from 'react-native'
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { useDispatch } from "react-redux";
+import {removeFromCart, clearFromCart} from '../redux/action';
 
 const CartScreen = ({navigation}) => {
+       const result = useSelector((state)=>state.cartData);
+       const dispatch = useDispatch();
+       const product = {
+        name:'I phone',
+        type: 'mobile',
+        price: 20000,
+        color: 'red',
+      }
   return (
+    
     <View>
-      <Text>CartScreen</Text>
+      <StatusBar />
+      <Text> Items added to cart : {result.length} </Text>
+       <Button title = "Remove" onPress={() => dispatch(removeFromCart(product))} />
+       <Button title = "Clear" onPress={() => dispatch(clearFromCart())} />       
+      
     </View>
   )
 }

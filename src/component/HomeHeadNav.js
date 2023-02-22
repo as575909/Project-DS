@@ -8,6 +8,7 @@ import DrawerNav from './DrawerNav';
 const HomeHeadNav = () => {
     const navigation = useNavigation();
   return (
+    
     <View style={styles.container}>
       <DrawerNav />
       {/* <TouchableOpacity  onPress={() => navigation.navigate('DrawerNav')}>
@@ -16,7 +17,7 @@ const HomeHeadNav = () => {
         <TextInput placeholder='Search' style={styles.mytext}></TextInput>
 
       <TouchableOpacity onPress={() => navigation.navigate('cart')} style={styles.containerin}>
-        <Icon name="cart-plus" size={30} color='black' style={styles.myicon} />
+        <Icon name="cart-plus" size={30} color='#5A5A5A' style={styles.myicon} />
       </TouchableOpacity>
       
     </View>

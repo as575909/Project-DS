@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, StatusBar } from 'react-native';
 import Menu from '../component/Menu';
 import HomeHeadNav from '../component/HomeHeadNav';
+import DrawerNav from '../component/DrawerNav';
 
 const Home = (props) => {
   const description = "Lorem ipsum dolor sit amet. Et commodi enim ut modi maxime quo minus rerum a nihil commodi et aspernatur officiis et repudiandae alias. Quo aperiam consequatur";
@@ -10,6 +11,7 @@ const Home = (props) => {
       <StatusBar />
       <HomeHeadNav style={styles.header} />   
       <View style = {styles.homeTop}>
+      
         <Image style = {styles.headerImage}
           resizeMode = "stretch"
           source = {require("../../assets/logo1.jpg")}/>

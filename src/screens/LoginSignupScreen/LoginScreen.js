@@ -33,7 +33,7 @@ const LoginScreen = ({navigation}) => {
             onPress={()=> setShowpassword(!showpassword)} />
          </View>
          
-         <TouchableOpacity style = {btn1} onPress={() => navigation.navigate('Home')}>
+         <TouchableOpacity style = {btn1} onPress={() => navigation.navigate('TabNavigator')}>
             <Text style={{color: colors.col1, fontSize: titles.btntxt, fontFamily: "Itim-Regular", marginTop: 10}}>Log In</Text>
          </TouchableOpacity>
 

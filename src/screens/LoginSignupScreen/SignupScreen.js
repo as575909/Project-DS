@@ -88,7 +88,7 @@ const SignupScreen = ({navigation}) => {
             onPress={()=> setShowcpassword(!showcpassword)} />
          </View>
 {/* Signup Button  */}
-         <TouchableOpacity style = {btn1} onPress={() => navigation.navigate('Home')}>
+         <TouchableOpacity style = {btn1} onPress={() => navigation.navigate('TabNavigator')}>
             <Text style={{color: colors.col1, fontSize: titles.btntxt, fontFamily: "Itim-Regular", marginTop: 10}}>Sign up</Text>
          </TouchableOpacity>
 

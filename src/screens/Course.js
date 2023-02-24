@@ -6,16 +6,21 @@ import {
   Image,
   Touchable,
   TouchableOpacity,
+  SafeAreaView,
 } from "react-native";
 import React from "react";
 import Courses from "../api/Course";
+import HomeHeadNav from '../component/HomeHeadNav';
 
 
 
 const Course = ({ navigation }) => {
   const courseCard = ({ item }) => {
     return (
-      <View style={styles.mainContainer}>
+      <SafeAreaView>
+<HomeHeadNav /> 
+
+      <View style={styles.mainContainer}>  
         <View style={styles.courseContainer}>
           <View>
             <Image
@@ -42,6 +47,7 @@ const Course = ({ navigation }) => {
           </View>
         </View>
       </View>
+      </SafeAreaView>
     );
   };
 

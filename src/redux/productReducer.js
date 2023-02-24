@@ -1,4 +1,4 @@
-import {Product_List} from "./constant";
+import { Product_List, Set_Product_List } from "./constant";
 
 
 export const productData = (data = [], action) => {
@@ -12,14 +12,15 @@ export const productData = (data = [], action) => {
     // }
 
     switch (action.type) {
-        case Product_List:
-            //add to cart logic
-            console.warn("Product List condition", action)
-            return [action.data]
         
+        case Set_Product_List:
+            //add to cart logic
+            console.warn("Set Product List condition", action)
+            return [...action.data]
+
         default:
             //no case matched
-            return []
+            return data;
 
     }
 

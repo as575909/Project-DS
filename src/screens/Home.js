@@ -1,22 +1,24 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, StatusBar } from 'react-native';
-import Menu from '../component/Menu';
-import HomeHeadNav from '../component/HomeHeadNav';
-import DrawerNav from '../component/DrawerNav';
+import TabNavigator from '../component/BottomTab';
+// import Menu from '../component/Menu';
 
-const Home = (props) => {
+
+
+
+const Home = () => {
   const description = "Lorem ipsum dolor sit amet. Et commodi enim ut modi maxime quo minus rerum a nihil commodi et aspernatur officiis et repudiandae alias. Quo aperiam consequatur";
   return (
-    <View style = {styles.mainContainer}>
+    <View style={styles.mainContainer}>
+
       <StatusBar />
-      <HomeHeadNav style={styles.header} />   
-      <View style = {styles.homeTop}>
-      
-        <Image style = {styles.headerImage}
-          resizeMode = "stretch"
-          source = {require("../../assets/logo1.jpg")}/>
-        <Text style = {styles.mainHeader}> Welcome to </Text>
-        <Text style = {[
+
+      <View style={styles.homeTop}>
+        <Image style={styles.headerImage}
+          resizeMode="stretch"
+          source={require("../../assets/logo1.jpg")} />
+        <Text style={styles.mainHeader}> Welcome to </Text>
+        <Text style={[
           styles.mainHeader,
           {
             fontSize: 33,
@@ -25,20 +27,22 @@ const Home = (props) => {
             fontWeight: 'bold',
             fontFamily: 'Kanit-Regular',
           },
-        ]}>{props.channelName}</Text>  
-        <Text style = {styles.paraStyle}>{description}</Text>
+        ]}>EduoSkill!!</Text>
+        <Text style={styles.paraStyle}>{description}</Text>
       </View>
 
-      <View style = {styles.menuStyle}>
-        <View style = {styles.lineStyle}></View>
-        <Menu />
-        <View style = {[
+      {/* <View style = {styles.menuStyle}> */}
+      {/* <View style = {styles.lineStyle}></View> */}
+      {/* <Menu /> */}
+      {/* <TabNavigator /> */}
+      {/* <View style = {[
           styles.lineStyle,
           {
             marginVertical: 10,
           },
-          ]}></View>
-      </View>
+          ]}></View> */}
+      {/* </View> */}
+
     </View>
   )
 }
@@ -47,7 +51,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     height: '100%',
     display: "flex",
-    justifyContent: "space-between",
+    // justifyContent: "space-between",
     paddingHorizontal: 20,
     backgroundColor: "#fff",
     textAlign: "center",
@@ -66,13 +70,13 @@ const styles = StyleSheet.create({
   },
 
   headerImage: {
-    height: 150,
+    height: '40%',
     width: "100%",
-    aspectRatio: 2,
+    aspectRatio: 1.5,
     display: "flex",
     alignItems: "stretch",
-    marginTop: 50,
-    marginBottom: 50,
+    marginTop: '10%',
+    marginBottom: '10%',
     borderRadius: 20,
   },
 
@@ -87,8 +91,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 19,
     color: "#7d7d7d",
-    marginTop: 20,
-    paddingBottom: 30, 
+    marginTop: 10,
+    paddingBottom: 30,
     lineHeight: 26,
     fontFamily: "Itim-Regular",
   },

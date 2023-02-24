@@ -5,12 +5,16 @@ import {
   TouchableOpacity,
   View,
   Image,
+  SafeAreaView,
 } from "react-native";
 import React from "react";
+import { ScrollView } from "react-native-gesture-handler";
 
 
 const About = () => {
   return (
+    <SafeAreaView>
+    <ScrollView>
     <View style={styles.aboutContainer}>
       <Text style={styles.mainHeader}> Ayush Kumar Singh</Text>
       <Text style={styles.paraStyle}> I am an Application Developer 😎 </Text>
@@ -74,6 +78,8 @@ const About = () => {
         </TouchableOpacity>
       </View>
     </View>
+    </ScrollView>
+    </SafeAreaView>
   );
 };
 
@@ -109,6 +115,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     // marginVertical: 30,
     marginTop: 20,
+    borderRadius: 60,
   },
   aboutSubHeader: {
     fontSize: 18,
@@ -133,7 +140,7 @@ const styles = StyleSheet.create({
 
   iconStyle: {
     width: "100%",
-    height: 50,
+    height: "20%",
     aspectRatio: 1,
   },
 });

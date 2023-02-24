@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { StyleSheet, Text, TextInput, View, TouchableOpacity, Alert } from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
+import { ScrollView } from 'react-native-gesture-handler';
 
 
 const Contact = ({navigation}) => {
@@ -20,6 +21,7 @@ const Contact = ({navigation}) => {
   };
 
   return (
+    <ScrollView>
     <View style ={styles.mainContainer}>
       <Text style = {styles.mainHeader}> Level up your Knowledge </Text>
       <Text style = {styles.description}> You can reach us anytime via as575909@gmail.com </Text>
@@ -91,6 +93,7 @@ const Contact = ({navigation}) => {
       </TouchableOpacity>
 
     </View>
+    </ScrollView>
   )
 }
 

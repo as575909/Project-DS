@@ -7,6 +7,8 @@ import { productList } from '../redux/productAction';
 
 const CartScreen = ({navigation}) => {
        const result = useSelector((state)=>state.cartData);
+       const result2 = useSelector((state)=>state.productData);
+       console.warn("data in cart screen from saga", result2);
        const dispatch = useDispatch();
        const product = {
         name:'I phone',

@@ -1,6 +1,6 @@
 import { View, Text, FlatList, StyleSheet, Image } from "react-native";
 import React, { useState, useEffect } from "react";
-import axios from 'axios';
+import Axios from '../../src/api/Axios';
 
 const UserData = () => {
   const [isError, setIsError] = useState(true);
@@ -8,8 +8,8 @@ const UserData = () => {
 
   const getUserData = async () => {
     try {
-      const response = await axios.get(
-        "https://thapatechnical.github.io/userapi/users.json"
+      const response = await Axios.get(
+        "/userapi/users.json"
       );
       setMyData(response.data);
       // console.log(realData);

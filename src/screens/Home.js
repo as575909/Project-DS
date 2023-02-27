@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, StatusBar } from 'react-native';
-import TabNavigator from '../component/BottomTab';
+import TabNavigator from '../Navigation/BottomTab';
 // import Menu from '../component/Menu';
 
 

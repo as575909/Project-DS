@@ -3,7 +3,7 @@ import React from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { colors } from '../globals/style';
 import { useNavigation } from '@react-navigation/native';
-import DrawerNav from './DrawerNav';
+import DrawerNav from '../Navigation/DrawerNav';
 
 
 const HomeHeadNav = () => {

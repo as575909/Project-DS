@@ -1,29 +1,75 @@
 import React, { useState } from 'react';
-import { Linking, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Alert, Linking, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { titles, colors, btn1, hr80} from '../../globals/style';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { Formik, Form, Field } from 'formik';
+import * as Yup from 'yup';
 
+
+const SignupSchema = Yup.object().shape({
+    namee: Yup.string()
+      .min(4, 'Too Short!')
+      .max(50, 'Too Long!')
+      .required('Please enter your full name'),
+
+    email: Yup.string()
+    .email('Invalid email')
+    .required('Please enter your email address'),
+
+    password: Yup.string()
+    .min(8)
+    .required('Please enter your Password')
+    .matches(
+        /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,
+        'Must contain minimum 8 characters, atleast one UpperCase letter, one lowercase letter, one number and one special character',
+    ),
+
+    confirmPassword: Yup.string()
+    .min(8, 'Confirm Password must be 8 characters long')
+    .oneOf([Yup.ref('password')], 'Password do not match')
+    .required('Confirm password is required'),
+
+    mobile: Yup.string()
+    .min(10, 'Must be 10 digits')
+    .max(10, 'Must be 10 digits')
+    .matches(/^[0-9]+$/, 'Must be only digits')
+    .required('Please enter your mobile number'),
+  });
+  
 
 const SignupScreen = ({navigation}) => {
     const [emailfocus, setEmailfocus] = useState(false);
     const [passwordfocus, setPasswordfocus] = useState(false);
     const [phonefocus, setPhonefocus] = useState(false);
     const [namefocus, setNamefocus] = useState(false);
-
     const [showpassword, setShowpassword] = useState(false);
     const [showcpassword, setShowcpassword] = useState(false);
     const [cpasswordfocus, setcPasswordfocus] = useState(false);
 
-
-
   return (
 
+    <Formik initialValues={{
+        namee: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+        mobile: '',
+    }}
+    validationSchema = {SignupSchema}
+    onSubmit = {values => Alert.alert(JSON.stringify(values))}
+    >
+
+    {({values,errors,touched,handleChange,setFieldTouched,isValid,handleSubmit}) => (    
     <View style = {styles.container}>
+        <StatusBar barStyle={'light-content'} />
       <Text style={styles.head1}>Sign Up</Text>
 {/* Name */}
          <View style = {styles.inputout}>
          <Icon name="user" size={24} color={namefocus === true ? colors.text1 : colors.text2} style = {styles.icon} />
             <TextInput style={styles.input} placeholder=' Full Name'
+            value={values.namee}
+            onChangeText = {handleChange('namee')}
+            onBlur = {() => setFieldTouched('namee')}
             onFocus={()=>{
               setNamefocus(true)
                 setEmailfocus(false)
@@ -31,11 +77,18 @@ const SignupScreen = ({navigation}) => {
                 setPasswordfocus(false)
                 setShowpassword(false)
             }} />
+            
          </View>
+         {touched.namee && errors.namee && (
+                <Text style={styles.errorTxt}>{errors.namee}</Text>
+            )}
 {/* Email */}
          <View style = {styles.inputout}>
          <Icon name="at" size={24} color={emailfocus === true ? colors.text1 : colors.text2} style = {styles.icon} />
             <TextInput style={styles.input} placeholder='Email'
+             value={values.email}
+             onChangeText = {handleChange('email')}
+             onBlur = {() => setFieldTouched('email')}
             onFocus={()=>{
               setNamefocus(false)
                 setEmailfocus(true)
@@ -44,10 +97,17 @@ const SignupScreen = ({navigation}) => {
                 setShowpassword(false)
             }} />
          </View>
+         {touched.email && errors.email && (
+                <Text style={styles.errorTxt}>{errors.email}</Text>
+            )}
 {/* Phone Number */}
         <View style = {styles.inputout}>
          <Icon name="phone" size={24} color={phonefocus === true ? colors.text1 : colors.text2} style = {styles.icon} />
             <TextInput style={styles.input} placeholder='Phone Number'
+            keyboardType='number-pad'
+             value={values.mobile}
+             onChangeText = {handleChange('mobile')}
+             onBlur = {() => setFieldTouched('mobile')}
             onFocus={()=>{
                 setNamefocus(false)
                 setEmailfocus(false)
@@ -56,10 +116,16 @@ const SignupScreen = ({navigation}) => {
                 setShowpassword(false)
             }} />
          </View>
+         {touched.mobile && errors.mobile && (
+                <Text style={styles.errorTxt}>{errors.mobile}</Text>
+            )}
 {/* Password */}
          <View style = {styles.inputout}>
          <Icon name="lock" size={24} color={passwordfocus === true ? colors.text1 : colors.text2} style = {styles.icon} />
             <TextInput style={styles.input} placeholder='Password'
+             value={values.password}
+             onChangeText = {handleChange('password')}
+             onBlur = {() => setFieldTouched('password')}
             onFocus={()=>{
               setNamefocus(false)
               setPhonefocus(false)
@@ -71,10 +137,16 @@ const SignupScreen = ({navigation}) => {
             style = {styles.icon1}
             onPress={()=> setShowpassword(!showpassword)} />
          </View>
+         {touched.password && errors.password && (
+                <Text style={styles.errorTxt}>{errors.password}</Text>
+            )}
 {/* Confirm Password */}
          <View style = {styles.inputout}>
          <Icon name="lock" size={24} color={cpasswordfocus === true ? colors.text1 : colors.text2} style = {styles.icon} />
             <TextInput style={styles.input} placeholder=' Confirm Password'
+            value={values.confirmPassword}
+            onChangeText = {handleChange('confirmPassword')}
+            onBlur = {() => setFieldTouched('confirmPassword')}
             onFocus={()=>{
               setNamefocus(false)
               setPhonefocus(false)
@@ -87,8 +159,14 @@ const SignupScreen = ({navigation}) => {
             style = {styles.icon1}
             onPress={()=> setShowcpassword(!showcpassword)} />
          </View>
+         {touched.confirmPassword && errors.confirmPassword && (
+                <Text style={styles.errorTxt}>{errors.confirmPassword}</Text>
+            )}
 {/* Signup Button  */}
-         <TouchableOpacity style = {btn1} onPress={() => navigation.navigate('TabNavigator')}>
+         <TouchableOpacity style = {[btn1, {backgroundColor: isValid ? 'blue' : 'grey'}]} 
+         onPress={() => navigation.navigate('TabNavigator')}
+         onPressIn={handleSubmit} 
+         disabled = {!isValid}>
             <Text style={{color: colors.col1, fontSize: titles.btntxt, fontFamily: "Itim-Regular", marginTop: 10}}>Sign up</Text>
          </TouchableOpacity>
 
@@ -114,6 +192,8 @@ const SignupScreen = ({navigation}) => {
                 <Text style={styles.signup} onPress={() => navigation.navigate('login')}>  Log In</Text>
             </Text>
     </View>
+    )} 
+    </Formik>
   );
 ;}
 
@@ -202,6 +282,11 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 10,
         padding: 10,
+    },
+    errorTxt: {
+        fontSize: 12,
+        color: 'red',
+        
     },
      
 });

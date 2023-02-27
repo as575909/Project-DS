@@ -1,7 +1,24 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { titles, colors, btn1, hr80} from '../../globals/style';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { Formik, Form, Field } from 'formik';
+import * as Yup from 'yup';
+
+
+const SignupSchema = Yup.object().shape({
+    email: Yup.string()
+    .email('Invalid email')
+    .required('Please enter your email address'),
+
+    password: Yup.string()
+    .min(8)
+    .required('Please enter your Password')
+    .matches(
+        /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,
+        'Must contain minimum 8 characters, atleast one UpperCase letter, one lowercase letter, one number and one special character',
+    ),
+  });
 
 
 const LoginScreen = ({navigation}) => {
@@ -9,20 +26,38 @@ const LoginScreen = ({navigation}) => {
     const [passwordfocus, setPasswordfocus] = useState(false);
     const [showpassword, setShowpassword] = useState(false);
   return (
+
+<Formik initialValues={{
+        email: '',
+        password: '',
+    }}
+    validationSchema = {SignupSchema}
+    onSubmit = {values => Alert.alert("Login Successful")}>
+
+    {({values,errors,touched,handleChange,setFieldTouched,isValid,handleSubmit}) => (
     <View style = {styles.container}>
       <Text style={styles.head1}>Log In</Text>
          <View style = {styles.inputout}>
          <Icon name="user" size={24} color={emailfocus === true ? colors.text1 : colors.text2} style = {styles.icon} />
             <TextInput style={styles.input} placeholder='Email'
+            value={values.email}
+            onChangeText = {handleChange('email')}
+            onBlur = {() => setFieldTouched('email')}
             onFocus={()=>{
                 setEmailfocus(true)
                 setPasswordfocus(false)
                 setShowpassword(false)
             }} />
          </View>
+         {touched.email && errors.email && (
+                <Text style={styles.errorTxt}>{errors.email}</Text>
+            )}
          <View style = {styles.inputout}>
          <Icon name="lock" size={24} color={passwordfocus === true ? colors.text1 : colors.text2} style = {styles.icon} />
             <TextInput style={styles.input} placeholder='Password'
+            value={values.password}
+            onChangeText = {handleChange('password')}
+            onBlur = {() => setFieldTouched('password')}
             onFocus={()=>{
                 setEmailfocus(false)
                 setPasswordfocus(true)
@@ -32,8 +67,13 @@ const LoginScreen = ({navigation}) => {
             style = {styles.icon1}
             onPress={()=> setShowpassword(!showpassword)} />
          </View>
+         {touched.password && errors.password && (
+                <Text style={styles.errorTxt}>{errors.password}</Text>
+            )}
          
-         <TouchableOpacity style = {btn1} onPress={() => navigation.navigate('TabNavigator')}>
+         <TouchableOpacity style = {[btn1, {backgroundColor: isValid ? 'blue' : 'grey'}]} 
+         onPress={() => navigation.navigate('TabNavigator')}
+         onPressIn={handleSubmit}>
             <Text style={{color: colors.col1, fontSize: titles.btntxt, fontFamily: "Itim-Regular", marginTop: 10}}>Log In</Text>
          </TouchableOpacity>
 
@@ -59,6 +99,8 @@ const LoginScreen = ({navigation}) => {
                 <Text style={styles.signup} onPress={() => navigation.navigate('signup')}>  Sign Up</Text>
             </Text>
     </View>
+    )} 
+    </Formik>
   );
 ;}
 
@@ -147,6 +189,11 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 10,
         padding: 10,
+    },
+    errorTxt: {
+        fontSize: 12,
+        color: 'red',
+        
     },
      
 });

@@ -1,17 +1,17 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Home from './Home';
-import About from './About';
-import Contact from './Contact';
-import UserData from './UserData';
-import Course from './Course';
-import CourseDetails from './CourseDetails';
-import WelcomeScreen from './LoginSignupScreen/WelcomeScreen';
-import LoginScreen from './LoginSignupScreen/LoginScreen';
-import SignupScreen from './LoginSignupScreen/SignupScreen';
-import CartScreen from './CartScreen';
-import DrawerNav from '../component/DrawerNav';
-import TabNavigator from '../component/BottomTab';
+import Home from '../screens/Home';
+import About from '../screens/About';
+import Contact from '../screens/Contact';
+import UserData from '../screens/UserData';
+import Course from '../screens/Course';
+import CourseDetails from '../screens/CourseDetails';
+import WelcomeScreen from '../screens/LoginSignupScreen/WelcomeScreen';
+import LoginScreen from '../screens/LoginSignupScreen/LoginScreen';
+import SignupScreen from '../screens/LoginSignupScreen/SignupScreen';
+import CartScreen from '../screens/CartScreen';
+import DrawerNav from './DrawerNav';
+import TabNavigator from './BottomTab';
 
 const Navigation = () => {
   const Stack = createNativeStackNavigator();

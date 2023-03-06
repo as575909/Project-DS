@@ -1,33 +1,21 @@
-import { Add_To_Cart, Remove_From_Cart, Clear_From_Cart } from "./constant";
-export const cartData = (data = [], action) => {
+// import { ADD_TO_CART, EMPTY_CART, REMOVE_FROM_CART } from "./constant"
 
-    // if(action.type === Add_To_Cart)
-    // {
-    //     console.warn("reducer called", action)
-    //     return action.data
-    // } else {
-    //     return "no action matched"
-    // }
 
-    switch (action.type) {
-        case Add_To_Cart:
-            //add to cart logic
-            console.warn("Add to Cart called", action)
-            return [action.data, ...data]
-        case Remove_From_Cart:
-            //add to cart logic
-            console.warn("Remove from Cart called", action)
-            data.length = data.length ? data.length - 1:[]; 
-            return [...data]
-        case Clear_From_Cart:
-            //add to cart logic
-            console.warn("Clear from Cart called", action)
-            data = []
-            return [...data]
-        default:
-            //no case matched
-            return data;
 
-    }
-
-}
+// export const cartData = (data = [], action) => {
+//     switch (action.type) {
+//         case ADD_TO_CART:
+//             console.warn("ADD_TO_CART condition ", action)
+//             return [action.data, ...data]
+//             case REMOVE_FROM_CART:
+//                 console.warn("REMOVE_FROM_CART condition ", action);
+//                 data.length= data.length? data.length-1:[]
+//                 return [...data]
+//                 case EMPTY_CART:
+//                     console.warn("EMPTY CART condition ", action);
+//                     data =[]
+//                     return [...data]
+//         default:
+//             return data
+//     }
+// }

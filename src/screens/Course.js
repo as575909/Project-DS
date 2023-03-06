@@ -11,42 +11,74 @@ import {
 import React from "react";
 import Courses from "../api/Course";
 import HomeHeadNav from '../component/HomeHeadNav';
+import { useDispatch, useSelector } from "react-redux";
+import { increment } from '../features/counter/counterSlice';
+import { addProductToMyCart } from "../features/counter/MyCartSlice";
 
 
 
 const Course = ({ navigation }) => {
+  const dispatch = useDispatch();
+  const result = useSelector((state) => state.counter);
+  const myCartItems = useSelector((state) => state.cart);
+  console.log('added products in cart',myCartItems);
   const courseCard = ({ item }) => {
+
+   
     return (
       <SafeAreaView>
-<HomeHeadNav /> 
+        <HomeHeadNav />
 
-      <View style={styles.mainContainer}>  
-        <View style={styles.courseContainer}>
-          <View>
-            <Image
-              style={styles.cardImage}
-              source={item.Image}
-              resizeMode="contain"
-            />
-          </View>
+        <View style={styles.mainContainer}>
+          <View style={styles.courseContainer}>
+            <View>
+              <Image
+                style={styles.cardImage}
+                source={item.Image}
+                resizeMode="contain"
+              />
+            </View>
 
-          <Text style={styles.mainHeader}>{item.title}</Text>
+            <Text style={styles.mainHeader}>{item.title}</Text>
 
-          <Text style={styles.description}>{item.description}</Text>
+            <Text style={styles.description}>{item.description}</Text>
 
-          <View style={styles.buttonContainer}>
-            <TouchableOpacity
-              style={styles.buttonStyle}
-              onPress={() =>
-                navigation.navigate("CourseDetails", {
-                  courseId: item.id,
-                })
-              }>
-              <Text style={styles.buttonText}> course Details </Text>
-            </TouchableOpacity>
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity
+                style={styles.buttonStyle}
+                onPress={() =>
+                  navigation.navigate("CourseDetails", {
+                    courseId: item.id,
+                  })
+                }>
+                <Text style={styles.buttonText}> course Details </Text>
+
+              </TouchableOpacity>
+
+              {item.qty == 0 ? (<TouchableOpacity
+                style={styles.buttonStyle}
+                onPress={() => dispatch(addProductToMyCart(item))}>
+                <Text style={styles.buttonText}> Add to Cart </Text>
+              </TouchableOpacity>) : null}
+
+              {item.qty == 0 ? null : (<TouchableOpacity
+                style={styles.buttonStyle}>
+                <Text style={styles.buttonText}> - </Text>
+              </TouchableOpacity>)}
+
+              {item.qty == 0 ? null : (
+                <Text style={{ marginLeft: 10, fontSize: 16, fontWeight: '600' }}>{'0'}</Text>
+              )}
+
+              {item.qty == 0 ? null : (
+                <TouchableOpacity
+                  style={styles.buttonStyle}>
+                  <Text style={styles.buttonText}> + </Text>
+                </TouchableOpacity>
+              )}
+            </View>
           </View>
         </View>
-      </View>
       </SafeAreaView>
     );
   };
@@ -101,7 +133,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     display: "flex",
     flexDirection: "row",
-    justifyContent: "center",
+    justifyContent: "space-between",
   },
   buttonStyle: {
     backgroundColor: "#809fff",
@@ -111,6 +143,7 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    marginRight: 10,
   },
   buttonText: {
     fontSize: 20,

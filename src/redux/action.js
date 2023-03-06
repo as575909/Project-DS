@@ -1,27 +1,24 @@
-import { Add_To_Cart, Remove_From_Cart, Clear_From_Cart } from "./constant";
+// import { ADD_TO_CART, EMPTY_CART, REMOVE_FROM_CART } from "./constant"
 
-export const addToCart = (data) => {
+// export const addToCart = (data) => {
+//     console.warn("action is called", data)
+//     return {
+//         type: ADD_TO_CART,
+//         data
+//     }
+// }
 
-    console.warn("action called", data)
-    return {
-        type: Add_To_Cart,
-        data: data
-    }
-}
+// export const removeToCart = (data) => {
+//     console.warn("action removeToCart", data)
+//     return {
+//         type: REMOVE_FROM_CART,
+//         data
+//     }
+// }
 
-export const removeFromCart = (data) => {
-
-    console.warn("action remove called", data)
-    return {
-        type: Remove_From_Cart,
-        data: data
-    }
-}
-
-export const clearFromCart = () => {
-
-    console.warn("action clear called")
-    return {
-        type: Clear_From_Cart,
-    }
-}
+// export const emptyCart = () => {
+//     console.warn("action emptyCart",)
+//     return {
+//         type: EMPTY_CART,
+//     }
+// }

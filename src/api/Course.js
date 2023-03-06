@@ -9,6 +9,7 @@ const Courses = [
         course2: "CSS",
         course3: "JavaScript",
         price: 5000,
+        qty: 0,
 
     },
     {
@@ -21,6 +22,7 @@ const Courses = [
         course2: "Cryptography",
         course3: "BlockChain",
         price: 4500,
+        qty: 0,
 
     },
     {
@@ -33,6 +35,7 @@ const Courses = [
         course2: "C++",
         course3: "Data Structures & Algorithms",
         price: 5000,
+        qty: 0,
 
     },
     {
@@ -45,6 +48,7 @@ const Courses = [
         course2: "Figma",
         course3: "Adobe XD",
         price: 3000,
+        qty: 0,
 
     },
 ];

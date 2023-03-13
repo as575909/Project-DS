@@ -2,6 +2,11 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, StatusBar } from 'react-native';
 import TabNavigator from '../Navigation/BottomTab';
 // import Menu from '../component/Menu';
+import {
+  responsiveHeight,
+  responsiveWidth,
+  responsiveFontSize
+} from "react-native-responsive-dimensions";
 
 
 
@@ -18,16 +23,7 @@ const Home = () => {
           resizeMode="stretch"
           source={require("../../assets/logo1.jpg")} />
         <Text style={styles.mainHeader}> Welcome to </Text>
-        <Text style={[
-          styles.mainHeader,
-          {
-            fontSize: 33,
-            color: "#4c5dab",
-            marginTop: 0,
-            fontWeight: 'bold',
-            fontFamily: 'Kanit-Regular',
-          },
-        ]}>EduoSkill!!</Text>
+        <Text style={styles.mainHeader1}>EduoSkill!!</Text>
         <Text style={styles.paraStyle}>{description}</Text>
       </View>
 
@@ -70,26 +66,36 @@ const styles = StyleSheet.create({
   },
 
   headerImage: {
-    height: '40%',
-    width: "100%",
-    aspectRatio: 1.5,
-    display: "flex",
-    alignItems: "stretch",
-    marginTop: '10%',
-    marginBottom: '10%',
-    borderRadius: 20,
+    // height: '40%',
+    // width: "100%",
+    width: responsiveWidth(80),
+    height: responsiveHeight(30),
+    // aspectRatio: 1.5,
+    // display: "flex",
+    // alignItems: "stretch",
+    marginTop: responsiveHeight(5),
+    marginBottom: responsiveHeight(5),
+    borderRadius: responsiveWidth(4),
   },
 
   mainHeader: {
-    fontSize: 30,
+    // fontSize: 30,
+    fontSize: responsiveFontSize(4),
     color: "#344055",
     textTransform: "uppercase",
     fontFamily: "Itim-Regular",
   },
 
+  mainHeader1: {
+      fontSize:responsiveFontSize(6),
+      color: "#4c5dab",
+      marginTop: 0,
+      fontWeight: 'bold',
+  },
+
   paraStyle: {
     textAlign: "center",
-    fontSize: 19,
+    fontSize: responsiveFontSize(2.2),
     color: "#7d7d7d",
     marginTop: 10,
     paddingBottom: 30,

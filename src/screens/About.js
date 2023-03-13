@@ -6,9 +6,14 @@ import {
   View,
   Image,
   SafeAreaView,
+  ScrollView
 } from "react-native";
 import React from "react";
-import { ScrollView } from "react-native-gesture-handler";
+import {
+  responsiveHeight,
+  responsiveWidth,
+  responsiveFontSize
+} from "react-native-responsive-dimensions";
 
 
 const About = () => {

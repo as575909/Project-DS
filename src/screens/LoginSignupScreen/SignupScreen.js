@@ -1,220 +1,250 @@
 import React, { useState } from 'react';
-import { Alert, Linking, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import { titles, colors, btn1, hr80} from '../../globals/style';
+import { Alert, Linking, StatusBar, Button, StyleSheet, Text, TextInput, TouchableOpacity, View, ScrollView } from 'react-native';
+import { titles, colors, btn1, hr80 } from '../../globals/style';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { Formik, Form, Field } from 'formik';
-import * as Yup from 'yup';
+import { useDispatch } from 'react-redux';
+import { adduser } from '../../redux/LoginReducer';
+import { useNavigation } from '@react-navigation/native';
 
 
-const SignupSchema = Yup.object().shape({
-    namee: Yup.string()
-      .min(4, 'Too Short!')
-      .max(50, 'Too Long!')
-      .required('Please enter your full name'),
 
-    email: Yup.string()
-    .email('Invalid email')
-    .required('Please enter your email address'),
 
-    password: Yup.string()
-    .min(8)
-    .required('Please enter your Password')
-    .matches(
-        /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,
-        'Must contain minimum 8 characters, atleast one UpperCase letter, one lowercase letter, one number and one special character',
-    ),
 
-    confirmPassword: Yup.string()
-    .min(8, 'Confirm Password must be 8 characters long')
-    .oneOf([Yup.ref('password')], 'Password do not match')
-    .required('Confirm password is required'),
+const SignupScreen = ({ }) => {
+    
 
-    mobile: Yup.string()
-    .min(10, 'Must be 10 digits')
-    .max(10, 'Must be 10 digits')
-    .matches(/^[0-9]+$/, 'Must be only digits')
-    .required('Please enter your mobile number'),
-  });
-  
+    const [Email, setEmail] = useState("");
+    const [chEmail, setchEmail] = useState("true");
+    const [errEmail, seterrEmail] = useState("");
 
-const SignupScreen = ({navigation}) => {
-    const [emailfocus, setEmailfocus] = useState(false);
-    const [passwordfocus, setPasswordfocus] = useState(false);
-    const [phonefocus, setPhonefocus] = useState(false);
-    const [namefocus, setNamefocus] = useState(false);
-    const [showpassword, setShowpassword] = useState(false);
-    const [showcpassword, setShowcpassword] = useState(false);
-    const [cpasswordfocus, setcPasswordfocus] = useState(false);
+    const [rePassword, resetPassword] = useState("");
+    const [chrePassword, setchrePassword] = useState("true");
+    const [errRePassword, seterrRePassword] = useState("");
 
-  return (
+    const [Password, setPassword] = useState("");
+    const [chPassword, setchPassword] = useState("true");
+    const [errPassword, seterrPassword] = useState("");
 
-    <Formik initialValues={{
-        namee: '',
-        email: '',
-        password: '',
-        confirmPassword: '',
-        mobile: '',
-    }}
-    validationSchema = {SignupSchema}
-    onSubmit = {values => Alert.alert(JSON.stringify(values))}
-    >
+    const [PhoneNum, setPhoneNum] = useState("");
+    const [chPhoneNum, setchPhoneNum] = useState("true");
+    const [errPhoneNum, seterrPhoneNum] = useState("");
 
-    {({values,errors,touched,handleChange,setFieldTouched,isValid,handleSubmit}) => (    
-    <View style = {styles.container}>
-        <StatusBar barStyle={'light-content'} />
-      <Text style={styles.head1}>Sign Up</Text>
-{/* Name */}
-         <View style = {styles.inputout}>
-         <Icon name="user" size={24} color={namefocus === true ? colors.text1 : colors.text2} style = {styles.icon} />
-            <TextInput style={styles.input} placeholder=' Full Name'
-            value={values.namee}
-            onChangeText = {handleChange('namee')}
-            onBlur = {() => setFieldTouched('namee')}
-            onFocus={()=>{
-              setNamefocus(true)
-                setEmailfocus(false)
-                setPhonefocus(false)
-                setPasswordfocus(false)
-                setShowpassword(false)
-            }} />
-            
-         </View>
-         {touched.namee && errors.namee && (
-                <Text style={styles.errorTxt}>{errors.namee}</Text>
-            )}
-{/* Email */}
-         <View style = {styles.inputout}>
-         <Icon name="at" size={24} color={emailfocus === true ? colors.text1 : colors.text2} style = {styles.icon} />
-            <TextInput style={styles.input} placeholder='Email'
-             value={values.email}
-             onChangeText = {handleChange('email')}
-             onBlur = {() => setFieldTouched('email')}
-            onFocus={()=>{
-              setNamefocus(false)
-                setEmailfocus(true)
-                setPhonefocus(false)
-                setPasswordfocus(false)
-                setShowpassword(false)
-            }} />
-         </View>
-         {touched.email && errors.email && (
-                <Text style={styles.errorTxt}>{errors.email}</Text>
-            )}
-{/* Phone Number */}
-        <View style = {styles.inputout}>
-         <Icon name="phone" size={24} color={phonefocus === true ? colors.text1 : colors.text2} style = {styles.icon} />
-            <TextInput style={styles.input} placeholder='Phone Number'
-            keyboardType='number-pad'
-             value={values.mobile}
-             onChangeText = {handleChange('mobile')}
-             onBlur = {() => setFieldTouched('mobile')}
-            onFocus={()=>{
-                setNamefocus(false)
-                setEmailfocus(false)
-                setPhonefocus(true)
-                setPasswordfocus(false)
-                setShowpassword(false)
-            }} />
-         </View>
-         {touched.mobile && errors.mobile && (
-                <Text style={styles.errorTxt}>{errors.mobile}</Text>
-            )}
-{/* Password */}
-         <View style = {styles.inputout}>
-         <Icon name="lock" size={24} color={passwordfocus === true ? colors.text1 : colors.text2} style = {styles.icon} />
-            <TextInput style={styles.input} placeholder='Password'
-             value={values.password}
-             onChangeText = {handleChange('password')}
-             onBlur = {() => setFieldTouched('password')}
-            onFocus={()=>{
-              setNamefocus(false)
-              setPhonefocus(false)
-                setEmailfocus(false)
-                setPasswordfocus(true)
-            }}
-            secureTextEntry={showpassword === false ? true : false} />
-            <Icon name={showpassword == false ? 'eye-slash' : 'eye'} size={24} color= 'grey' 
-            style = {styles.icon1}
-            onPress={()=> setShowpassword(!showpassword)} />
-         </View>
-         {touched.password && errors.password && (
-                <Text style={styles.errorTxt}>{errors.password}</Text>
-            )}
-{/* Confirm Password */}
-         <View style = {styles.inputout}>
-         <Icon name="lock" size={24} color={cpasswordfocus === true ? colors.text1 : colors.text2} style = {styles.icon} />
-            <TextInput style={styles.input} placeholder=' Confirm Password'
-            value={values.confirmPassword}
-            onChangeText = {handleChange('confirmPassword')}
-            onBlur = {() => setFieldTouched('confirmPassword')}
-            onFocus={()=>{
-              setNamefocus(false)
-              setPhonefocus(false)
-                setEmailfocus(false)
-                setcPasswordfocus(true)
-                setPasswordfocus(false)
-            }}
-            secureTextEntry={showcpassword === false ? true : false} />
-            <Icon name={showcpassword == false ? 'eye-slash' : 'eye'} size={24} color= 'grey' 
-            style = {styles.icon1}
-            onPress={()=> setShowcpassword(!showcpassword)} />
-         </View>
-         {touched.confirmPassword && errors.confirmPassword && (
-                <Text style={styles.errorTxt}>{errors.confirmPassword}</Text>
-            )}
-{/* Signup Button  */}
-         <TouchableOpacity style = {[btn1, {backgroundColor: isValid ? 'blue' : 'grey'}]} 
-         onPress={() => navigation.navigate('TabNavigator')}
-         onPressIn={handleSubmit} 
-         disabled = {!isValid}>
-            <Text style={{color: colors.col1, fontSize: titles.btntxt, fontFamily: "Itim-Regular", marginTop: 10}}>Sign up</Text>
-         </TouchableOpacity>
+    const dispatch = useDispatch();
+    const navigation = useNavigation();
 
-         {/* <Text style={styles.forgot}>Forgot Password?</Text> */}
-         <Text style={styles.or}>OR</Text>
-         <Text style={styles.gftxt}>Sign In With </Text>
+    const onSubmit = () => {
+        const userObj = {
+            "Email": Email,
+            "Password": Password,
+            "Number": PhoneNum,
+        }
+        if (userObj.Email && userObj.Password && userObj.Number != " ") {
+            Alert.alert(
+                'Success!',
+                `User ${userObj.Email} was successfully created!`,
+            );
+            navigation.navigate('login')
+        }
 
-         <View style={styles.gf}>
-            <TouchableOpacity onPress={() => Linking.openURL("https://github.com/as575909")}>
-                <View style={styles.gficon}>
-                <Icon name="google" size={30} color = 'red' />
+        else {
+            alert("Please fill all details")
+        }
+        dispatch(adduser(userObj))
+    }
+
+
+    const validateEmail = () => {
+        var emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
+
+        var email = Email.trim();
+        if (email == "" || email == undefined || email == null) {
+            seterrEmail("Please enter the email");
+            setchEmail(false);
+            return false;
+        } else if (!emailRegex.test(email)) {
+            seterrEmail("Please enter valid email address");
+            setchEmail(false);
+            return false;
+        } else {
+            seterrEmail("");
+            setchEmail(true);
+            return true;
+
+        }
+
+    }
+
+
+    const validatePhoneNum = () => {
+        var phoneRegex = /^[1-9][0-9]{9,12}$/;
+        var phoneNum = PhoneNum.trim();
+
+        if (phoneNum == "" || phoneNum == undefined || phoneNum == null) {
+            seterrPhoneNum("Please enter your contact number");
+            setchPhoneNum(false);
+            return false;
+        } else if (!phoneRegex.test(phoneNum)) {
+            seterrPhoneNum("Please enter 10 digits number ");
+            setchPhoneNum(false);
+            return false;
+        } else {
+            seterrPhoneNum("");
+            setchPhoneNum(true);
+            return true;
+        }
+    }
+
+    const validatePassword = () => {
+        var passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+        var password = Password.trim();
+
+        if (password == "" || password == undefined || password == null) {
+            seterrPassword("Please enter the password")
+            setchPassword(false);
+            return false;
+        } else if (!passwordRegex.test(password)) {
+            seterrPassword("Please enter the valid password")
+            setchPassword(false);
+            return false;
+        } else {
+            seterrPassword("");
+            setchPassword(true);
+            return true
+        }
+    }
+
+    const validateRePassword = () => {
+        var rePass = rePassword.trim();
+        if (rePass == "" || rePass == undefined || rePass == null) {
+            setchrePassword(false)
+            seterrRePassword("Please enter password again");
+            return false;
+        } else if (rePass != Password) {
+            setchrePassword(false);
+            seterrRePassword("Password and rePassword must be same");
+            return false;
+        } else (rePass == Password)
+        {
+            setchrePassword(true);
+            seterrRePassword("")
+            return true;
+
+        }
+
+    }
+
+
+    return (
+        <View style={styles.container}>
+            <ScrollView>
+                <View style={styles.topContainer}>
+                    <Text style={styles.title}>Let's get Started</Text>
+                    <Text style={styles.subtitle}>Sign up </Text>
                 </View>
-            </TouchableOpacity>
+                <View style = {styles.inputout}>
+                  <Icon name="at" size={24} color={Email === true ? colors.text1 : colors.text2} style = {styles.icon} />
+                  <TextInput placeholder='Email' onChangeText={setEmail} onEndEditing={validateEmail} />
+                 </View>
+                {
+                    chEmail == true ? null : <Text style={{ color: 'red', marginLeft: '5%' }}>{errEmail}</Text>
+                }
+                <View style = {styles.inputout}>
+                  <Icon name="phone" size={24} color={Email === true ? colors.text1 : colors.text2} style = {styles.icon} />
+                  <TextInput placeholder='Contact Number' onChangeText={setPhoneNum} onEndEditing={validatePhoneNum} keyboardType={"number-pad"} />
+                 </View>
+               
+                {
+                    chPhoneNum == true ? null : <Text style={{ color: 'red', marginLeft: '5%' }}>{errPhoneNum}</Text>
+                }
+                <View style = {styles.inputout}>
+                  <Icon name="lock" size={24} color={Email === true ? colors.text1 : colors.text2} style = {styles.icon} />
+                  <TextInput placeholder='Password' onChangeText={setPassword} onEndEditing={validatePassword} secureTextEntry={true} />
+                 </View>
+                
+                {
+                    chPassword == true ? null : <Text style={{ color: 'red', marginLeft: '5%' }}>{errPassword}</Text>
+                }
+                <View style = {styles.inputout}>
+                  <Icon name="lock" size={24} color={Email === true ? colors.text1 : colors.text2} style = {styles.icon} />
+                  <TextInput placeholder='Confirm Password' onChangeText={resetPassword} onEndEditing={validateRePassword} secureTextEntry={true} />
+                 </View>
+                
+                {
+                    chrePassword == true ? null : <Text style={{ color: 'red', marginLeft: '5%' }} >{errRePassword}</Text>
+                }
 
-            <TouchableOpacity onPress={() => Linking.openURL("https://github.com/as575909")}>
-                <View style={styles.gficon}>
-                <Icon name="facebook" size={30} color = 'blue' />
+                <TouchableOpacity style={[btn1, { alignSelf: 'center' }, { backgroundColor: validatePassword ? 'blue' : 'grey' }]}
+                    //  onPress={() => navigation.navigate('TabNavigator')}
+                    onPress={onSubmit}
+                
+                >
+                    <Text style={{ color: 'white', fontSize: titles.btntxt, fontFamily: "Itim-Regular", marginTop: 10 }}>Sign up</Text>
+                </TouchableOpacity>
+
+                <Text style={styles.or}>OR</Text>
+                <Text style={styles.gftxt}>Sign In With </Text>
+
+                <View style={styles.gf}>
+                    <TouchableOpacity onPress={() => Linking.openURL("https://github.com/as575909")}>
+                        <View style={styles.gficon}>
+                            <Icon name="google" size={30} color='red' />
+                        </View>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity onPress={() => Linking.openURL("https://github.com/as575909")}>
+                        <View style={styles.gficon}>
+                            <Icon name="facebook" size={30} color='blue' />
+                        </View>
+                    </TouchableOpacity>
                 </View>
-            </TouchableOpacity>
-         </View>
-         <View style={hr80}></View>
-         <Text >Already Have an account?
-                <Text style={styles.signup} onPress={() => navigation.navigate('login')}>  Log In</Text>
-            </Text>
-    </View>
-    )} 
-    </Formik>
-  );
-;}
+                <View style={[hr80, {alignSelf: 'center'}]}></View>
+                <Text style={styles.dont}>Already Have an account?
+                    <Text style={styles.signup} onPress={() => navigation.navigate('login')}>  Log In</Text>
+                </Text>
+            </ScrollView>
+        </View>
+    );
+    ;
+}
 
 
 
 const styles = StyleSheet.create({
-     container: {
+    container: {
         flex: 1,
+        flexDirection: 'row',
         width: '100%',
         alignItems: "center",
-        //justifyContent: 'center',
-        
-     },
-     head1: {
+        justifyContent: 'center',
+
+    },
+    topContainer: {
+        marginTop: 50,
+        alignItems: 'center',
+    },
+    title: {
+        color: 'blue',
+        // fontWeight: 'bold',
+        fontSize: 30,
+        fontFamily: "Itim-Regular",
+        textAlign: 'center',
+    },
+    subtitle: {
+        color: 'blue',
+        fontSize: 25,
+      //  paddingTop: 3,
+        fontFamily: "Itim-Regular",
+        textAlign: 'center',
+    },
+
+    head1: {
         fontSize: titles.title1,
         color: colors.text1,
         textAlign: 'center',
         marginVertical: 0,
         fontFamily: "Itim-Regular",
-     },
-     inputout: {
+    },
+    inputout: {
         flexDirection: 'row',
         width: '80%',
         marginVertical: 10,
@@ -222,9 +252,9 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         paddingHorizontal: 5,
         paddingVertical: 0,
-        // alignSelf: 'center',
+        alignSelf: 'center',
         elevation: 20,
-        
+
     },
     input: {
         fontSize: 18,
@@ -250,15 +280,18 @@ const styles = StyleSheet.create({
         marginVertical: 8,
         fontWeight: 'bold',
         fontFamily: "Itim-Regular",
+        alignSelf: 'center',
     },
     gftxt: {
         color: colors.text2,
         marginVertical: 5,
         fontSize: 20,
         fontFamily: "Itim-Regular",
+        alignSelf: 'center',
     },
     gf: {
         flexDirection: 'row',
+        alignSelf: 'center',
     },
     gficon: {
         backgroundColor: 'white',
@@ -268,10 +301,12 @@ const styles = StyleSheet.create({
         padding: 10,
         alignItems: 'center',
         elevation: 20,
+        alignSelf: 'center',
     },
     signup: {
         color: colors.text1,
         fontFamily: "Itim-Regular",
+        alignSelf: 'center',
     },
     errormsg: {
         color: 'red',
@@ -286,9 +321,17 @@ const styles = StyleSheet.create({
     errorTxt: {
         fontSize: 12,
         color: 'red',
-        
+
     },
-     
+    bottomContainer: {
+        justifyContent: 'center',
+        marginTop: 50,
+    },
+    dont: {
+        marginTop: '-2%',
+        alignSelf: 'center',
+    },
+
 });
 
 export default SignupScreen;

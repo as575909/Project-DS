@@ -1,30 +1,60 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import front from '../../../assets/front.jpg';
-import {colors, hr80} from '../../globals/style';
+import { colors, hr80 } from '../../globals/style';
+import { useEffect } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const WelcomeScreen = ({navigation}) => {
-  return (
-    <View style = {styles.container}>
-        <Text style = {styles.title}> Welcome to EduoSkill </Text>
-        <View style ={styles.logoout}>
-            <Image source={front} style={styles.logo}/>
+
+
+
+const WelcomeScreen = ({ }) => {
+
+    // useEffect(() => {
+    //     async function checkInitialScreen() {
+    //         console.log('userStatus');
+    //       const userStatus = await AsyncStorage.getItem('isLoggedIn')
+    //       navigation.navigate(userStatus != '1' ? 'signup' : 'TabNavigator')
+    //       console.log(userStatus,'userStatus');
+    //     }}, []);
+
+    const navigation = useNavigation();
+    const retrieveData = async () => {
+        try {
+            const value = await AsyncStorage.getItem('isLoggedIn');
+            if (value !== null) {
+                // We have data!!
+                navigation.navigate('signup')
+                console.log(value);
+            }
+        } catch (error) {
+            // Error retrieving data
+            console.log("error")
+        }
+    };
+
+    return (
+        <View style={styles.container}>
+            <Text style={styles.title}> Welcome to EduoSkill </Text>
+            <View style={styles.logoout}>
+                <Image source={front} style={styles.logo} />
+            </View>
+            <View style={hr80} />
+            <Text style={styles.text}>Find the best course around you at lowest price.</Text>
+            <View style={hr80} />
+
+
+            <View style={styles.btnout}>
+                <TouchableOpacity onPress={() => navigation.navigate('signup')}>
+                    <Text style={styles.btn}>Sign up</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('login')}>
+                    <Text style={styles.btn}>Log In</Text>
+                </TouchableOpacity>
+            </View>
         </View>
-        <View style = {hr80}/>
-        <Text style ={styles.text}>Find the best course around you at lowest price.</Text>
-        <View style = {hr80}/>
-
-
-        <View style = {styles.btnout}>
-            <TouchableOpacity onPress={() => navigation.navigate('signup')}>
-                <Text style={styles.btn}>Sign up</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate('login')}>
-                <Text style={styles.btn}>Log In</Text>
-            </TouchableOpacity>
-        </View>
-    </View>
-  );
+    );
 };
 
 
@@ -69,7 +99,7 @@ const styles = StyleSheet.create({
         color: colors.text1,
         textAlign: 'center',
         marginVertical: 30,
-        marginHorizontal: 10, 
+        marginHorizontal: 10,
         // fontWeight: 700,
         backgroundColor: '#fff',
         borderRadius: 10,

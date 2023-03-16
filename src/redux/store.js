@@ -16,12 +16,55 @@
 // export default store;
 
 import { configureStore } from '@reduxjs/toolkit'
-import counterReducer from '../features/counter/counterSlice'
-import MyCartReducer from '../features/counter/MyCartSlice';
+import rootReducer from './rootReducer';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { persistReducer, persistStore } from 'redux-persist';
 
-export default configureStore({
-  reducer: {
-    counter: counterReducer,
-    cart: MyCartReducer,
-  },
+import {
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist'
+
+const persistConfig = {
+  key: 'root',
+  storage: AsyncStorage
+}
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+
+// export default () => {
+//   let store = configureStore({
+//     reducer: persistedReducer, 
+
+//  });
+//   let persistor = persistStore(store);
+//   return { store, persistor };
+// };
+
+
+
+// const store = configureStore(
+//   {
+//      reducer: persistedReducer,
+//   }
+// )
+
+const store = configureStore({
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
 })
+
+let persistor = persistStore(store);
+
+
+export {store, persistor};

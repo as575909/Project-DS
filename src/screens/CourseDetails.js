@@ -4,7 +4,7 @@ import Courses from "../api/Course";
 
 
 const CourseDetails = ({ navigation, route }) => {
-  
+
   const id = route.params.courseId;
   console.log(id);
 
@@ -19,7 +19,7 @@ const CourseDetails = ({ navigation, route }) => {
         <View>
           <Image
             style={styles.cardImage}
-            source={selectedCourse.Image}
+            source={{uri: selectedCourse.image}}
             resizeMode="contain"
           />
         </View>
@@ -28,7 +28,7 @@ const CourseDetails = ({ navigation, route }) => {
 
         <Text style={styles.description}>{selectedCourse.description}</Text>
 
-        <Text style={[styles.description, styles.subCourse]}>
+        {/* <Text style={[styles.description, styles.subCourse]}>
           {selectedCourse.course1}
         </Text>
 
@@ -38,15 +38,27 @@ const CourseDetails = ({ navigation, route }) => {
 
         <Text style={[styles.description, styles.subCourse]}>
           {selectedCourse.course3}
-        </Text>
+        </Text> */}
+
+
+        <View style={styles.description}>
+          <Text style={styles.subCourse}>
+            Price: ${selectedCourse.price.toFixed(2)}
+          </Text>
+          <Text> Rating: {selectedCourse.rating.rate} </Text>
+          <Text style={styles.subCourse}>
+            ({selectedCourse.rating.count} reviews)
+          </Text>
+        </View>
+
 
         <View style={styles.buttonContainer}>
           <Text style={styles.price}> ₹ {selectedCourse.price}/- </Text>
-          
+
         </View>
       </View>
     </View>
-   
+
   );
 };
 

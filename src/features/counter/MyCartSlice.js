@@ -13,7 +13,7 @@ const MyCartSlice = createSlice({
             });
             if (myIndex == -1) {
                 state.push({
-                    Image: action.payload.Image,
+                    image: action.payload.image,
                     id: action.payload.id,
                     price: action.payload.price,
                     qty: action.payload.qty + 1,

@@ -82,6 +82,7 @@ const CartScreen = ({ navigation }) => {
 
 
   const courseCard = ({ item }) => {
+    console.log(item, 'hi');
     return (
       <SafeAreaView>
 
@@ -90,7 +91,8 @@ const CartScreen = ({ navigation }) => {
             <View>
               <Image
                 style={styles.cardImage}
-                source={item.Image}
+                // source={item.Image}
+                source={{uri: item.image}}
                 resizeMode="contain"
               />
             </View>

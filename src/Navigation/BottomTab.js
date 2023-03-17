@@ -18,7 +18,7 @@ const TabNavigator = () => {
 
                     if (route.name === 'Home') {
                         iconName = 'home';
-                    } else if (route.name === 'Courses') {
+                    } else if (route.name === 'Products') {
                         iconName = 'list';
                     } else if (route.name === 'My Cart') {
                         iconName = 'cart-plus';
@@ -36,13 +36,13 @@ const TabNavigator = () => {
             <Tab.Screen name="Home" component={DrawerNav}
             options={{ headerShown: false, }}></Tab.Screen>
 
-            <Tab.Screen name="Courses" component={Course}
+            <Tab.Screen name="Products" component={Course}
             options={{
                 headerTitleStyle: {
                   fontSize: 25,
                   fontFamily: "Itim-Regular",
                 },
-                headerTitle: "Courses",
+                headerTitle: "Products",
                 headerTitleAlign: "center",
               }} />
 

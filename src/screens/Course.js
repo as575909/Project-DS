@@ -22,19 +22,19 @@ const Course = ({ navigation }) => {
   const result = useSelector((state) => state.counter);
   const myCartItems = useSelector((state) => state.cart);
   console.log('added products in cart',myCartItems);
-  const courseCard = ({ item }) => {
 
-   
+
+  const courseCard = ({ item }) => {  
     return (
       <SafeAreaView>
-        <HomeHeadNav />
+       {/* <HomeHeadNav /> */}
 
         <View style={styles.mainContainer}>
           <View style={styles.courseContainer}>
             <View>
               <Image
                 style={styles.cardImage}
-                source={item.Image}
+                source={{uri: item.image}}
                 resizeMode="contain"
               />
             </View>
@@ -51,7 +51,7 @@ const Course = ({ navigation }) => {
                     courseId: item.id,
                   })
                 }>
-                <Text style={styles.buttonText}> course Details </Text>
+                <Text style={styles.buttonText}> Product Details </Text>
 
               </TouchableOpacity>
 
@@ -139,11 +139,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#809fff",
     borderRadius: 5,
     paddingVertical: 10,
-    paddingHorizontal: 20,
+    paddingHorizontal: 10,
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    marginRight: 10,
+    marginRight: 15,
   },
   buttonText: {
     fontSize: 20,

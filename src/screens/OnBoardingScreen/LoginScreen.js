@@ -6,6 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { titles, colors, btn1, hr80 } from '../../globals/style';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {login} from '../../utils/asyncStorage';
 
 
 const SignInScreen = (props) => {
@@ -23,8 +24,6 @@ const SignInScreen = (props) => {
 
     const userData = useSelector((state) => state.user);
 
-
-
     const login = async () => {
 
         let found = false;
@@ -37,8 +36,9 @@ const SignInScreen = (props) => {
                 if (userData.data[i].Password == Password) {
                     console.log("password match", userData.data[i].Password == Password)
                     await AsyncStorage.setItem('isLoggedIn', '1')
-                    Alert.alert('Sucess',
-                        `User ${userData.data[0].Email} has successfully signed in!`
+                    console.log('isLoggedIn')
+                    Alert.alert('Success',
+                        `User ${userData.data[0].Email} has successfully logged in!`
                     )
 
                 }
@@ -47,6 +47,7 @@ const SignInScreen = (props) => {
             else {
                 alert('Email or Password is Incorrect')
                 return false
+                // navigation.navigate('TabNavigator')
             }
         }
     }

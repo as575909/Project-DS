@@ -1,6 +1,13 @@
+// import axios from 'axios';
+
+// const Axios = axios.create({
+//   baseURL: 'https://as575909.github.io',
+// });
+// export default Axios;
+
 import axios from 'axios';
 
-const Axios = axios.create({
-  baseURL: 'https://as575909.github.io',
+const API = axios.create({
+  baseURL: 'https://fakestoreapi.com',
 });
-export default Axios;
+export default API;

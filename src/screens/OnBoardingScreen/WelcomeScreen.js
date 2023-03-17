@@ -5,34 +5,29 @@ import { colors, hr80 } from '../../globals/style';
 import { useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {retrieveData} from '../../utils/asyncStorage';
 
 
 
 
 const WelcomeScreen = ({ }) => {
 
-    // useEffect(() => {
-    //     async function checkInitialScreen() {
-    //         console.log('userStatus');
-    //       const userStatus = await AsyncStorage.getItem('isLoggedIn')
-    //       navigation.navigate(userStatus != '1' ? 'signup' : 'TabNavigator')
-    //       console.log(userStatus,'userStatus');
-    //     }}, []);
 
     const navigation = useNavigation();
-    const retrieveData = async () => {
-        try {
-            const value = await AsyncStorage.getItem('isLoggedIn');
-            if (value !== null) {
-                // We have data!!
-                navigation.navigate('signup')
-                console.log(value);
-            }
-        } catch (error) {
-            // Error retrieving data
-            console.log("error")
-        }
-    };
+    // const retrieveData = async () => {
+    //     try {
+    //         const value = await AsyncStorage.getItem('isLoggedIn' , (err, result) => {
+    //             navigation.navigate(result != '1' ? 'signup' : 'TabNavigator')
+    //             console.log(result);
+    //           });
+          
+    //     } catch (error) {
+    //         // Error retrieving data
+    //         console.log("error")
+    //     }
+    // };
+
+    retrieveData();
 
     return (
         <View style={styles.container}>

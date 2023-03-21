@@ -41,9 +41,7 @@ const Navigation = () => {
         {/* //HomeScreen */}
         <Stack.Screen name='Home' component={Home}
           options={{ headerShown: false, }} />
-        {/* <Stack.Screen name="Home" options={{ headerShown: false, }}>
-          {(props) => <Home {...props} channelName={"EduoSkill!!"} />}
-        </Stack.Screen> */}
+      
 
         <Stack.Screen name="TabNavigator" component={TabNavigator}
           options={{ headerShown: false, }}

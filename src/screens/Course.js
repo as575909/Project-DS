@@ -14,6 +14,7 @@ import HomeHeadNav from '../component/HomeHeadNav';
 import { useDispatch, useSelector } from "react-redux";
 import { increment } from '../features/counter/counterSlice';
 import { addProductToMyCart } from "../features/counter/MyCartSlice";
+import {moderateScale} from 'react-native-size-matters';
 
 
 
@@ -67,7 +68,7 @@ const Course = ({ navigation }) => {
               </TouchableOpacity>)}
 
               {item.qty == 0 ? null : (
-                <Text style={{ marginLeft: 10, fontSize: 16, fontWeight: '600' }}>{'0'}</Text>
+                <Text style={styles.zero}>{'0'}</Text>
               )}
 
               {item.qty == 0 ? null : (
@@ -99,35 +100,35 @@ const styles = StyleSheet.create({
     aspectRatio: 1,
   },
   mainContainer: {
-    paddingHorizontal: 20,
+    paddingHorizontal: moderateScale(20),
   },
   courseContainer: {
-    padding: 30,
+    padding: moderateScale(30),
     backgroundColor: "rgba(255, 255, 255, 0.90)",
     textAlign: "center",
-    borderRadius: 5,
+    borderRadius: moderateScale(5),
     shadowColor: "grey",
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.5,
     shadowRadius: 8,
-    elevation: 8,
-    marginVertical: 30,
+    elevation: moderateScale(8),
+    marginVertical: moderateScale(30),
   },
   mainHeader: {
     fontSize: 22,
     color: "#344055",
     textTransform: "uppercase",
     // fontWeight: 500,
-    paddingBottom: 15,
+    paddingBottom: moderateScale(15),
     textAlign: "center",
     fontFamily: "Kanit-Bold",
   },
   description: {
     textAlign: "left",
     fontFamily: "Itim-Regular",
-    paddingBottom: 15,
-    lineHeight: 20,
-    fontSize: 16,
+    paddingBottom: moderateScale(15),
+    lineHeight: moderateScale(17),
+    fontSize: moderateScale(15),
     color: "#7d7d7d",
   },
   buttonContainer: {
@@ -137,19 +138,24 @@ const styles = StyleSheet.create({
   },
   buttonStyle: {
     backgroundColor: "#809fff",
-    borderRadius: 5,
-    paddingVertical: 10,
-    paddingHorizontal: 10,
+    borderRadius: moderateScale(5),
+    paddingVertical: moderateScale(10),
+    paddingHorizontal: moderateScale(10),
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    marginRight: 15,
+    marginRight: moderateScale(15),
   },
   buttonText: {
-    fontSize: 20,
+    fontSize: moderateScale(18),
     color: "#eee",
     fontFamily: "Itim-Regular",
     textTransform: "capitalize",
+  },
+  zero: {
+    marginLeft: moderateScale(10), 
+    fontSize: moderateScale(16), 
+    fontWeight: '600',
   },
 });
 

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity, FlatList } from "react-native";
+import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity, FlatList } from "react-native";
 import React from "react";
 import Courses from "../api/Course";
 
@@ -14,6 +14,7 @@ const CourseDetails = ({ navigation, route }) => {
 
 
   return (
+    <ScrollView>
     <View style={styles.mainContainer}>
       <View style={styles.courseContainer}>
         <View>
@@ -58,7 +59,7 @@ const CourseDetails = ({ navigation, route }) => {
         </View>
       </View>
     </View>
-
+    </ScrollView>
   );
 };
 

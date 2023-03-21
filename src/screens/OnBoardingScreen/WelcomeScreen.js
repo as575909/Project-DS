@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import front from '../../../assets/front.jpg';
+import front from '../../assets/images/front.jpg';
 import { colors, hr80 } from '../../globals/style';
 import { useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';

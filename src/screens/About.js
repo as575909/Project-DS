@@ -14,12 +14,14 @@ import {
   responsiveWidth,
   responsiveFontSize
 } from "react-native-responsive-dimensions";
+import Strings from '../statics/Strings';
+import {moderateScale} from 'react-native-size-matters';
 
 
 const About = () => {
   return (
-    <SafeAreaView>
-    <ScrollView>
+   
+    
     <View style={styles.aboutContainer}>
       <Text style={styles.mainHeader}> Ayush Kumar Singh</Text>
       <Text style={styles.paraStyle}> I am an Application Developer 😎 </Text>
@@ -27,16 +29,14 @@ const About = () => {
       <View>
         <Image
           style={styles.imgStyle}
-          source={require("../../assets/me1.jpeg")}
+          source={require("../assets/images/me1.jpeg")}
         />
       </View>
 
       <View style={styles.aboutLayout}>
         <Text style={styles.aboutSubHeader}> About me </Text>
         <Text style={[styles.paraStyle, styles.aboutPara]}>
-          Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
-          commodo ligula eget dolor. Lorem ipsum dolor sit amet, consectetuer
-          adipiscing elit. Aenean commodo ligula eget dolor.
+        {Strings.Description}
         </Text>
       </View>
 
@@ -83,8 +83,8 @@ const About = () => {
         </TouchableOpacity>
       </View>
     </View>
-    </ScrollView>
-    </SafeAreaView>
+    
+    
   );
 };
 
@@ -95,47 +95,47 @@ const styles = StyleSheet.create({
   },
 
   imgStyle: {
-    width: 150,
-    height: 150,
-    borderRadius: 100,
+    width: moderateScale(140),
+    height: moderateScale(140),
+    borderRadius: moderateScale(100),
   },
   mainHeader: {
-    fontSize: 18,
+    fontSize: moderateScale(18),
     color: "#344055",
     textTransform: "uppercase",
     fontWeight: "500",
     // marginTop: 50,
-    marginTop: 10,
-    marginBottom: 10,
+    marginTop: moderateScale(10),
+    marginBottom: moderateScale(10),
     fontFamily: "Itim-Regular",
   },
   paraStyle: {
-    fontSize: 18,
+    fontSize: moderateScale(16),
     color: "#7d7d7d",
-    paddingBottom: 30,
+    paddingBottom: moderateScale(28),
     fontFamily: "Itim-Regular",
   },
   aboutLayout: {
     backgroundColor: "#4c5dab",
-    paddingHorizontal: 30,
+    paddingHorizontal: moderateScale(30),
     // marginVertical: 30,
-    marginTop: 20,
-    borderRadius: 60,
+    marginTop: moderateScale(12),
+    borderRadius: moderateScale(60),
   },
   aboutSubHeader: {
-    fontSize: 18,
+    fontSize: moderateScale(18),
     color: "#fff",
     textTransform: "uppercase",
     fontWeight: "500",
-    marginVertical: 15,
+    marginVertical: moderateScale(15),
     fontFamily: "Itim-Regular",
     alignSelf: "center",
   },
   aboutPara: {
     color: "#fff",
-    fontSize: 18,
+    fontSize: moderateScale(15),
     fontFamily: "Itim-Regular",
-    lineHeight: 26,
+    lineHeight: moderateScale(24),
   },
   menuContainer: {
     width: "100%",

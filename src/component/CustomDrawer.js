@@ -1,5 +1,6 @@
 import { ImageBackground, StyleSheet, Text, View, Image, TouchableOpacity, Alert } from 'react-native';
 import React from 'react';
+import { DrawerActions } from "@react-navigation/native";
 import { DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
@@ -14,8 +15,8 @@ const CustomDrawer = (props) => {
     {...props}
     contentContainerStyle={{backgroundColor:'#89CFF0'}}>
 
-        <ImageBackground source={require('../../assets/images/bgdrawer.jpg')} style={styles.imgbg}>
-        <Image source={require('../../assets/images/manAvatar.jpg')} style={styles.avatar} />
+        <ImageBackground source={require('../assets/images/bgdrawer.jpg')} style={styles.imgbg}>
+        <Image source={require('../assets/images/manAvatar.jpg')} style={styles.avatar} />
         <Text style={styles.user}>@User</Text>
         <View style={styles.coinContainer}>
         <Text style={styles.coins}>200 Coins</Text>

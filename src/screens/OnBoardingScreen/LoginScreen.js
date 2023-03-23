@@ -37,20 +37,21 @@ const SignInScreen = (props) => {
                     console.log("password match", userData.data[i].Password == Password)
                     await AsyncStorage.setItem('isLoggedIn', '1')
                     console.log('isLoggedIn')
-                    Alert.alert('Success',
-                        `User ${userData.data[0].Email} has successfully logged in!`
-                    )
+                    Alert.alert(
+                        'Success',
+                        `${userData.data[0].Name} you are successfully logged in!`
+                    );
 
                 }
                 navigation.navigate('TabNavigator')
             }
             else {
                 alert('Email or Password is Incorrect')
-                return false
+                return false;
                 // navigation.navigate('TabNavigator')
             }
         }
-    }
+    };
 
 
 
@@ -138,10 +139,10 @@ const SignInScreen = (props) => {
                 </TouchableOpacity>
 
                 <Text style={styles.forgot}>Forgot Password?</Text>
-                <Text style={styles.or}>OR</Text>
-                <Text style={styles.gftxt}>Sign In With </Text>
+                {/* <Text style={styles.or}>OR</Text>
+                <Text style={styles.gftxt}>Sign In With </Text> */}
 
-                <View style={styles.gf}>
+                {/* <View style={styles.gf}>
                          <TouchableOpacity>
                              <View style={styles.gficon}>
                                  <Icon name="google" size={30} color='red' />
@@ -153,7 +154,7 @@ const SignInScreen = (props) => {
                                  <Icon name="facebook" size={30} color='blue' />
                              </View>
                          </TouchableOpacity>
-                     </View>
+                     </View> */}
                      <View style={[hr80, {alignSelf: 'center'}]}></View>
                      <Text style={styles.dont} >Don't have an account?
                         <Text style={styles.signup} onPress={() => navigation.navigate('signup')}>  Sign Up</Text>

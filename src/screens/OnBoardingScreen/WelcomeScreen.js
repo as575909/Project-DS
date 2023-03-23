@@ -14,29 +14,29 @@ const WelcomeScreen = ({ }) => {
 
 
     const navigation = useNavigation();
-    // const retrieveData = async () => {
-    //     try {
-    //         const value = await AsyncStorage.getItem('isLoggedIn' , (err, result) => {
-    //             navigation.navigate(result != '1' ? 'signup' : 'TabNavigator')
-    //             console.log(result);
-    //           });
+    const retrieveData = async () => {
+        try {
+            const value = await AsyncStorage.getItem('isLoggedIn' , (err, result) => {
+                navigation.navigate(result != '1' ? 'signup' : 'TabNavigator')
+                console.log(result);
+              });
           
-    //     } catch (error) {
-    //         // Error retrieving data
-    //         console.log("error")
-    //     }
-    // };
+        } catch (error) {
+            // Error retrieving data
+            console.log("error")
+        }
+    };
 
     retrieveData();
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}> Welcome to EduoSkill </Text>
+            <Text style={styles.title}> Welcome to InstaMart </Text>
             <View style={styles.logoout}>
                 <Image source={front} style={styles.logo} />
             </View>
             <View style={hr80} />
-            <Text style={styles.text}>Find the best course around you at lowest price.</Text>
+            <Text style={styles.text}>Find the best items around you at lowest price.</Text>
             <View style={hr80} />
 
 

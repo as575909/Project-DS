@@ -12,6 +12,7 @@ import { useNavigation } from '@react-navigation/native';
 
 const SignupScreen = ({ }) => {
     
+    const [Name, setName] = useState('');
 
     const [Email, setEmail] = useState("");
     const [chEmail, setchEmail] = useState("true");
@@ -34,6 +35,7 @@ const SignupScreen = ({ }) => {
 
     const onSubmit = () => {
         const userObj = {
+            "Name": Name,
             "Email": Email,
             "Password": Password,
             "Number": PhoneNum,
@@ -41,7 +43,7 @@ const SignupScreen = ({ }) => {
         if (userObj.Email && userObj.Password && userObj.Number != " ") {
             Alert.alert(
                 'Success!',
-                `User ${userObj.Email} was successfully created!`,
+                `User ${userObj.Name} was successfully created!`,
             );
             navigation.navigate('login')
         }
@@ -141,6 +143,12 @@ const SignupScreen = ({ }) => {
                     <Text style={styles.title}>Let's get Started</Text>
                     <Text style={styles.subtitle}>Sign up </Text>
                 </View>
+
+                <View style = {styles.inputout}>
+                  <Icon name="user" size={24} color={Email === true ? colors.text1 : colors.text2} style = {styles.icon} />
+                  <TextInput placeholder='Name' onChangeText={setName} value={Name} />
+                 </View>
+
                 <View style = {styles.inputout}>
                   <Icon name="at" size={24} color={Email === true ? colors.text1 : colors.text2} style = {styles.icon} />
                   <TextInput placeholder='Email' onChangeText={setEmail} onEndEditing={validateEmail} />
@@ -181,10 +189,10 @@ const SignupScreen = ({ }) => {
                     <Text style={{ color: 'white', fontSize: titles.btntxt, fontFamily: "Itim-Regular", marginTop: 10 }}>Sign up</Text>
                 </TouchableOpacity>
 
-                <Text style={styles.or}>OR</Text>
-                <Text style={styles.gftxt}>Sign In With </Text>
+                {/* <Text style={styles.or}>OR</Text>
+                <Text style={styles.gftxt}>Sign In With </Text> */}
 
-                <View style={styles.gf}>
+                {/* <View style={styles.gf}>
                     <TouchableOpacity onPress={() => Linking.openURL("https://github.com/as575909")}>
                         <View style={styles.gficon}>
                             <Icon name="google" size={30} color='red' />
@@ -196,7 +204,7 @@ const SignupScreen = ({ }) => {
                             <Icon name="facebook" size={30} color='blue' />
                         </View>
                     </TouchableOpacity>
-                </View>
+                </View> */}
                 <View style={[hr80, {alignSelf: 'center'}]}></View>
                 <Text style={styles.dont}>Already Have an account?
                     <Text style={styles.signup} onPress={() => navigation.navigate('login')}>  Log In</Text>

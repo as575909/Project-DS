@@ -4,8 +4,8 @@ import Home from '../screens/Home';
 import About from '../screens/About';
 import Contact from '../screens/Contact';
 import UserData from '../screens/UserData';
-import Course from '../screens/Course';
-import CourseDetails from '../screens/CourseDetails';
+import Products from '../screens/Products';
+import ProductDetails from '../screens/ProductDetails';
 import WelcomeScreen from '../screens/OnBoardingScreen/WelcomeScreen';
 import LoginScreen from '../screens/OnBoardingScreen/LoginScreen';
 import SignupScreen from '../screens/OnBoardingScreen/SignupScreen';
@@ -47,8 +47,8 @@ const Navigation = () => {
           options={{ headerShown: false, }}
         />
 
-        {/* CourseScreen */}
-        <Stack.Screen name='Course' component={Course} />
+        {/* ProductScreen */}
+        <Stack.Screen name='Products' component={Products} />
         {/* AboutScreen */}
         <Stack.Screen name='About' component={About} />
         {/* ContactScreen */}
@@ -56,9 +56,9 @@ const Navigation = () => {
         {/* UserDataScreen */}
         <Stack.Screen name='UserData' component={UserData} />
 
-        {/* CourseDetails Screen  */}
+        {/* ProductDetails Screen  */}
         <Stack.Screen
-          name="CourseDetails" component={CourseDetails}
+          name="ProductDetails" component={ProductDetails}
           options={{
             headerTitleStyle: {
               fontSize: 25,

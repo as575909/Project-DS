@@ -11,11 +11,12 @@ import {
 } from 'react-native';
 
 // import {addToCart} from '../redux/CartSlice';
-import { addProductToMyCart } from "../features/counter/MyCartSlice";
+import { addProductToMyCart } from "../redux/reducers/MyCartSlice";
 import {useDispatch, useSelector} from 'react-redux';
 
 import {getFakeProducts} from '../api/Axios';
-import {colors} from '../globals/style';
+import colors from '../statics/styles/colors';
+import { listEmptyComponent } from '../component/emptyList';
 
 const Product = () => {
   const [data, setData] = useState([]);
@@ -53,7 +54,9 @@ const Product = () => {
           <Text>Loading...</Text>
         ) : (
           <FlatList
+
             data={data}
+            ListEmptyComponent={listEmptyComponent}
             keyExtractor={({id}) => id.toString()}
             renderItem={({item}) => (
               <View style={styles.container}>

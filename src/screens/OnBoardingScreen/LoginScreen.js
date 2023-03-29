@@ -1,12 +1,16 @@
 import React from 'react';
-import { View, Text, ScrollView, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import { View, Text, ScrollView, TextInput, TouchableOpacity, StyleSheet, Alert, BackHandler } from 'react-native';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import {storeData} from '../../utils/asyncStorage';
 import { titles, colors, btn1, hr80 } from '../../globals/style';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {login} from '../../utils/asyncStorage';
+import { isValidEmail, isValidPassword } from '../../utils/regex';
+import MyTextInput from '../../component/MyTextInput';
+import { moderateScale } from 'react-native-size-matters';
+import { responsiveFontSize } from 'react-native-responsive-dimensions';
+
 
 
 const SignInScreen = (props) => {
@@ -24,6 +28,7 @@ const SignInScreen = (props) => {
 
     const userData = useSelector((state) => state.user);
 
+
     const login = async () => {
 
         let found = false;
@@ -35,7 +40,8 @@ const SignInScreen = (props) => {
                 console.log(userData.data[i].Email == Email, "Email Matched")
                 if (userData.data[i].Password == Password) {
                     console.log("password match", userData.data[i].Password == Password)
-                    await AsyncStorage.setItem('isLoggedIn', '1')
+                    // await AsyncStorage.setItem('isLoggedIn', '1')
+                    await storeData('isLoggedIn', '1')
                     console.log('isLoggedIn')
                     Alert.alert(
                         'Success',
@@ -49,21 +55,15 @@ const SignInScreen = (props) => {
                 alert('Email or Password is Incorrect')
                 return false;
                 // navigation.navigate('TabNavigator')
-            }
-        }
-    };
-
-
+            }}};
 
     const validateEmail = () => {
-        var emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
-
         var email = Email.trim();
         if (email == "" || email == undefined || email == null) {
             seterrEmail("Please enter the email");
             setchEmail(false);
             return false;
-        } else if (!emailRegex.test(email)) {
+        } else if (!isValidEmail(email)) {
             seterrEmail("Please enter valid email address");
             setchEmail(false);
             return false;
@@ -72,19 +72,15 @@ const SignInScreen = (props) => {
             setchEmail(true);
             return true;
 
-        }
-
-    }
+        }}
 
     const validatePassword = () => {
-        var passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
         var password = Password.trim();
-
         if (password == "" || password == undefined || password == null) {
             seterrPassword("Please enter the password")
             setchPassword(false);
             return false;
-        } else if (!passwordRegex.test(password)) {
+        } else if (!isValidPassword(password)) {
             seterrPassword("Please enter the valid password")
             setchPassword(false);
             return false;
@@ -92,8 +88,7 @@ const SignInScreen = (props) => {
             seterrPassword("");
             setchPassword(true);
             return true
-        }
-    }
+        }}
 
     return (
         <View style={styles.container}>
@@ -108,7 +103,7 @@ const SignInScreen = (props) => {
 
                 <View style={styles.inputout}>
                     <Icon name="user" size={24} color={Email === true ? colors.text1 : colors.text2} style={styles.icon} />
-                    <TextInput style={styles.input} placeholder='Enter Email' onChangeText={setEmail} onEndEditing={validateEmail} />
+                    <MyTextInput placeholder='Enter Email' onChangeText={setEmail} onEndEditing={validateEmail} onBlur={e => this.validateEmail} />
 
                 </View>
                 {
@@ -117,15 +112,15 @@ const SignInScreen = (props) => {
 
                 <View style={styles.inputout}>
                     <Icon name="lock" size={24} color={Password === true ? colors.text1 : colors.text2} style={styles.icon} />
-                    <TextInput style={styles.input}
-                        placeholder='Password'
+                    <MyTextInput                         placeholder='Password'
                         onChangeText={setPassword}
                         onEndEditing={validatePassword}
+                        onBlur={e => this.validatePassword}
                         //secureTextEntry={true} />
                         secureTextEntry={showpassword === false ? true : false} />
-                    <Icon name={showpassword == false ? 'eye-slash' : 'eye'} size={24} color='grey'
+                    {/* <Icon name={showpassword == false ? 'eye-slash' : 'eye'} size={24} color='grey'
                         style={styles.icon1}
-                        onPress={() => setShowpassword(!showpassword)} />
+                        onPress={() => setShowpassword(!showpassword)} /> */}
                 </View>
                 {
                     chPassword == true ? null : <Text style={{ color: 'red', marginLeft: '5%' }}>{errPassword}</Text>
@@ -171,6 +166,7 @@ const SignInScreen = (props) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        flexDirection: 'row',
         width: '100%',
         alignItems: "center",
         justifyContent: 'center',
@@ -180,33 +176,49 @@ const styles = StyleSheet.create({
         fontSize: titles.title1,
         color: colors.text1,
         textAlign: 'center',
+        alignItems: 'center',
         marginVertical: 10,
         fontFamily: "Itim-Regular",
+        // marginTop: moderateScale(50),
+        // alignItems: 'center',
+        // textAlign: 'center',
     },
     title: {
         color: 'blue',
         // fontWeight: 'bold',
         fontSize: 30,
         fontFamily: "Itim-Regular",
-        textAlign: 'center',
+        // textAlign: 'center',
     },
     subtitle: {
+        // color: 'blue',
+        // fontSize: 25,
+        // paddingTop: 3,
+        // fontFamily: "Itim-Regular",
+        // textAlign: 'center',
         color: 'blue',
-        fontSize: 25,
-        paddingTop: 3,
+        fontSize: responsiveFontSize(3.5),
         fontFamily: "Itim-Regular",
-        textAlign: 'center',
     },
     inputout: {
         flexDirection: 'row',
-        width: '95%',
+        width: '80%',
         marginVertical: 10,
         backgroundColor: colors.col1,
         borderRadius: 10,
         paddingHorizontal: 10,
         paddingVertical: 10,
         alignSelf: 'center',
-        elevation: 10,
+        elevation: 20,
+        // flexDirection: 'row',
+        // width: '95%',
+        // marginVertical: moderateScale(10),
+        // backgroundColor: colors.col1,
+        // borderRadius: moderateScale(10),
+        // paddingHorizontal: moderateScale(5),
+        // paddingVertical: moderateScale(0),
+        // alignSelf: 'center',
+        // elevation: moderateScale(20),
 
     },
     input: {
@@ -221,6 +233,7 @@ const styles = StyleSheet.create({
     icon1: {
         padding: 1,
         marginTop: 10,
+        paddingLeft: 30,
     },
     forgot: {
         color: colors.text2,

@@ -39,6 +39,20 @@ const MyCartSlice = createSlice({
             }
         },
 
+        increaseQty: (state, action) => {
+            let myIndex = -1;
+            state.map((item, index) => {
+                if (item.id == action.payload) {
+                    myIndex = index;
+                }
+            });
+            if (myIndex == -1) {
+
+            } else {
+                state[myIndex].qty = state[myIndex].qty + 1;
+            }
+        },
+
         deleteMyCartItem: (state, action) => {
             return (state = state.filter(item => {
                 item.id != action.payload;
@@ -47,6 +61,6 @@ const MyCartSlice = createSlice({
     },
 });
 
-export const { addProductToMyCart, removeMyCartItem, deleteMyCartItem } = MyCartSlice.actions;
+export const { addProductToMyCart, removeMyCartItem, deleteMyCartItem, increaseQty } = MyCartSlice.actions;
 
 export default MyCartSlice.reducer;

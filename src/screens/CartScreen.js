@@ -1,20 +1,42 @@
-import { FlatList, SafeAreaView, StatusBar, StyleSheet, Text, Image, TouchableOpacity, View } from 'react-native'
-import { useEffect } from 'react';
+import React, {useEffect} from 'react';
+import { Alert, FlatList, SafeAreaView, StatusBar, StyleSheet, Text, Image, TouchableOpacity, View } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import { increment } from '../features/counter/counterSlice';
-import { addProductToMyCart, removeMyCartItem, deleteMyCartItem } from "../features/counter/MyCartSlice";
+import { increment } from '../redux/reducers/counterSlice';
+import { addProductToMyCart, removeMyCartItem, deleteMyCartItem, increaseQty } from "../redux/reducers/MyCartSlice";
 import { btn1 } from '../globals/style';
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
+import showAlert from '../component/Alert';
+import EmptyCart from '../component/EmptyCart';
+import Strings from '../statics/Strings';
+import { onBackPress } from '../utils/backPressHandler';
+
 
 const CartScreen = ({ navigation }) => {
   // const result = useSelector((state) => state.counter);
   const myCartItems = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   products.map(item => {
-  //     dispatch(increment(item));
-  //   });
-  // }, []);
+
+  const AlertItem = () => {
+    Alert.alert(
+      'Delete',
+      'Are you sure you want to clear the cart?',
+      [
+        {
+          text: 'Cancel',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        {text: 'OK', onPress: () => dispatch(deleteMyCartItem())},
+      ],
+      {cancelable: false},
+    );
+  };
+
+  // const AlertItem = () => {
+  //   showAlert('Delete', 'Are you sure you want to clear the cart?','dispatch(deleteMyCartItem())');
+  // };
+
 
   const getTotal = () => {
     let total = 0;
@@ -29,14 +51,13 @@ const CartScreen = ({ navigation }) => {
     console.log(item, 'hi');
     return (
       <SafeAreaView>
-
         <View style={styles.mainContainer}>
           <View style={styles.courseContainer}>
             <View>
               <Image
                 style={styles.cardImage}
                 // source={item.Image}
-                source={{uri: item.image}}
+                source={{ uri: item.image }}
                 resizeMode="contain"
               />
             </View>
@@ -47,21 +68,22 @@ const CartScreen = ({ navigation }) => {
 
             <View style={styles.buttonContainer}>
 
-
-              {item.qty == 0 ? null : (<TouchableOpacity
+              {/* {item.qty == 0 ? null : (<TouchableOpacity
                 style={styles.buttonStyle}
                 onPress={() => {
                   if (item.qty > 1) {
                     dispatch(removeMyCartItem(item));
                   } else {
                     dispatch(deleteMyCartItem(item.id));
+
                   }
                 }}>
                 <Text style={styles.buttonText}> - </Text>
               </TouchableOpacity>)}
 
+
               {item.qty == 0 ? null : (
-                <Text style={{ marginLeft: 10, fontSize: 16, fontWeight: '600', marginTop: 10, }}>{item.qty}</Text>
+                <Text style={styles.qty}>{item.qty}</Text>
               )}
 
               {item.qty == 0 ? null : (
@@ -70,7 +92,32 @@ const CartScreen = ({ navigation }) => {
                   onPress={() => dispatch(addProductToMyCart(item))}>
                   <Text style={styles.buttonText}> + </Text>
                 </TouchableOpacity>
-              )}
+              )} */}
+
+              <TouchableOpacity
+                style={styles.buttonStyle}
+                onPress={() => {
+                  if (item.qty > 1) {
+                    dispatch(removeMyCartItem(item));
+                  } else {
+                    dispatch(deleteMyCartItem(item.id));
+
+                  }
+                }}>
+                <Text style={styles.buttonText}> - </Text>
+              </TouchableOpacity>
+
+              <Text style={styles.qty}>{item.qty}</Text>
+
+              <TouchableOpacity
+                style={styles.buttonStyle}
+                onPress={() => { 
+                dispatch(addProductToMyCart(item))
+                
+                }}>
+                <Text style={styles.buttonText}> + </Text>
+              </TouchableOpacity>
+
             </View>
           </View>
         </View>
@@ -83,7 +130,13 @@ const CartScreen = ({ navigation }) => {
 
     <View>
       <StatusBar />
-      <Text> Items added to cart : {myCartItems.length} </Text>
+
+      <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+        <Text> Items added to cart : {myCartItems.length} </Text>
+        <TouchableOpacity onPress={AlertItem}>
+          <FontAwesomeIcon name="trash" size={20} color="#00141a" />
+        </TouchableOpacity>
+      </View>
 
       <FlatList
         keyExtractor={(item) => item.id}
@@ -104,7 +157,10 @@ const CartScreen = ({ navigation }) => {
 
         </View>
 
-      </View>) : null}
+      </View>) : <EmptyCart style={{height: 600, backgroundColor: '#fff3b0'}} />}
+
+
+
 
     </View>
   )
@@ -166,7 +222,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontFamily: "Kanit-Bold",
   },
-  
+
   buttonContainer: {
     display: "flex",
     flexDirection: "row",
@@ -187,6 +243,12 @@ const styles = StyleSheet.create({
     color: "#eee",
     fontFamily: "Itim-Regular",
     textTransform: "capitalize",
+  },
+  qty: {
+    marginLeft: 10,
+    fontSize: 16,
+    fontWeight: '600',
+    marginTop: 10,
   },
 
 })

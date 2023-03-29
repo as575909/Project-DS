@@ -1,12 +1,27 @@
-import React from 'react';
-import { StyleSheet, Text, View, Image, StatusBar } from 'react-native';
+import React, { useEffect } from 'react';
+import { Text, View, Image, StatusBar, BackHandler } from 'react-native';
 import TabNavigator from '../Navigation/BottomTab';
 // import Menu from '../component/Menu';
 import Strings from '../statics/Strings';
 import styles from '../statics/styles';
+import front from '../assets/images/front.jpg';
+import { useNavigation } from '@react-navigation/native';
+import { onBackPress } from '../utils/backPressHandler';
+
 
 const Home = () => {
-  // const description = "Lorem ipsum dolor sit amet. Et commodi enim ut modi maxime quo minus rerum a nihil commodi et aspernatur officiis et repudiandae alias. Quo aperiam consequatur";
+
+  const navigation = useNavigation();
+
+  // function handleBkPress() {
+  //   navigation.goBack();
+  //   return true;
+  // }
+
+  // useEffect(() => {
+  //   onBackPress(handleBkPress);
+  // }, []);
+
   return (
     <View style={styles.mainContainer}>
 
@@ -15,9 +30,9 @@ const Home = () => {
       <View style={styles.homeTop}>
         <Image style={styles.headerImage}
           resizeMode="stretch"
-          source={require("../assets/images/logo1.jpg")} />
+          source={front} />
         <Text style={styles.mainHeader}> {Strings.Welcome} </Text>
-        <Text style={styles.mainHeader1}>{Strings.EduoSkill}</Text>
+        <Text style={styles.mainHeader1}>{Strings.InstaMart}</Text>
         <Text style={styles.paraStyle}>{Strings.Description}</Text>
       </View>
 

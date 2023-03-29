@@ -3,15 +3,21 @@ import { Alert, Linking, StatusBar, Button, StyleSheet, Text, TextInput, Touchab
 import { titles, colors, btn1, hr80 } from '../../globals/style';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useDispatch } from 'react-redux';
-import { adduser } from '../../redux/LoginReducer';
+import { adduser } from '../../redux/reducers/LoginReducer';
 import { useNavigation } from '@react-navigation/native';
-
-
-
-
+import Strings from '../../statics/Strings';
+import { isValidEmail, isValidPhone, isValidPassword } from '../../utils/regex';
+import { validateEmail, validatePhoneNum, validatePassword, validateRePassword } from '../../statics/validation';
+import MyTextInput from '../../component/MyTextInput';
+import { moderateScale } from 'react-native-size-matters';
+import {
+  responsiveHeight,
+  responsiveWidth,
+  responsiveFontSize
+} from "react-native-responsive-dimensions";
 
 const SignupScreen = ({ }) => {
-    
+
     const [Name, setName] = useState('');
 
     const [Email, setEmail] = useState("");
@@ -42,28 +48,24 @@ const SignupScreen = ({ }) => {
         }
         if (userObj.Email && userObj.Password && userObj.Number != " ") {
             Alert.alert(
-                'Success!',
+                Strings.Success,
                 `User ${userObj.Name} was successfully created!`,
             );
             navigation.navigate('login')
         }
-
         else {
-            alert("Please fill all details")
+            alert(Strings.Error1)
         }
         dispatch(adduser(userObj))
     }
 
-
     const validateEmail = () => {
-        var emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
-
         var email = Email.trim();
         if (email == "" || email == undefined || email == null) {
             seterrEmail("Please enter the email");
             setchEmail(false);
             return false;
-        } else if (!emailRegex.test(email)) {
+        } else if (!isValidEmail(email)) {
             seterrEmail("Please enter valid email address");
             setchEmail(false);
             return false;
@@ -71,21 +73,16 @@ const SignupScreen = ({ }) => {
             seterrEmail("");
             setchEmail(true);
             return true;
-
         }
-
     }
 
-
     const validatePhoneNum = () => {
-        var phoneRegex = /^[1-9][0-9]{9,12}$/;
         var phoneNum = PhoneNum.trim();
-
         if (phoneNum == "" || phoneNum == undefined || phoneNum == null) {
             seterrPhoneNum("Please enter your contact number");
             setchPhoneNum(false);
             return false;
-        } else if (!phoneRegex.test(phoneNum)) {
+        } else if (!isValidPhone(phoneNum)) {
             seterrPhoneNum("Please enter 10 digits number ");
             setchPhoneNum(false);
             return false;
@@ -97,14 +94,12 @@ const SignupScreen = ({ }) => {
     }
 
     const validatePassword = () => {
-        var passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
-        var password = Password.trim();
-
+         var password = Password.trim();
         if (password == "" || password == undefined || password == null) {
             seterrPassword("Please enter the password")
             setchPassword(false);
             return false;
-        } else if (!passwordRegex.test(password)) {
+        } else if (!isValidPassword(password)) {
             seterrPassword("Please enter the valid password")
             setchPassword(false);
             return false;
@@ -132,61 +127,55 @@ const SignupScreen = ({ }) => {
             return true;
 
         }
-
     }
 
-
     return (
-        <View style={styles.container}>
+        <View style={styles.container2}>
             <ScrollView>
                 <View style={styles.topContainer}>
-                    <Text style={styles.title}>Let's get Started</Text>
-                    <Text style={styles.subtitle}>Sign up </Text>
+                    <Text style={styles.title}>{Strings.Title1}</Text>
+                    <Text style={styles.subtitle}>{Strings.SignUp}</Text>
                 </View>
 
-                <View style = {styles.inputout}>
-                  <Icon name="user" size={24} color={Email === true ? colors.text1 : colors.text2} style = {styles.icon} />
-                  <TextInput placeholder='Name' onChangeText={setName} value={Name} />
-                 </View>
+                <View style={styles.inputout}>
+                    <Icon name="user" size={24} color={Email === true ? colors.text1 : colors.text2} style={styles.icon} />
+                    {/* <TextInput placeholder={Strings.Name} onChangeText={setName} value={Name}  /> */}
+                    <MyTextInput placeholder={Strings.Name} onChangeText={setName} value={Name} />
+                </View>
 
-                <View style = {styles.inputout}>
-                  <Icon name="at" size={24} color={Email === true ? colors.text1 : colors.text2} style = {styles.icon} />
-                  <TextInput placeholder='Email' onChangeText={setEmail} onEndEditing={validateEmail} />
-                 </View>
-                {
-                    chEmail == true ? null : <Text style={{ color: 'red', marginLeft: '5%' }}>{errEmail}</Text>
-                }
-                <View style = {styles.inputout}>
-                  <Icon name="phone" size={24} color={Email === true ? colors.text1 : colors.text2} style = {styles.icon} />
-                  <TextInput placeholder='Contact Number' onChangeText={setPhoneNum} onEndEditing={validatePhoneNum} keyboardType={"number-pad"} />
-                 </View>
-               
-                {
-                    chPhoneNum == true ? null : <Text style={{ color: 'red', marginLeft: '5%' }}>{errPhoneNum}</Text>
-                }
-                <View style = {styles.inputout}>
-                  <Icon name="lock" size={24} color={Email === true ? colors.text1 : colors.text2} style = {styles.icon} />
-                  <TextInput placeholder='Password' onChangeText={setPassword} onEndEditing={validatePassword} secureTextEntry={true} />
-                 </View>
-                
-                {
-                    chPassword == true ? null : <Text style={{ color: 'red', marginLeft: '5%' }}>{errPassword}</Text>
-                }
-                <View style = {styles.inputout}>
-                  <Icon name="lock" size={24} color={Email === true ? colors.text1 : colors.text2} style = {styles.icon} />
-                  <TextInput placeholder='Confirm Password' onChangeText={resetPassword} onEndEditing={validateRePassword} secureTextEntry={true} />
-                 </View>
-                
-                {
-                    chrePassword == true ? null : <Text style={{ color: 'red', marginLeft: '5%' }} >{errRePassword}</Text>
-                }
+                <View style={styles.inputout}>
+                    <Icon name="at" size={24} color={Email === true ? colors.text1 : colors.text2} style={styles.icon} />
+                    <MyTextInput placeholder={Strings.Email} onChangeText={setEmail} onEndEditing={validateEmail} onBlur={e => this.validateEmail} />
+                    
+                </View>
+                {chEmail == true ? null : <Text style={styles.error}>{errEmail}</Text>}
+
+                <View style={styles.inputout}>
+                    <Icon name="phone" size={24} color={Email === true ? colors.text1 : colors.text2} style={styles.icon} />
+                    <MyTextInput placeholder={Strings.Mob} onChangeText={setPhoneNum} onEndEditing={validatePhoneNum} onBlur={e => this.validatePhoneNum} keyboardType={"number-pad"} />
+                </View>
+
+                {chPhoneNum == true ? null : <Text style={styles.error}>{errPhoneNum}</Text>}
+
+                <View style={styles.inputout}>
+                    <Icon name="lock" size={24} color={Email === true ? colors.text1 : colors.text2} style={styles.icon} />
+                    <MyTextInput placeholder={Strings.Password} onChangeText={setPassword} onEndEditing={validatePassword} onBlur={e => this.validatePassword} secureTextEntry={true} />
+                </View>
+
+                {chPassword == true ? null : <Text style={styles.error}>{errPassword}</Text>}
+
+                <View style={styles.inputout}>
+                    <Icon name="lock" size={24} color={Email === true ? colors.text1 : colors.text2} style={styles.icon} />
+                    <MyTextInput placeholder={Strings.CPassword} onChangeText={resetPassword} onEndEditing={validateRePassword} onBlur={e => this.validateRePassword} secureTextEntry={true} />
+                </View>
+
+                {chrePassword == true ? null : <Text style={styles.error} >{errRePassword}</Text>}
 
                 <TouchableOpacity style={[btn1, { alignSelf: 'center' }, { backgroundColor: validatePassword ? 'blue' : 'grey' }]}
                     //  onPress={() => navigation.navigate('TabNavigator')}
                     onPress={onSubmit}
-                
                 >
-                    <Text style={{ color: 'white', fontSize: titles.btntxt, fontFamily: "Itim-Regular", marginTop: 10 }}>Sign up</Text>
+                    <Text style={styles.signupTxt}>{Strings.SignUp}</Text>
                 </TouchableOpacity>
 
                 {/* <Text style={styles.or}>OR</Text>
@@ -205,9 +194,9 @@ const SignupScreen = ({ }) => {
                         </View>
                     </TouchableOpacity>
                 </View> */}
-                <View style={[hr80, {alignSelf: 'center'}]}></View>
-                <Text style={styles.dont}>Already Have an account?
-                    <Text style={styles.signup} onPress={() => navigation.navigate('login')}>  Log In</Text>
+                <View style={hr80}></View>
+                <Text style={styles.dont}>{Strings.Title2}
+                    <Text style={styles.signup} onPress={() => navigation.navigate('login')}>  {Strings.Login}</Text>
                 </Text>
             </ScrollView>
         </View>
@@ -218,7 +207,7 @@ const SignupScreen = ({ }) => {
 
 
 const styles = StyleSheet.create({
-    container: {
+    container2: {
         flex: 1,
         flexDirection: 'row',
         width: '100%',
@@ -227,117 +216,97 @@ const styles = StyleSheet.create({
 
     },
     topContainer: {
-        marginTop: 50,
+        marginTop: moderateScale(50),
         alignItems: 'center',
+        textAlign: 'center',
     },
     title: {
         color: 'blue',
-        // fontWeight: 'bold',
-        fontSize: 30,
+        fontSize: moderateScale(30),
         fontFamily: "Itim-Regular",
-        textAlign: 'center',
     },
     subtitle: {
         color: 'blue',
-        fontSize: 25,
-      //  paddingTop: 3,
+        fontSize: responsiveFontSize(3.5),
         fontFamily: "Itim-Regular",
-        textAlign: 'center',
     },
 
-    head1: {
-        fontSize: titles.title1,
-        color: colors.text1,
-        textAlign: 'center',
-        marginVertical: 0,
-        fontFamily: "Itim-Regular",
-    },
     inputout: {
         flexDirection: 'row',
         width: '80%',
-        marginVertical: 10,
+        marginVertical: moderateScale(10),
         backgroundColor: colors.col1,
-        borderRadius: 10,
-        paddingHorizontal: 5,
-        paddingVertical: 0,
+        borderRadius: moderateScale(10),
+        paddingHorizontal: moderateScale(5),
+        paddingVertical: moderateScale(0),
         alignSelf: 'center',
-        elevation: 20,
-
+        elevation: moderateScale(20),
     },
     input: {
-        fontSize: 18,
-        marginLeft: 10,
+        fontSize: responsiveFontSize(2),
+        marginLeft: moderateScale(10),
         width: '75%',
         fontFamily: "Itim-Regular",
     },
     icon: {
-        padding: 10,
+        padding: moderateScale(10),
     },
     icon1: {
-        padding: 1,
-        marginTop: 10,
+        padding: moderateScale(1),
+        marginTop: moderateScale(10),
     },
     forgot: {
         color: colors.text2,
-        marginTop: 20,
-        marginBottom: 10,
+        marginTop: moderateScale(20),
+        marginBottom: moderateScale(10),
         fontFamily: "Itim-Regular",
     },
     or: {
         color: colors.text1,
-        marginVertical: 8,
+        marginVertical: moderateScale(8),
         fontWeight: 'bold',
         fontFamily: "Itim-Regular",
         alignSelf: 'center',
     },
-    gftxt: {
-        color: colors.text2,
-        marginVertical: 5,
-        fontSize: 20,
-        fontFamily: "Itim-Regular",
-        alignSelf: 'center',
-    },
-    gf: {
-        flexDirection: 'row',
-        alignSelf: 'center',
-    },
-    gficon: {
-        backgroundColor: 'white',
-        width: 50,
-        margin: 10,
-        borderRadius: 10,
-        padding: 10,
-        alignItems: 'center',
-        elevation: 20,
-        alignSelf: 'center',
-    },
+    // gftxt: {
+    //     color: colors.text2,
+    //     marginVertical: moderateScale(5),
+    //     fontSize: responsiveFontSize(3),
+    //     fontFamily: "Itim-Regular",
+    //     alignSelf: 'center',
+    // },
+    // gf: {
+    //     flexDirection: 'row',
+    //     alignSelf: 'center',
+    // },
+    // gficon: {
+    //     backgroundColor: 'white',
+    //     width: 50,
+    //     margin: 10,
+    //     borderRadius: 10,
+    //     padding: 10,
+    //     alignItems: 'center',
+    //     elevation: 20,
+    //     alignSelf: 'center',
+    // },
     signup: {
         color: colors.text1,
         fontFamily: "Itim-Regular",
         alignSelf: 'center',
     },
-    errormsg: {
-        color: 'red',
-        fontSize: 18,
-        textAlign: 'center',
-        marginTop: 10,
-        borderColor: 'red',
-        borderWidth: 1,
-        borderRadius: 10,
-        padding: 10,
-    },
-    errorTxt: {
-        fontSize: 12,
-        color: 'red',
-
-    },
-    bottomContainer: {
-        justifyContent: 'center',
-        marginTop: 50,
-    },
     dont: {
         marginTop: '-2%',
         alignSelf: 'center',
+    },
+    error: {
+        color: 'red',
+        marginLeft: '5%',
+    },
+    signupTxt: {
+        color: 'white',
+        fontSize: responsiveFontSize(3),
+        fontFamily: "Itim-Regular",
+        marginTop: moderateScale(10),
     },
 
 });

@@ -1,4 +1,4 @@
-const Courses = [
+const ProductApi = [
     {
         "id": 1,
         "title": "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
@@ -207,4 +207,4 @@ const Courses = [
         "qty":0, 
     },
 ];
-export default Courses;
+export default ProductApi;

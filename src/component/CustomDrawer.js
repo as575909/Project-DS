@@ -4,23 +4,29 @@ import { DrawerActions } from "@react-navigation/native";
 import { DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import { logout } from '../utils/asyncStorage';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import { useSelector } from 'react-redux';
+import styles from '../statics/styles';
+import bgdrawer from '../../assets/images/bgdrawer.jpg';
+import manAvatar from '../../assets/images/manAvatar.jpg';
+import Strings from '../statics/Strings';
+import colors from '../statics/styles/colors';
 
 const CustomDrawer = (props) => {
+    const userName = useSelector((state) => state.user);
+    console.log(userName,"jkl");
   return (
-    <View style={styles.container}>
+    <View style={styles.containerCustomDrawer}>
     <DrawerContentScrollView 
     {...props}
     contentContainerStyle={{backgroundColor:'#89CFF0'}}>
 
-        <ImageBackground source={require('../assets/images/bgdrawer.jpg')} style={styles.imgbg}>
-        <Image source={require('../assets/images/manAvatar.jpg')} style={styles.avatar} />
-        <Text style={styles.user}>@User</Text>
+        <ImageBackground source={bgdrawer} style={styles.imgbg}>
+        <Image source={manAvatar} style={styles.avatar} />
+        <Text style={styles.user}>{Strings.Welcome}, {userName.data[0].Name}</Text>
         <View style={styles.coinContainer}>
-        <Text style={styles.coins}>200 Coins</Text>
-        <FontAwesome5 name='coins' size={14} color='yellow' />
+        <Text style={styles.coins}>Rewards</Text>
+        <FontAwesome5 name='coins' size={14} color= {colors.yellow} />
         </View>
         </ImageBackground>
 
@@ -68,56 +74,3 @@ const CustomDrawer = (props) => {
 }
 
 export default CustomDrawer
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-
-    },
-    imgbg: {
-        padding: 10,
-    },
-    avatar: {
-        height: 80,
-        width: 80,
-        borderRadius: 40,
-        marginBottom: 10,
-        
-    },
-    user:{
-        color: '#fff',
-        fontSize: 18,
-        fontFamily: 'Itim-Regular',
-    },
-    coins: {
-        color: '#fff',
-        fontFamily: 'Itim-Regular',
-        marginRight: 5,
-    },
-    coinContainer: {
-        flexDirection: 'row',
-    },
-    list: {
-        flex: 1,
-        backgroundColor: 'white',
-        paddingTop: 10,
-    },
-    footer: {
-        padding: 20,
-        borderTopWidth: 1,
-        borderTopColor: '#ccc'
-    },
-    share: {
-        paddingVertical: 15,
-    },
-    shareIcon: {
-        flexDirection: 'row',
-        alignItems: 'center', 
-    },
-    refer: {
-        fontSize: 15,
-        fontFamily: 'Itim-Regular',
-        marginLeft: 10,
-
-    }
-})

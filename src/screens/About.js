@@ -16,6 +16,8 @@ import {
 } from "react-native-responsive-dimensions";
 import Strings from '../statics/Strings';
 import {moderateScale} from 'react-native-size-matters';
+import me1 from '../assets/images/me1.jpeg';
+import images from '../statics/images';
 
 
 const About = () => {
@@ -29,7 +31,7 @@ const About = () => {
       <View>
         <Image
           style={styles.imgStyle}
-          source={require("../assets/images/me1.jpeg")}
+          source={me1}
         />
       </View>
 

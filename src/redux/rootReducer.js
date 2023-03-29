@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
-import counterReducer from '../features/counter/counterSlice'
-import MyCartReducer from '../features/counter/MyCartSlice';
-import LoginReducer from './LoginReducer';
+import counterReducer from './reducers/counterSlice'
+import MyCartReducer from './reducers/MyCartSlice';
+import LoginReducer from './reducers/LoginReducer';
 
 
 export default combineReducers({

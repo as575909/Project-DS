@@ -4,6 +4,8 @@ const colors = {
     text2: 'grey',
     // text3: '#344055',
     text3: '#7d7d7d',
+    text4: '#4F4F4F',
+    black: 'black',
     footer: '#ccc',
     primary: '#344055',
     secondary: '#4c5dab',
@@ -17,7 +19,9 @@ const colors = {
     bg: '#ffffc6',
     cardBgColor: "#dadccb",
     btnBgColor: '#809fff',
-    yellow: '#FFFF00'
+    yellow: '#FFFF00',
+    drvoilet: '#aa18ea',
+    drcg: '#333',
 };
 
 export default colors;

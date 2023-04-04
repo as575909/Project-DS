@@ -8,72 +8,82 @@ import MyCart from './DrawerNav';
 import DrawerNav from './DrawerNav';
 import HomeHeadNav from '../component/HomeHeadNav';
 import Profile from '../screens/Profile';
-import colors from '../statics/styles/colors';
 import Strings from '../statics/Strings';
+import colors from '../statics/styles/colors';
 
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
-    return (
+  return (
 
-        <Tab.Navigator
-            screenOptions={({ route }) => ({
-                tabBarIcon: ({ }) => {
-                    let iconName;
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ }) => {
+          let iconName;
 
-                    if (route.name === 'Home') {
-                        iconName = 'home';
-                    } else if (route.name === 'Products') {
-                        iconName = 'list';
-                    } else if (route.name === 'Mycart') {
-                        iconName = 'cart-plus';
-                    } else if (route.name === 'More') {
-                        iconName = 'bars';
-                    }
+          if (route.name === 'Home') {
+            iconName = 'home';
+          } else if (route.name === 'Products') {
+            iconName = 'list';
+          } else if (route.name === 'Mycart') {
+            iconName = 'cart-plus';
+          } else if (route.name === 'More') {
+            iconName = 'bars';
+          }
 
-                    return <FontAwesome name={iconName} size={25} color="#4F4F4F" />;
-                },
-                tabBarActiveTintColor: colors.text1,
-                tabBarInactiveTintColor: colors.text2,
-                tabBarOptions: { showLabel: false },
-            })}>
+          return <FontAwesome name={iconName} size={25} color={colors.black} />;
+        },
+        tabBarActiveTintColor: colors.text1,
+        tabBarInactiveTintColor: colors.text2,
+        tabBarShowLabel: false,
+        // tabBarStyle: {
+        //   position: 'absolute',
+        //   bottom: 0,
+        //   left: 10,
+        //   right: 10,
+        //   elevation: 0,
+        //   backgroundColor: '#89CFF0',
+        //   borderRadius: 15,
+        //   height: 30,
+        // }
+      })}>
 
-            <Tab.Screen name="Products" component={DrawerNav}
-            options={{ headerShown: false, }}></Tab.Screen>
+      <Tab.Screen name="Products" component={DrawerNav}
+        options={{ headerShown: false, }}></Tab.Screen>
 
-            <Tab.Screen name="Home" component={Home}
-            options={{
-                headerTitleStyle: {
-                  fontSize: 25,
-                  fontFamily: "Itim-Regular",
-                },
-                headerTitle: "Home",
-                headerTitleAlign: "center",
-              }} />
+      <Tab.Screen name="Home" component={Home}
+        options={{
+          headerTitleStyle: {
+            fontSize: 25,
+            fontFamily: "Itim-Regular",
+          },
+          headerTitle: "Home",
+          headerTitleAlign: "center",
+        }} />
 
-            <Tab.Screen name="Mycart" component={CartScreen}
-             options={{
-                headerTitleStyle: {
-                  fontSize: 25,
-                  fontFamily: "Itim-Regular",
-                },
-                headerTitleAlign: "center",
-                
-              }} />
+      <Tab.Screen name="Mycart" component={CartScreen}
+        options={{
+          headerTitleStyle: {
+            fontSize: 25,
+            fontFamily: "Itim-Regular",
+          },
+          headerTitleAlign: "center",
 
-            <Tab.Screen name="More" component= {Profile}
-            options={{
-                headerTitleStyle: {
-                  fontSize: 25,
-                  fontFamily: "Itim-Regular",
-                },
-                headerTitleAlign: "center",
-                
-              }} />
+        }} />
 
-        </Tab.Navigator>
+      <Tab.Screen name="More" component={Profile}
+        options={{
+          headerTitleStyle: {
+            fontSize: 25,
+            fontFamily: "Itim-Regular",
+          },
+          headerTitleAlign: "center",
 
-    );
+        }} />
+
+    </Tab.Navigator>
+
+  );
 };
 
 export default TabNavigator;

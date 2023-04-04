@@ -1,6 +1,7 @@
 const Strings = {
   Welcome: 'Welcome to ',
   InstaMart: 'InstaMart!!',
+  Title: 'InstaMart',
   Tagline: "Find the best items around you at lowest price.",
   Description:
     'Lorem ipsum dolor sit amet. Et commodi enim ut modi maxime quo minus rerum a nihil commodi et aspernatur officiis et repudiandae alias. Quo aperiam consequatur',
@@ -19,5 +20,6 @@ const Strings = {
   Alertt: 'Are you sure you want to remove all items ?',
   LogoutTxt: 'Do you want to LogOut',
   CtnShp: 'Continue Shopping',
+  FontFamily: 'Itim-Regular',
 };
 export default Strings;

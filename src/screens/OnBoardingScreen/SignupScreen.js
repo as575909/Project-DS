@@ -11,10 +11,11 @@ import { validateEmail, validatePhoneNum, validatePassword, validateRePassword }
 import MyTextInput from '../../component/MyTextInput';
 import { moderateScale } from 'react-native-size-matters';
 import {
-  responsiveHeight,
-  responsiveWidth,
-  responsiveFontSize
+    responsiveHeight,
+    responsiveWidth,
+    responsiveFontSize
 } from "react-native-responsive-dimensions";
+import auth from '@react-native-firebase/auth';
 
 const SignupScreen = ({ }) => {
 
@@ -39,7 +40,10 @@ const SignupScreen = ({ }) => {
     const dispatch = useDispatch();
     const navigation = useNavigation();
 
+    
+
     const onSubmit = () => {
+
         const userObj = {
             "Name": Name,
             "Email": Email,
@@ -56,6 +60,25 @@ const SignupScreen = ({ }) => {
         else {
             alert(Strings.Error1)
         }
+        
+        // auth()
+        // .createUserWithEmailAndPassword(Email, Password)
+        // .then(() => {
+        //     navigation.navigate('login')
+        //     console.log('User account created & signed in!');
+        // })
+        // .catch(error => {
+        //     if (error.code === 'auth/email-already-in-use') {
+        //         console.log('That email address is already in use!');
+        //     }
+
+        //     if (error.code === 'auth/invalid-email') {
+        //         console.log('That email address is invalid!');
+        //     }
+
+        //     console.error(error);
+        // });
+
         dispatch(adduser(userObj))
     }
 
@@ -94,7 +117,7 @@ const SignupScreen = ({ }) => {
     }
 
     const validatePassword = () => {
-         var password = Password.trim();
+        var password = Password.trim();
         if (password == "" || password == undefined || password == null) {
             seterrPassword("Please enter the password")
             setchPassword(false);
@@ -138,7 +161,7 @@ const SignupScreen = ({ }) => {
                 </View>
 
                 <View style={styles.inputout}>
-                    <Icon name="user" size={24} color={Email === true ? colors.text1 : colors.text2} style={styles.icon} />
+                    <Icon name="user" size={24} color={Name === true ? colors.text1 : colors.text2} style={styles.icon} />
                     {/* <TextInput placeholder={Strings.Name} onChangeText={setName} value={Name}  /> */}
                     <MyTextInput placeholder={Strings.Name} onChangeText={setName} value={Name} />
                 </View>
@@ -146,7 +169,7 @@ const SignupScreen = ({ }) => {
                 <View style={styles.inputout}>
                     <Icon name="at" size={24} color={Email === true ? colors.text1 : colors.text2} style={styles.icon} />
                     <MyTextInput placeholder={Strings.Email} onChangeText={setEmail} onEndEditing={validateEmail} onBlur={e => this.validateEmail} />
-                    
+
                 </View>
                 {chEmail == true ? null : <Text style={styles.error}>{errEmail}</Text>}
 

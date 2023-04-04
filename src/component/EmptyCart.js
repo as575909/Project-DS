@@ -9,6 +9,7 @@ import colors from '../statics/styles/colors';
 
 const EmptyCart = () => {
     const navigation = useNavigation();
+    
     return (
         <View style={styles.main}>
             <Text style={styles.text}> You have no item in your cart </Text>
@@ -21,7 +22,9 @@ const EmptyCart = () => {
                 title={Strings.CtnShp}
              
             />
+         
         </View>
+       
     )
 }
 

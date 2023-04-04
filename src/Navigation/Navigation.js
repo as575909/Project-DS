@@ -12,6 +12,7 @@ import SignupScreen from '../screens/OnBoardingScreen/SignupScreen';
 import CartScreen from '../screens/CartScreen';
 import DrawerNav from './DrawerNav';
 import TabNavigator from './BottomTab';
+import colors from '../statics/styles/colors';
 
 const Navigation = () => {
   const Stack = createNativeStackNavigator();

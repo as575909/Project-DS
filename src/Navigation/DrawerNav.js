@@ -13,7 +13,9 @@ import { DrawerActions } from "@react-navigation/native";
 import { logout } from '../utils/asyncStorage';
 import CustomDrawer from '../component/CustomDrawer';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-
+import colors from '../statics/styles/colors';
+import Strings from '../statics/Strings';
+import { moderateScale } from 'react-native-size-matters';
 
 const Drawer = createDrawerNavigator();
 
@@ -23,23 +25,26 @@ function DrawerNav() {
     <Drawer.Navigator
       drawerContent={props => <CustomDrawer {...props} />}
       screenOptions={{
-        drawerActiveBackgroundColor: '#aa18ea',
-        drawerActiveTintColor: '#fff',
-        drawerInactiveTintColor: '#333',
+        drawerActiveBackgroundColor: colors.drvoilet,
+        drawerActiveTintColor: colors.col1,
+        drawerInactiveTintColor: colors.drcg,
+        // drawerStyle: {
+        //   position: 'absolute',
+        // },
         drawerLabelStyle: {
-          marginLeft: -15,
+          marginLeft: moderateScale(-15),
           fontFamily: 'Itim-Regular',
         }
       }}
     >
-      <Drawer.Screen name="InstaMart" component={Products}
+      <Drawer.Screen name= {Strings.Title} component={Products}
         options={{
           drawerIcon: ({ color }) => (
             <Ionicons name='list-outline' size={22} color={color} />
           ),
           headerTitleStyle: {
-            fontSize: 25,
-            fontFamily: "Itim-Regular",
+            fontSize: moderateScale(25),
+            fontFamily: Strings.FontFamily,
           },
           headerTitleAlign: "center",
 
@@ -51,8 +56,8 @@ function DrawerNav() {
             <Ionicons name='home-outline' size={22} color={color} />
           ),
           headerTitleStyle: {
-            fontSize: 25,
-            fontFamily: "Itim-Regular",
+            fontSize: moderateScale(25),
+            fontFamily: Strings.FontFamily,
           },
           headerTitleAlign: "center",
 
@@ -64,8 +69,8 @@ function DrawerNav() {
             <Ionicons name='cart-outline' size={22} color={color} />
           ),
           headerTitleStyle: {
-            fontSize: 25,
-            fontFamily: "Itim-Regular",
+            fontSize: moderateScale(25),
+            fontFamily: Strings.FontFamily,
           },
           headerTitleAlign: "center",
         }} />
@@ -76,8 +81,8 @@ function DrawerNav() {
             <Ionicons name='pricetags-outline' size={22} color={color} />
           ),
           headerTitleStyle: {
-            fontSize: 25,
-            fontFamily: "Itim-Regular",
+            fontSize: moderateScale(25),
+            fontFamily: Strings.FontFamily,
           },
           headerTitleAlign: "center",
         }} />
@@ -88,8 +93,8 @@ function DrawerNav() {
             <Ionicons name="information-circle-outline" size={22} color={color} />
           ),
           headerTitleStyle: {
-            fontSize: 25,
-            fontFamily: "Itim-Regular",
+            fontSize: moderateScale(25),
+            fontFamily: Strings.FontFamily,
           },
           headerTitleAlign: "center",
         }} />
@@ -100,8 +105,8 @@ function DrawerNav() {
             <Ionicons name='chatbox-outline' size={22} color={color} />
           ),
           headerTitleStyle: {
-            fontSize: 25,
-            fontFamily: "Itim-Regular",
+            fontSize: moderateScale(25),
+            fontFamily: Strings.FontFamily,
           },
           headerTitleAlign: "center",
         }} />
@@ -112,8 +117,8 @@ function DrawerNav() {
             <Ionicons name='settings-outline' size={22} color={color} />
           ),
           headerTitleStyle: {
-            fontSize: 25,
-            fontFamily: "Itim-Regular",
+            fontSize: moderateScale(25),
+            fontFamily: Strings.FontFamily,
           },
           headerTitleAlign: "center",
         }} />

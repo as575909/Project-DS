@@ -14,7 +14,7 @@ import colors from '../statics/styles/colors';
 
 const CustomDrawer = (props) => {
     const userName = useSelector((state) => state.user);
-    console.log(userName,"jkl");
+    console.log(userName.data[0].Name,"jkl");
   return (
     <View style={styles.containerCustomDrawer}>
     <DrawerContentScrollView 

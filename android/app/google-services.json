@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "907371587505",
+    "project_id": "instamart-5ff83",
+    "storage_bucket": "instamart-5ff83.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:907371587505:android:4492ead327097ca74a7f90",
+        "android_client_info": {
+          "package_name": "com.eduoskill"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "907371587505-dvsir309pjtjl6bu6vuoinu76doafbe6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.eduoskill",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "907371587505-mqjrp03ujhdv93j1fdfdrh2v1eudn7c3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDm3RBqAvdi9oMr3cB90zB9-OAHMM-pZp8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "907371587505-mqjrp03ujhdv93j1fdfdrh2v1eudn7c3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

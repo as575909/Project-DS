@@ -12,7 +12,6 @@ import { moderateScale } from 'react-native-size-matters';
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
 
 
-
 const SignInScreen = (props) => {
     const navigation = useNavigation();
 
@@ -52,10 +51,12 @@ const SignInScreen = (props) => {
                 navigation.navigate('TabNavigator')
             }
             else {
+               
                 alert('Email or Password is Incorrect')
                 return false;
-                // navigation.navigate('TabNavigator')
-            }}};
+              // navigation.navigate('TabNavigator')
+            }}
+    };
 
     const validateEmail = () => {
         var email = Email.trim();

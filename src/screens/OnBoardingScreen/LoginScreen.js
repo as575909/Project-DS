@@ -46,7 +46,6 @@ const SignInScreen = (props) => {
                         'Success',
                         `${userData.data[0].Name} you are successfully logged in!`
                     );
-
                 }
                 navigation.navigate('TabNavigator')
             }
@@ -134,7 +133,12 @@ const SignInScreen = (props) => {
                     <Text style={{ color: 'white', fontSize: 20, fontFamily: "Itim-Regular", marginTop: 10 }}>Log In</Text>
                 </TouchableOpacity>
 
-                <Text style={styles.forgot}>Forgot Password?</Text>
+              
+                <Text style={styles.forgot} 
+                //onPress={() => navigation.navigate('ForgotPswrd')}
+                onPress={() => navigation.navigate('ForgotPswrd')}
+                >Forgot Password?</Text>
+              
                 {/* <Text style={styles.or}>OR</Text>
                 <Text style={styles.gftxt}>Sign In With </Text> */}
 

@@ -6,11 +6,12 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useSelector } from 'react-redux';
-import styles from '../statics/styles';
+// import styles from '../../statics/styles';
 import bgdrawer from '../../assets/images/bgdrawer.jpg';
 import manAvatar from '../../assets/images/manAvatar.jpg';
-import Strings from '../statics/Strings';
-import colors from '../statics/styles/colors';
+import Strings from '../../statics/Strings';
+import colors from '../../statics/styles/colors';
+import { styles } from './index.style';
 
 const CustomDrawer = (props) => {
     const userName = useSelector((state) => state.user);

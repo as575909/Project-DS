@@ -13,6 +13,9 @@ import CartScreen from '../screens/CartScreen';
 import DrawerNav from './DrawerNav';
 import TabNavigator from './BottomTab';
 import colors from '../statics/styles/colors';
+import ForgotPasswordScreen from '../screens/OnBoardingScreen/ForgotPswrdScreen';
+import OTPScreen from '../screens/OnBoardingScreen/OtpScreen';
+import ResetPasswordScreen from '../screens/OnBoardingScreen/ResetPassword';
 
 const Navigation = () => {
   const Stack = createNativeStackNavigator();
@@ -30,6 +33,18 @@ const Navigation = () => {
           options={{ headerShown: false, }}
         />
 
+        <Stack.Screen name='ForgotPswrd' component={ForgotPasswordScreen}
+          options={{ headerShown: false, }}
+        />
+
+        <Stack.Screen name='OtpScreen' component={OTPScreen}
+          options={{ headerShown: false, }}
+        />
+
+        <Stack.Screen name='ResetPswrdScreen' component={ResetPasswordScreen}
+          options={{ headerShown: false, }}
+        />
+
         {/* Cart Screen */}
         <Stack.Screen name='cart' component={CartScreen}
           options={{ headerShown: false, }}
@@ -42,7 +57,7 @@ const Navigation = () => {
         {/* //HomeScreen */}
         <Stack.Screen name='Home' component={Home}
           options={{ headerShown: false, }} />
-      
+
 
         <Stack.Screen name="TabNavigator" component={TabNavigator}
           options={{ headerShown: false, }}

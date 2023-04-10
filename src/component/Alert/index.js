@@ -1,5 +1,5 @@
 import {Alert, BackHandler, Text} from 'react-native';
-import Strings from '../statics/Strings';
+import Strings from '../../statics/Strings';
 
 
 // export const showAlert = (title, message, pressed) => {

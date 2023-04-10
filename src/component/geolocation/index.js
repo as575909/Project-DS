@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import Geolocation from '@react-native-community/geolocation';
+import { styles } from './index.style';
 
 const LocationComponent = () => {
   const [latitude, setLatitude] = useState(null);
@@ -31,27 +32,5 @@ const LocationComponent = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    backgroundColor: "#fff3b0",
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
-    fontFamily: "Itim-Regular",
-  },
-  location: {
-    fontSize: 18,
-    textAlign: 'center',
-  },
-  loading: {
-    fontSize: 18,
-    fontStyle: 'italic',
-  },
-});
 
 export default LocationComponent;

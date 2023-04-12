@@ -43,7 +43,7 @@ export const styles = StyleSheet.create({
     buttonContainer: {
       display: "flex",
       flexDirection: "row",
-      justifyContent: "center",
+      justifyContent: "space-evenly",
      
     },
     buttonStyle: {
@@ -62,9 +62,11 @@ export const styles = StyleSheet.create({
       textTransform: "capitalize",
     },
     zero: {
-      marginLeft: moderateScale(10), 
+      marginTop: moderateScale(10),
       fontSize: moderateScale(16), 
       fontWeight: '600',
+      marginLeft: moderateScale(10),
+      marginRight: moderateScale(20),
     },
     price: {
         textTransform: "uppercase",

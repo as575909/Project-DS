@@ -1,19 +1,21 @@
-import React, {useEffect} from 'react';
-import { Alert, FlatList, SafeAreaView, StatusBar, StyleSheet, Text, Image, TouchableOpacity, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Alert, FlatList, SafeAreaView, StatusBar, StyleSheet, Text, Image, TouchableOpacity, View, ScrollView } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { increment } from '../../redux/reducers/counterSlice';
-import { addProductToMyCart, removeMyCartItem, deleteMyCartItem, increaseQty } from "../../redux/reducers/MyCartSlice";
+import { addProductToMyCart, removeMyCartItem, deleteMyCartItem, increaseQty, removeItem } from "../../redux/reducers/MyCartSlice";
 import { btn1 } from '../../globals/style';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import showAlert from '../../component/Alert';
 import EmptyCart from '../../component/EmptyCart';
 import Strings from '../../statics/Strings';
 import { onBackPress } from '../../utils/backPressHandler';
-import {styles} from './index.style';
+import { styles } from './index.style';
+import HomeHeadNav from '../../component/HomeHeadNav';
 
 
 const CartScreen = ({ navigation }) => {
   // const result = useSelector((state) => state.counter);
+  const [search, setSearch] = useState('');
   const myCartItems = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
@@ -28,21 +30,18 @@ const CartScreen = ({ navigation }) => {
           onPress: () => console.log('Cancel Pressed'),
           style: 'cancel',
         },
-        {text: 'OK', onPress: () => dispatch(deleteMyCartItem())},
+        { text: 'OK', onPress: () => dispatch(deleteMyCartItem()) },
       ],
-      {cancelable: false},
+      { cancelable: false },
     );
   };
 
-  // const AlertItem = () => {
-  //   showAlert('Delete', 'Are you sure you want to clear the cart?','dispatch(deleteMyCartItem())');
-  // };
-
 
   const getTotal = () => {
-    let total = 0;
+    let newTotal = 0;
     myCartItems.map(item => {
-      total = total + item.qty * item.price;
+      newTotal = newTotal + item.qty * item.price;
+      total = newTotal.toFixed(2);
     });
     return total;
   }
@@ -64,36 +63,11 @@ const CartScreen = ({ navigation }) => {
             </View>
 
             <Text style={styles.mainHeader}>{item.title}</Text>
-            <Text style={styles.mainHeader}>{item.price}</Text>
+            <Text style={styles.mainHeader}>{item.price}/-</Text>
 
 
             <View style={styles.buttonContainer}>
 
-              {/* {item.qty == 0 ? null : (<TouchableOpacity
-                style={styles.buttonStyle}
-                onPress={() => {
-                  if (item.qty > 1) {
-                    dispatch(removeMyCartItem(item));
-                  } else {
-                    dispatch(deleteMyCartItem(item.id));
-
-                  }
-                }}>
-                <Text style={styles.buttonText}> - </Text>
-              </TouchableOpacity>)}
-
-
-              {item.qty == 0 ? null : (
-                <Text style={styles.qty}>{item.qty}</Text>
-              )}
-
-              {item.qty == 0 ? null : (
-                <TouchableOpacity
-                  style={styles.buttonStyle}
-                  onPress={() => dispatch(addProductToMyCart(item))}>
-                  <Text style={styles.buttonText}> + </Text>
-                </TouchableOpacity>
-              )} */}
 
               <TouchableOpacity
                 style={styles.buttonStyle}
@@ -101,7 +75,7 @@ const CartScreen = ({ navigation }) => {
                   if (item.qty > 1) {
                     dispatch(removeMyCartItem(item));
                   } else {
-                    dispatch(deleteMyCartItem(item.id));
+                    dispatch(removeItem(item.id));
 
                   }
                 }}>
@@ -112,11 +86,17 @@ const CartScreen = ({ navigation }) => {
 
               <TouchableOpacity
                 style={styles.buttonStyle}
-                onPress={() => { 
-                dispatch(addProductToMyCart(item))
-                
+                onPress={() => {
+                  dispatch(addProductToMyCart(item));
+                  // dispatch(increaseQty(item.id));
                 }}>
                 <Text style={styles.buttonText}> + </Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={styles.deleteButton}
+                onPress={() => dispatch(removeItem(item.id))}>
+                <Text style={{ color: 'white', marginTop: 5 }}>Delete</Text>
               </TouchableOpacity>
 
             </View>
@@ -129,39 +109,47 @@ const CartScreen = ({ navigation }) => {
 
   return (
 
-    <View>
-      <StatusBar />
+    <View style={{ flex: 1 }}>
 
-      <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-        <Text> Items added to cart : {myCartItems.length} </Text>
-        <TouchableOpacity onPress={AlertItem}>
-          <FontAwesomeIcon name="trash" size={20} color="#00141a" />
-        </TouchableOpacity>
-      </View>
-
-      <FlatList
-        keyExtractor={(item) => item.id}
-        data={myCartItems}
-        renderItem={courseCard}
+      <HomeHeadNav
+        searchChange={() => ("")}
+        search={search}
       />
+      <ScrollView>
 
-      {myCartItems.length > 0 ? (<View style={styles.footer}>
-        <View style={styles.total1}>
-          <Text style={styles.total2}>
-            {'Total:' + getTotal()}
-          </Text>
-        </View>
-        <View style={styles.total1}>
-          <TouchableOpacity style={btn1}>
-            <Text style={{ color: 'white', marginTop: 10, fontSize: 20 }}>Check Out</Text>
-          </TouchableOpacity>
+        {myCartItems.length > 0 ? (
+          <View>
 
-        </View>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+              <Text> Items added to cart : {myCartItems.length} </Text>
+              <TouchableOpacity onPress={AlertItem}>
+                <FontAwesomeIcon name="trash" size={20} color="#00141a" />
+              </TouchableOpacity>
+            </View>
 
-      </View>) : <EmptyCart style={{height: 600, backgroundColor: '#fff3b0'}} />}
+            <FlatList
+              keyExtractor={(item) => item.id}
+              data={myCartItems}
+              renderItem={courseCard}
+            />
+
+            <View style={styles.footer}>
+              <View style={styles.total1}>
+                <Text style={styles.total2}>
+                  {'Total:' + getTotal()}
+                </Text>
+              </View>
+              <View style={styles.total1}>
+                <TouchableOpacity style={btn1}>
+                  <Text style={{ color: 'white', marginTop: 10, fontSize: 20 }}>Check Out</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+        ) : <EmptyCart style={{ height: 600, backgroundColor: '#fff3b0' }} />}
 
 
-
+      </ScrollView>
 
     </View>
   )

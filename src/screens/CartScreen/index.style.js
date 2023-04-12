@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
       height: 50,
       backgroundColor: '#fff',
       position: 'absolute',
-      bottom: 15,
+      bottom: moderateScale(-10),
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-evenly',
@@ -36,13 +36,13 @@ export const styles = StyleSheet.create({
     cardImage: {
       width: "100%",
       height: undefined,
-      aspectRatio: 1,
+      aspectRatio: 3,
     },
     mainContainer: {
-      paddingHorizontal: 20,
+      paddingHorizontal: 30,
     },
     courseContainer: {
-      padding: 30,
+      padding: 20,
       backgroundColor: "rgba(255, 255, 255, 0.90)",
       textAlign: "center",
       borderRadius: 5,
@@ -51,7 +51,7 @@ export const styles = StyleSheet.create({
       shadowOpacity: 0.5,
       shadowRadius: 8,
       elevation: 8,
-      marginVertical: 30,
+      marginVertical: 5,
     },
     mainHeader: {
       fontSize: 22,
@@ -85,10 +85,18 @@ export const styles = StyleSheet.create({
       textTransform: "capitalize",
     },
     qty: {
-      marginLeft: 10,
+      marginLeft: 0,
       fontSize: 16,
       fontWeight: '600',
       marginTop: 10,
+    },
+    deleteButton: {
+      backgroundColor: 'red',
+      paddingVertical: 10,
+      paddingHorizontal: 20,
+      borderRadius: 5,
+      marginTop: 0,
+      
     },
   
   })

@@ -16,6 +16,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import colors from '../statics/styles/colors';
 import Strings from '../statics/Strings';
 import { moderateScale } from 'react-native-size-matters';
+import TabNavigator from './BottomTab';
 
 const Drawer = createDrawerNavigator();
 
@@ -28,6 +29,7 @@ function DrawerNav() {
         drawerActiveBackgroundColor: colors.drvoilet,
         drawerActiveTintColor: colors.col1,
         drawerInactiveTintColor: colors.drcg,
+        headerShown: false,
         // drawerStyle: {
         //   position: 'absolute',
         // },
@@ -37,7 +39,7 @@ function DrawerNav() {
         }
       }}
     >
-      <Drawer.Screen name= {Strings.Title} component={Products}
+      <Drawer.Screen name={Strings.Title} component={Products}
         options={{
           drawerIcon: ({ color }) => (
             <Ionicons name='list-outline' size={22} color={color} />
@@ -123,7 +125,22 @@ function DrawerNav() {
           headerTitleAlign: "center",
         }} />
 
+      {/* <Drawer.Screen name="Tab" component={TabNavigator}
+        options={{
+          drawerIcon: ({ color }) => (
+            <Ionicons name='settings-outline' size={22} color={color} />
+          ),
+          headerTitleStyle: {
+            fontSize: moderateScale(25),
+            fontFamily: Strings.FontFamily,
+          },
+          headerTitleAlign: "center",
+        }} /> */}
+
+
     </Drawer.Navigator>
+
+
 
 
   );

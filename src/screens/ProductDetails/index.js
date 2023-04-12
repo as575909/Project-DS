@@ -16,11 +16,14 @@ const ProductDetails = ({ navigation, route }) => {
   const dispatch = useDispatch();
 
   const id = route.params.courseId;
-  console.log(id,'product detail');
+  console.log(id, 'product detail');
 
   const item = ProductApi.find((element) => {
     return id === element.id;
   });
+
+  const cartItem = myCartItems.find((cartItem) => cartItem.id === item.id);
+  const qty = cartItem ? cartItem.qty : 0;
 
 
   return (
@@ -50,19 +53,46 @@ const ProductDetails = ({ navigation, route }) => {
           </View>
 
           <View style={styles.buttonContainer}>
-            {item.qty == 0 ? (<TouchableOpacity
-              style={styles.buttonStyle}
-              onPress={() => {{
-              dispatch(addProductToMyCart(item))
-              dispatch(increment(item.id))
-              }}}>
-              <Text style={styles.buttonText}> Add to Cart </Text>
-            </TouchableOpacity>) : <QtyMng />}
-
-            {/* {item.qty == 0 ? null : (<TouchableOpacity
+            {qty == 0 ? (<TouchableOpacity
               style={styles.buttonStyle}
               onPress={() => {
-                if (item.qty > 1) {
+                {
+                  dispatch(addProductToMyCart(item))
+                  dispatch(increment(item.id))
+                }
+              }}>
+              <Text style={styles.buttonText}> Add to Cart </Text>
+            </TouchableOpacity>) : <QtyMng />
+            // <View style={styles.buttonContainer}>
+            //   <TouchableOpacity
+            //     style={styles.buttonStyle}
+            //     onPress={() => {
+            //       if (qty > 1) {
+            //         dispatch(removeMyCartItem(item));
+            //       } else {
+            //         dispatch(removeItem(item.id));
+            //       }
+            //     }}>
+            //     <Text style={styles.buttonText}> - </Text>
+            //   </TouchableOpacity>
+
+            //   <Text style={styles.zero}>{qty}</Text>
+
+            //   <TouchableOpacity
+            //     style={styles.buttonStyle}
+            //     onPress={() => {
+            //       dispatch(addProductToMyCart(item))
+
+            //     }}>
+            //     <Text style={styles.buttonText}> + </Text>
+            //   </TouchableOpacity>
+            // </View>
+            }
+
+            {/* {qty == 0 ? null : (<TouchableOpacity
+              style={styles.buttonStyle}
+              onPress={() => {
+                if (qty > 1) {
                   dispatch(removeMyCartItem(item));
                 } else {
                   dispatch(deleteMyCartItem(item.id));
@@ -73,11 +103,11 @@ const ProductDetails = ({ navigation, route }) => {
             </TouchableOpacity>)}
 
 
-            {item.qty == 0 ? null : (
-              <Text style={styles.qty}>{item.qty}</Text>
+            {qty == 0 ? null : (
+              <Text style={styles.qty}>{qty}</Text>
             )}
 
-            {item.qty == 0 ? null : (
+            {qty == 0 ? null : (
               <TouchableOpacity
                 style={styles.buttonStyle}
                 onPress={() => {

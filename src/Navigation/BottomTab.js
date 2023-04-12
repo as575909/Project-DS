@@ -18,7 +18,7 @@ const TabNavigator = () => {
 
     <Tab.Navigator
       screenOptions={({ route }) => ({
-        tabBarIcon: ({ }) => {
+        tabBarIcon: ({focused}) => {
           let iconName;
 
           if (route.name === 'Home') {
@@ -28,14 +28,15 @@ const TabNavigator = () => {
           } else if (route.name === 'Mycart') {
             iconName = 'cart-plus';
           } else if (route.name === 'More') {
-            iconName = 'bars';
+            iconName = 'user';
           }
 
-          return <FontAwesome name={iconName} size={25} color={colors.black} />;
+          return <FontAwesome name={iconName} size={25} color={focused ? colors.text1 : colors.black} />;
         },
         tabBarActiveTintColor: colors.text1,
         tabBarInactiveTintColor: colors.text2,
         tabBarShowLabel: false,
+        headerShown: false,
         // tabBarStyle: {
         //   position: 'absolute',
         //   bottom: 0,
@@ -44,14 +45,14 @@ const TabNavigator = () => {
         //   elevation: 0,
         //   backgroundColor: '#89CFF0',
         //   borderRadius: 15,
-        //   height: 30,
+        //   height: 50,
         // }
       })}>
 
       <Tab.Screen name="Products" component={DrawerNav}
-        options={{ headerShown: false, }}></Tab.Screen>
+      ></Tab.Screen>
 
-      <Tab.Screen name="Home" component={Home}
+      {/* <Tab.Screen name="Home" component={Home}
         options={{
           headerTitleStyle: {
             fontSize: 25,
@@ -59,7 +60,8 @@ const TabNavigator = () => {
           },
           headerTitle: "Home",
           headerTitleAlign: "center",
-        }} />
+         
+        }} /> */}
 
       <Tab.Screen name="Mycart" component={CartScreen}
         options={{
@@ -68,7 +70,7 @@ const TabNavigator = () => {
             fontFamily: "Itim-Regular",
           },
           headerTitleAlign: "center",
-
+         
         }} />
 
       <Tab.Screen name="More" component={Profile}
@@ -78,11 +80,11 @@ const TabNavigator = () => {
             fontFamily: "Itim-Regular",
           },
           headerTitleAlign: "center",
-
+         
         }} />
 
     </Tab.Navigator>
-
+    
   );
 };
 

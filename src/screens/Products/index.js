@@ -8,120 +8,125 @@ import {
   SafeAreaView,
   BackHandler,
 } from "react-native";
-import React, {useEffect} from "react";
+import React, { useEffect, useState } from "react";
 import ProductApi from "../../api/ProductApi";
 import HomeHeadNav from '../../component/HomeHeadNav';
 import { useDispatch, useSelector } from "react-redux";
-import { increment } from '../../redux/reducers/counterSlice';
-import { addProductToMyCart, removeMyCartItem, deleteMyCartItem } from "../../redux/reducers/MyCartSlice";
+import { increaseQty } from '../../redux/reducers/counterSlice';
+import { addProductToMyCart, removeMyCartItem, removeItem } from "../../redux/reducers/MyCartSlice";
 import colors from "../../statics/styles/colors";
 import { listEmptyComponent } from "../../component/emptyList";
 import DrawerNav from "../../Navigation/DrawerNav";
-import {onBackPress} from '../../utils/backPressHandler';
-import { handleBackPress } from "../../component/Alert";
+import { onBackPress } from '../../utils/backPressHandler';
+//import { handleBackPress } from "../../component/Alert";
 import showAlert from '../../component/Alert';
 import { styles } from "./index.style";
 import QtyMng from "../../component/QtyMngment";
 
 const Products = ({ navigation }) => {
   const dispatch = useDispatch();
+  const [search, setSearch] = useState('');
   const result = useSelector((state) => state.counter);
   const myCartItems = useSelector((state) => state.cart);
-  console.log('added products in cart',myCartItems);
+  console.log('added products in cart', myCartItems);
 
-  // function handleBackPress() {
-  //   showAlert('Exit App', 'Do you want to exit the App?','BackHandler.exitApp()');
-  //  // BackHandler.exitApp();
-  //   return true;
-  // }
-  
+  function handleBackPress() {
+    // showAlert('Exit App', 'Do you want to exit the App?','BackHandler.exitApp()');
+    BackHandler.exitApp();
+    return true;
+  }
+
   useEffect(() => {
     onBackPress(handleBackPress);
   }, []);
 
-  const courseCard = ({ item }) => {  
+  const courseCard = ({ item }) => {
+
+    const cartItem = myCartItems.find((cartItem) => cartItem.id === item.id);
+    const qty = cartItem ? cartItem.qty : 0;
+
     return (
-      <SafeAreaView>
-      
-      
-        <View style={styles.mainContainer}>
-        {/* <HomeHeadNav /> */}
-        <TouchableOpacity
-                // style={styles.buttonStyle}
-                onPress={() =>
-                  navigation.navigate("ProductDetails", {
-                    courseId: item.id,
-                  })
-                }>
-          <View style={styles.courseContainer}>
-            <View>
-              <Image
-                style={styles.cardImage}
-                source={{uri: item.image}}
-                resizeMode="contain"
-              />
-            </View>
+      <View>
+        <SafeAreaView>
+          <View style={styles.mainContainer}>
 
-            <Text style={styles.mainHeader}>{item.title}</Text>
-            <Text style={styles.price}> ₹ {item.price}/- </Text>
-            {/* <Text style={styles.description}>{item.description}</Text> */}
+            <TouchableOpacity
+              // style={styles.buttonStyle}
+              onPress={() =>
+                navigation.navigate("ProductDetails", {
+                  courseId: item.id,
+                })
+              }>
+              <View style={styles.courseContainer}>
+                <View>
+                  <Image
+                    style={styles.cardImage}
+                    source={{ uri: item.image }}
+                    resizeMode="contain"
+                  />
+                </View>
 
-            <View style={styles.buttonContainer}>
-              
-              {item.qty == 0 ? (<TouchableOpacity
-                style={styles.buttonStyle}
-                onPress={() => dispatch(addProductToMyCart(item))}>
-                <Text style={styles.buttonText}> Add to Cart </Text>
-              </TouchableOpacity>) : <QtyMng />}
+                <Text style={styles.mainHeader}>{item.title}</Text>
+                <Text style={styles.price}> ₹ {item.price}/- </Text>
+                {/* <Text style={styles.description}>{item.description}</Text> */}
 
-              {/* {item.qty == 0 ? null : (<TouchableOpacity
-                style={styles.buttonStyle}
-                onPress={() => {
-                  if (item.qty > 1) {
-                    dispatch(removeMyCartItem(item));
-                  } else {
-                    dispatch(deleteMyCartItem(item.id));
+                <View style={styles.buttonContainer}>
 
-                  }
-                }}
-                >
-                <Text style={styles.buttonText}> - </Text>
-              </TouchableOpacity>)}
+                  {qty == 0 ? (<TouchableOpacity
+                    style={styles.buttonStyle}
+                    onPress={() => {
+                      dispatch(addProductToMyCart(item));
+                    }}>
+                    <Text style={styles.buttonText}> Add to Cart </Text>
+                  </TouchableOpacity>) : 
+                  <View style={styles.buttonContainer}>
+                    <TouchableOpacity
+                      style={styles.buttonStyle}
+                      onPress={() => {
+                        if (qty > 1) {
+                          dispatch(removeMyCartItem(item));
+                        } else {
+                          dispatch(removeItem(item.id));
+                        }
+                      }}>
+                      <Text style={styles.buttonText}> - </Text>
+                    </TouchableOpacity>
 
-              {item.qty == 0 ? null : (
-                <Text style={styles.zero}>{item.qty}</Text>
-              )}
+                    <Text style={styles.zero}>{qty}</Text>
 
-              {item.qty == 0 ? null : (
-                <TouchableOpacity
-                  style={styles.buttonStyle}
-                  onPress={() => { 
-                    dispatch(addProductToMyCart(item))
-                    
-                    }}
-                  >
-                  <Text style={styles.buttonText}> + </Text>
-                </TouchableOpacity>
-              )} */}
+                    <TouchableOpacity
+                      style={styles.buttonStyle}
+                      onPress={() => {
+                        dispatch(addProductToMyCart(item))
+
+                      }}>
+                      <Text style={styles.buttonText}> + </Text>
+                    </TouchableOpacity>
+                  </View>}
+                  
 
 
-            </View>
+                </View>
+              </View>
+            </TouchableOpacity>
           </View>
-          </TouchableOpacity>
-        </View>
-      </SafeAreaView>
+        </SafeAreaView>
+      </View>
     );
   };
 
   return (
     <View>
-    {/* <HomeHeadNav /> */}
-    <FlatList
-      keyExtractor={(item) => item.id}
-      data={ProductApi}
-      renderItem={courseCard}
-      ListEmptyComponent={listEmptyComponent}
-    />
+      <HomeHeadNav
+        searchChange={() => ("")}
+        search={search}
+      />
+      <FlatList
+        keyExtractor={(item) => item.id}
+        data={ProductApi}
+        renderItem={courseCard}
+        ListEmptyComponent={listEmptyComponent}
+      />
     </View>
   );
 };

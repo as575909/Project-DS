@@ -60,7 +60,7 @@ export const styles = StyleSheet.create({
     buttonContainer: {
       display: "flex",
       flexDirection: "row",
-      justifyContent: "center",
+      justifyContent: "space-evenly",
   
     },
     buttonStyle: {
@@ -78,10 +78,11 @@ export const styles = StyleSheet.create({
       fontFamily: "Itim-Regular",
       textTransform: "capitalize",
     },
-    qty: {
-      marginLeft: 10,
-      fontSize: 16,
+    zero: {
+      marginTop: moderateScale(10),
+      fontSize: moderateScale(16), 
       fontWeight: '600',
-      marginTop: 10,
+      marginLeft: moderateScale(10),
+      marginRight: moderateScale(20),
     }
   });

@@ -3,13 +3,15 @@ import { View, Text, ScrollView, TextInput, TouchableOpacity, StyleSheet, Alert,
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
-import {storeData} from '../../utils/asyncStorage';
-import { titles, colors, btn1, hr80 } from '../../globals/style';
+import {storeData} from '../../../utils/asyncStorage';
+import { titles, colors, btn1, hr80 } from '../../../globals/style';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { isValidEmail, isValidPassword } from '../../utils/regex';
-import MyTextInput from '../../component/MyTextInput';
+import { isValidEmail, isValidPassword } from '../../../utils/regex';
+import MyTextInput from '../../../component/MyTextInput';
 import { moderateScale } from 'react-native-size-matters';
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
+import { onBackPress } from '../../../utils/backPressHandler';
+import { handleBackPress } from '../../../component/Alert';
 
 
 const SignInScreen = (props) => {
@@ -26,6 +28,10 @@ const SignInScreen = (props) => {
     const [showpassword, setShowpassword] = useState(false);
 
     const userData = useSelector((state) => state.user);
+
+    useEffect(() => {
+        onBackPress(handleBackPress);
+      }, []);
 
 
     const login = async () => {
@@ -136,7 +142,7 @@ const SignInScreen = (props) => {
               
                 <Text style={styles.forgot} 
                 //onPress={() => navigation.navigate('ForgotPswrd')}
-                onPress={() => navigation.navigate('ForgotPswrd')}
+                onPress={() => navigation.navigate('OtpScreen')}
                 >Forgot Password?</Text>
               
                 {/* <Text style={styles.or}>OR</Text>

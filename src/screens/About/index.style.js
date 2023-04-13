@@ -1,10 +1,5 @@
 import { StyleSheet } from "react-native";
 import {moderateScale} from 'react-native-size-matters';
-import {
-    responsiveHeight,
-    responsiveWidth,
-    responsiveFontSize
-  } from "react-native-responsive-dimensions";
 
 
 export const styles = StyleSheet.create({
@@ -12,12 +7,7 @@ export const styles = StyleSheet.create({
       display: "flex",
       alignItems: "center",
     },
-  
-    imgStyle: {
-      width: moderateScale(140),
-      height: moderateScale(140),
-      borderRadius: moderateScale(100),
-    },
+
     mainHeader: {
       fontSize: moderateScale(18),
       color: "#344055",
@@ -62,9 +52,5 @@ export const styles = StyleSheet.create({
       justifyContent: "space-evenly",
     },
   
-    iconStyle: {
-      width: "100%",
-      height: "20%",
-      aspectRatio: 1,
-    },
+    
   });

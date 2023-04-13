@@ -27,9 +27,7 @@
 //                 codeInputFieldStyle={{ borderRadius: 5, backgroundColor: '#fff', borderWidth: 1 }}
 //                 codeInputHighlightStyle={{ borderColor: '#03DAC6' }}
 //             />
-//             {/* <TouchableOpacity onPress={sendOTP}>
-//                 <Text style={{ color: '#03DAC6', fontSize: 18 }}>Send OTP</Text>
-//             </TouchableOpacity> */}
+          
 //             <CountDown
 //                 until={60}
 //                 size={20}
@@ -91,7 +89,7 @@ const OTPScreen = ({ navigation, route }) => {
       {success && (
         <View style={styles.successContainer}>
           <Text style={styles.successText}>OTP verified successfully!</Text>
-          <TouchableOpacity style={styles.resetButton} onPress={() => navigation.navigate('ResetPasswordScreen')}>
+          <TouchableOpacity style={styles.resetButton} onPress={() => navigation.navigate('ResetPswrdScreen')}>
             <Text style={styles.buttonText}>Reset Password</Text>
           </TouchableOpacity>
         </View>

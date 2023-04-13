@@ -1,6 +1,5 @@
 import { Image, StyleSheet, Text, View, Button } from 'react-native'
 import React from 'react';
-// import emptyCart from '../assets/images/emptyCart.png';
 import { useNavigation } from '@react-navigation/native';
 import Strings from '../../statics/Strings';
 import { Images } from '../../assets/images';
@@ -17,7 +16,7 @@ const EmptyCart = () => {
                 source={Images.emptyCart}
             />
             <Button
-                onPress={() => navigation.navigate('Products')}
+                onPress={() => navigation.navigate('InstaMart')}
                 title={Strings.CtnShp}
              
             />

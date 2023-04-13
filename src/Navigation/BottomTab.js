@@ -1,15 +1,13 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import Products from '../screens/Products';
 import Home from '../screens/Home';
 import CartScreen from '../screens/CartScreen';
-import MyCart from './DrawerNav';
 import DrawerNav from './DrawerNav';
-import HomeHeadNav from '../component/HomeHeadNav';
 import Profile from '../screens/Profile';
 import Strings from '../statics/Strings';
 import colors from '../statics/styles/colors';
+import Products from '../screens/Products';
 
 const Tab = createBottomTabNavigator();
 
@@ -37,20 +35,10 @@ const TabNavigator = () => {
         tabBarInactiveTintColor: colors.text2,
         tabBarShowLabel: false,
         headerShown: false,
-        // tabBarStyle: {
-        //   position: 'absolute',
-        //   bottom: 0,
-        //   left: 10,
-        //   right: 10,
-        //   elevation: 0,
-        //   backgroundColor: '#89CFF0',
-        //   borderRadius: 15,
-        //   height: 50,
-        // }
+       
       })}>
 
-      <Tab.Screen name="Products" component={DrawerNav}
-      ></Tab.Screen>
+      <Tab.Screen name="Products" component={DrawerNav}></Tab.Screen>
 
       {/* <Tab.Screen name="Home" component={Home}
         options={{

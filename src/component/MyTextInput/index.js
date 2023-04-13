@@ -1,22 +1,18 @@
 import React from 'react';
-import { TextInput, StyleSheet} from 'react-native';
-
+import { TextInput } from 'react-native';
+import { styles } from './index.style';
 
 const MyTextInput = (props) => {
-  const { placeholder, onChangeText, value, onEndEditing, onBlur, keyboardType, secureTextEntry } = props;
-
   return (
     <TextInput
-      placeholder={placeholder}
-      onChangeText={onChangeText}
-      onEndEditing={onEndEditing}
-      onBlur={onBlur}
-      value={value}
-      keyboardType={keyboardType}
-      secureTextEntry={secureTextEntry}
+      {...props}
+      style={[styles.input, props.style]}
+      placeholderTextColor='#9e9e9e'
+      underlineColorAndroid='transparent'
     />
   );
 };
 
 export default MyTextInput;
+
 

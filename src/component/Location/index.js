@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text } from 'react-native';
 import Geolocation from '@react-native-community/geolocation';
 import { styles } from './index.style';
 

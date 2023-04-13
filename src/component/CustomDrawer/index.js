@@ -3,19 +3,19 @@ import React from 'react';
 import { DrawerActions } from "@react-navigation/native";
 import { DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useSelector } from 'react-redux';
-// import styles from '../../statics/styles';
 import bgdrawer from '../../assets/images/bgdrawer.jpg';
 import manAvatar from '../../assets/images/manAvatar.jpg';
 import Strings from '../../statics/Strings';
-import colors from '../../statics/styles/colors';
 import { styles } from './index.style';
+import UserAvatar from '../UserAvatar';
+import style from '../../globals/style';
 
 const CustomDrawer = (props) => {
+
     const userName = useSelector((state) => state.user);
-    console.log(userName.data[0].Name,"jkl");
+    //console.log(userName.data[0].Name,"jkl");
   return (
     <View style={styles.containerCustomDrawer}>
     <DrawerContentScrollView 
@@ -23,12 +23,10 @@ const CustomDrawer = (props) => {
     contentContainerStyle={{backgroundColor:'#89CFF0'}}>
 
         <ImageBackground source={bgdrawer} style={styles.imgbg}>
-        <Image source={manAvatar} style={styles.avatar} />
-        <Text style={styles.user}>{Strings.Welcome}, {userName.data[0].Name}</Text>
-        <View style={styles.coinContainer}>
-        <Text style={styles.coins}>Rewards</Text>
-        <FontAwesome5 name='coins' size={14} color= {colors.yellow} />
-        </View>
+         <TouchableOpacity onPress={()=> props.navigation.navigate('About') }>   
+        <UserAvatar />
+        <Text style={styles.user}>{Strings.home_welcome}, {userName.data[0].Name}</Text>
+        </TouchableOpacity>
         </ImageBackground>
 
         <View style={styles.list}>

@@ -3,7 +3,6 @@ import { View, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useNavigation, DrawerActions } from '@react-navigation/native'
 import { styles } from './index.style';
-import CartScreen from '../../screens/CartScreen';
 
 const HomeHeadNav = (props) => {
   const navigation = useNavigation();

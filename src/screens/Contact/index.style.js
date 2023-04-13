@@ -42,30 +42,8 @@ export const styles = StyleSheet.create({
       paddingVertical: 6,
       borderRadius: 2,
     },
-    multiineStyle: {
+    multilineStyle: {
       paddingVertical: 4,
     },
-    buttonStyle: {
-      borderRadius: 5,
-      paddingVertical: 10,
-      paddingHorizontal: 18,
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      marginVertical: 30,
-    },
-    buttonText: {
-      color: "#eee",
-    },
-    wrapper: {
-      display: "flex",
-      flexDirection: "row",
-      marginTop: 20,
-      fontFamily: "Itim-Regular",
-    },
-    wrapperText: {
-      marginLeft: 10,
-      color: "#7d7d7d",
-      fontFamily: "Itim-Regular",
-    },
+    
   });

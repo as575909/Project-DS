@@ -1,21 +1,18 @@
-import React, { useState } from 'react';
-import { Alert, Linking, StatusBar, Button, StyleSheet, Text, TextInput, TouchableOpacity, View, ScrollView } from 'react-native';
-import { titles, colors, btn1, hr80 } from '../../globals/style';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import React, { useState, useEffect } from 'react';
+import { Alert, StyleSheet, Text, TouchableOpacity, View, ScrollView } from 'react-native';
+import { titles, colors, btn1, hr80 } from '../../../globals/style';
 import { useDispatch } from 'react-redux';
-import { adduser } from '../../redux/reducers/LoginReducer';
+import { adduser } from '../../../redux/reducers/LoginReducer';
 import { useNavigation } from '@react-navigation/native';
-import Strings from '../../statics/Strings';
-import { isValidEmail, isValidPhone, isValidPassword } from '../../utils/regex';
-import { validateEmail, validatePhoneNum, validatePassword, validateRePassword } from '../../statics/validation';
-import MyTextInput from '../../component/MyTextInput';
+import Strings from '../../../statics/Strings';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import MyTextInput from '../../../component/MyTextInput';
+import { isValidEmail, isValidPhone, isValidPassword } from '../../../utils/regex';
 import { moderateScale } from 'react-native-size-matters';
-import {
-    responsiveHeight,
-    responsiveWidth,
-    responsiveFontSize
-} from "react-native-responsive-dimensions";
-import auth from '@react-native-firebase/auth';
+import { responsiveFontSize } from "react-native-responsive-dimensions";
+import { onBackPress } from '../../../utils/backPressHandler';
+import { handleBackPress } from '../../../component/Alert';
+import InputWithIcon from '../../../component/InputWithIcon';
 
 const SignupScreen = ({ }) => {
 
@@ -40,7 +37,9 @@ const SignupScreen = ({ }) => {
     const dispatch = useDispatch();
     const navigation = useNavigation();
 
-    
+    useEffect(() => {
+        onBackPress(handleBackPress);
+    }, []);
 
     const onSubmit = () => {
 
@@ -50,35 +49,17 @@ const SignupScreen = ({ }) => {
             "Password": Password,
             "Number": PhoneNum,
         }
-        if (userObj.Email && userObj.Password && userObj.Number != " ") {
+        if (userObj.Name && userObj.Email && userObj.Password && userObj.Number != " ") {
+            if(chEmail && chPhoneNum && chPassword && chrePassword != 'true'){
             Alert.alert(
                 Strings.Success,
                 `User ${userObj.Name} was successfully created!`,
             );
             navigation.navigate('login')
-        }
+        }}
         else {
             alert(Strings.Error1)
         }
-        
-        // auth()
-        // .createUserWithEmailAndPassword(Email, Password)
-        // .then(() => {
-        //     navigation.navigate('login')
-        //     console.log('User account created & signed in!');
-        // })
-        // .catch(error => {
-        //     if (error.code === 'auth/email-already-in-use') {
-        //         console.log('That email address is already in use!');
-        //     }
-
-        //     if (error.code === 'auth/invalid-email') {
-        //         console.log('That email address is invalid!');
-        //     }
-
-        //     console.error(error);
-        // });
-
         dispatch(adduser(userObj))
     }
 
@@ -157,12 +138,11 @@ const SignupScreen = ({ }) => {
             <ScrollView>
                 <View style={styles.topContainer}>
                     <Text style={styles.title}>{Strings.Title1}</Text>
-                    <Text style={styles.subtitle}>{Strings.SignUp}</Text>
+                    <Text style={styles.subtitle}>{Strings.welcome_btn_signup}</Text>
                 </View>
 
-                <View style={styles.inputout}>
+                {/* <View style={styles.inputout}>
                     <Icon name="user" size={24} color={Name === true ? colors.text1 : colors.text2} style={styles.icon} />
-                    {/* <TextInput placeholder={Strings.Name} onChangeText={setName} value={Name}  /> */}
                     <MyTextInput placeholder={Strings.Name} onChangeText={setName} value={Name} />
                 </View>
 
@@ -171,7 +151,8 @@ const SignupScreen = ({ }) => {
                     <MyTextInput placeholder={Strings.Email} onChangeText={setEmail} onEndEditing={validateEmail} onBlur={e => this.validateEmail} />
 
                 </View>
-                {chEmail == true ? null : <Text style={styles.error}>{errEmail}</Text>}
+                {chEmail ? null : <Text style={styles.error}>{errEmail}</Text>}
+
 
                 <View style={styles.inputout}>
                     <Icon name="phone" size={24} color={Email === true ? colors.text1 : colors.text2} style={styles.icon} />
@@ -192,34 +173,32 @@ const SignupScreen = ({ }) => {
                     <MyTextInput placeholder={Strings.CPassword} onChangeText={resetPassword} onEndEditing={validateRePassword} onBlur={e => this.validateRePassword} secureTextEntry={true} />
                 </View>
 
-                {chrePassword == true ? null : <Text style={styles.error} >{errRePassword}</Text>}
+                {chrePassword == true ? null : <Text style={styles.error} >{errRePassword}</Text>} */}
+
+
+                <View style={styles.inputout}>
+                    <InputWithIcon iconName="user" placeholder="Name" onChangeText={setName} />
+                    <InputWithIcon iconName="envelope" placeholder="Email" onChangeText={setEmail} onEndEditing={validateEmail} keyboardType="email-address" />
+                    {chEmail ? null : <Text style={styles.error}>{errEmail}</Text>}
+                    <InputWithIcon iconName="phone" placeholder="Phone" onChangeText={setPhoneNum} onEndEditing={validatePhoneNum} keyboardType="phone-pad" />
+                    {chPhoneNum == true ? null : <Text style={styles.error}>{errPhoneNum}</Text>}
+                    <InputWithIcon iconName="lock" placeholder="Password" onChangeText={setPassword} onEndEditing={validatePassword} secureTextEntry />
+                    {chPassword == true ? null : <Text style={styles.error}>{errPassword}</Text>}
+                    <InputWithIcon iconName="check" placeholder="Confirm Password" onChangeText={resetPassword} onEndEditing={validateRePassword} secureTextEntry />
+                    {chrePassword == true ? null : <Text style={styles.error} >{errRePassword}</Text>}
+                </View>
+
 
                 <TouchableOpacity style={[btn1, { alignSelf: 'center' }, { backgroundColor: validatePassword ? 'blue' : 'grey' }]}
                     //  onPress={() => navigation.navigate('TabNavigator')}
                     onPress={onSubmit}
                 >
-                    <Text style={styles.signupTxt}>{Strings.SignUp}</Text>
+                    <Text style={styles.signupTxt}>{Strings.welcome_btn_signup}</Text>
                 </TouchableOpacity>
 
-                {/* <Text style={styles.or}>OR</Text>
-                <Text style={styles.gftxt}>Sign In With </Text> */}
-
-                {/* <View style={styles.gf}>
-                    <TouchableOpacity onPress={() => Linking.openURL("https://github.com/as575909")}>
-                        <View style={styles.gficon}>
-                            <Icon name="google" size={30} color='red' />
-                        </View>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity onPress={() => Linking.openURL("https://github.com/as575909")}>
-                        <View style={styles.gficon}>
-                            <Icon name="facebook" size={30} color='blue' />
-                        </View>
-                    </TouchableOpacity>
-                </View> */}
                 <View style={hr80}></View>
                 <Text style={styles.dont}>{Strings.Title2}
-                    <Text style={styles.signup} onPress={() => navigation.navigate('login')}>  {Strings.Login}</Text>
+                    <Text style={styles.signup} onPress={() => navigation.navigate('login')}>  {Strings.welcome_btn_login}</Text>
                 </Text>
             </ScrollView>
         </View>
@@ -255,8 +234,9 @@ const styles = StyleSheet.create({
     },
 
     inputout: {
-        flexDirection: 'row',
-        width: '80%',
+        // flexDirection: 'row',
+        flex: 1,
+        width: '90%',
         marginVertical: moderateScale(10),
         backgroundColor: colors.col1,
         borderRadius: moderateScale(10),
@@ -291,27 +271,7 @@ const styles = StyleSheet.create({
         fontFamily: "Itim-Regular",
         alignSelf: 'center',
     },
-    // gftxt: {
-    //     color: colors.text2,
-    //     marginVertical: moderateScale(5),
-    //     fontSize: responsiveFontSize(3),
-    //     fontFamily: "Itim-Regular",
-    //     alignSelf: 'center',
-    // },
-    // gf: {
-    //     flexDirection: 'row',
-    //     alignSelf: 'center',
-    // },
-    // gficon: {
-    //     backgroundColor: 'white',
-    //     width: 50,
-    //     margin: 10,
-    //     borderRadius: 10,
-    //     padding: 10,
-    //     alignItems: 'center',
-    //     elevation: 20,
-    //     alignSelf: 'center',
-    // },
+
     signup: {
         color: colors.text1,
         fontFamily: "Itim-Regular",

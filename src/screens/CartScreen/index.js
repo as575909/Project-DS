@@ -1,24 +1,22 @@
-import React, { useEffect, useState } from 'react';
-import { Alert, FlatList, SafeAreaView, StatusBar, StyleSheet, Text, Image, TouchableOpacity, View, ScrollView } from 'react-native';
+import React, { useState } from 'react';
+import { Alert, FlatList, SafeAreaView, Text, Image, TouchableOpacity, View, ScrollView } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import { increment } from '../../redux/reducers/counterSlice';
-import { addProductToMyCart, removeMyCartItem, deleteMyCartItem, increaseQty, removeItem } from "../../redux/reducers/MyCartSlice";
+import { addProductToMyCart, removeMyCartItem, deleteMyCartItem, removeItem } from "../../redux/reducers/MyCartSlice";
 import { btn1 } from '../../globals/style';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
-import showAlert from '../../component/Alert';
 import EmptyCart from '../../component/EmptyCart';
 import Strings from '../../statics/Strings';
-import { onBackPress } from '../../utils/backPressHandler';
 import { styles } from './index.style';
 import HomeHeadNav from '../../component/HomeHeadNav';
+import { CURRENCY_SYMBOLS } from '../../utils/currencySymbols';
+import { listEmptyComponent } from "../../component/EmptyList";
 
 
 const CartScreen = ({ navigation }) => {
-  // const result = useSelector((state) => state.counter);
   const [search, setSearch] = useState('');
   const myCartItems = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-
+  const currencySymbol = CURRENCY_SYMBOLS['RUPEE'];
 
   const AlertItem = () => {
     Alert.alert(
@@ -63,7 +61,7 @@ const CartScreen = ({ navigation }) => {
             </View>
 
             <Text style={styles.mainHeader}>{item.title}</Text>
-            <Text style={styles.mainHeader}>{item.price}/-</Text>
+            <Text style={styles.mainHeader}>{currencySymbol}{item.price}/-</Text>
 
 
             <View style={styles.buttonContainer}>
@@ -131,12 +129,13 @@ const CartScreen = ({ navigation }) => {
               keyExtractor={(item) => item.id}
               data={myCartItems}
               renderItem={courseCard}
+              ListEmptyComponent={listEmptyComponent}
             />
 
             <View style={styles.footer}>
               <View style={styles.total1}>
                 <Text style={styles.total2}>
-                  {'Total:' + getTotal()}
+                  {'Total:  ₹' + getTotal()}
                 </Text>
               </View>
               <View style={styles.total1}>

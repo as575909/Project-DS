@@ -39,9 +39,9 @@ const Home = () => {
           <Image style={styles.headerImage}
             resizeMode="stretch"
             source={Images.front} />
-          <Text style={styles.mainHeader}> {Strings.Welcome} </Text>
-          <Text style={styles.mainHeader1}>{Strings.InstaMart}</Text>
-          <Text style={styles.paraStyle}>{Strings.Description}</Text>
+          <Text style={styles.mainHeader}> {Strings.home_welcome} </Text>
+          <Text style={styles.mainHeader1}>{Strings.home_title_instamart}</Text>
+          <Text style={styles.paraStyle}>{Strings.home_description}</Text>
         </View>
 
 

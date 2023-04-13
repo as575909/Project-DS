@@ -51,6 +51,7 @@ import { styles } from './index.style';
 
 const ForgotPasswordScreen = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [confirm, setConfirm] = useState(null);
 
   const handleSendOTP = async () => {
     try {

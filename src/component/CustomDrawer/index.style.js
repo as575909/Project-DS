@@ -25,6 +25,7 @@ export const styles = StyleSheet.create({
         color: colors.col1,
         fontSize: responsiveFontSize(2),
         fontFamily: 'Itim-Regular',
+        marginTop: moderateScale(5),
       },
       coins: {
         color: colors.col1,

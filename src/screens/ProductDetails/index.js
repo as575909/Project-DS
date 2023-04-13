@@ -2,16 +2,18 @@ import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity, FlatList }
 import React from "react";
 import ProductApi from "../../api/ProductApi";
 import { increment } from "../../redux/reducers/counterSlice";
-import { addProductToMyCart, removeMyCartItem, deleteMyCartItem } from "../../redux/reducers/MyCartSlice";
+import { addProductToMyCart, removeMyCartItem, removeItem } from "../../redux/reducers/MyCartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import colors from "../../statics/styles/colors";
-import { increaseQty } from "../../redux/reducers/MyCartSlice";
 import { styles } from "./index.style";
 import QtyMng from "../../component/QtyMngment";
+import { CURRENCY_SYMBOLS } from '../../utils/currencySymbols';
 
 
 
 const ProductDetails = ({ navigation, route }) => {
+
+  const currencySymbol = CURRENCY_SYMBOLS['RUPEE'];
   const myCartItems = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
@@ -44,7 +46,7 @@ const ProductDetails = ({ navigation, route }) => {
 
           <View style={styles.description}>
             <Text style={styles.subCourse}>
-              Price: ₹ {item.price.toFixed(2)}/-
+              Price: {currencySymbol}{item.price.toFixed(2)}/-
             </Text>
             <Text> Rating: {item.rating.rate} </Text>
             <Text style={styles.subCourse}>
@@ -62,61 +64,32 @@ const ProductDetails = ({ navigation, route }) => {
                 }
               }}>
               <Text style={styles.buttonText}> Add to Cart </Text>
-            </TouchableOpacity>) : <QtyMng />
-            // <View style={styles.buttonContainer}>
-            //   <TouchableOpacity
-            //     style={styles.buttonStyle}
-            //     onPress={() => {
-            //       if (qty > 1) {
-            //         dispatch(removeMyCartItem(item));
-            //       } else {
-            //         dispatch(removeItem(item.id));
-            //       }
-            //     }}>
-            //     <Text style={styles.buttonText}> - </Text>
-            //   </TouchableOpacity>
+            </TouchableOpacity>) : 
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity
+                style={styles.buttonStyle}
+                onPress={() => {
+                  if (qty > 1) {
+                    dispatch(removeMyCartItem(item));
+                  } else {
+                    dispatch(removeItem(item.id));
+                  }
+                }}>
+                <Text style={styles.buttonText}> - </Text>
+              </TouchableOpacity>
 
-            //   <Text style={styles.zero}>{qty}</Text>
+              <Text style={styles.zero}>{qty}</Text>
 
-            //   <TouchableOpacity
-            //     style={styles.buttonStyle}
-            //     onPress={() => {
-            //       dispatch(addProductToMyCart(item))
-
-            //     }}>
-            //     <Text style={styles.buttonText}> + </Text>
-            //   </TouchableOpacity>
-            // </View>
-            }
-
-            {/* {qty == 0 ? null : (<TouchableOpacity
-              style={styles.buttonStyle}
-              onPress={() => {
-                if (qty > 1) {
-                  dispatch(removeMyCartItem(item));
-                } else {
-                  dispatch(deleteMyCartItem(item.id));
-
-                }
-              }}>
-              <Text style={styles.buttonText}> - </Text>
-            </TouchableOpacity>)}
-
-
-            {qty == 0 ? null : (
-              <Text style={styles.qty}>{qty}</Text>
-            )}
-
-            {qty == 0 ? null : (
               <TouchableOpacity
                 style={styles.buttonStyle}
                 onPress={() => {
                   dispatch(addProductToMyCart(item))
-                  dispatch(increment(item.id))
+
                 }}>
                 <Text style={styles.buttonText}> + </Text>
               </TouchableOpacity>
-            )} */}
+            </View>
+            }  
 
           </View>
 

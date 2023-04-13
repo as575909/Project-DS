@@ -10,12 +10,11 @@ import {
   SafeAreaView,
 } from 'react-native';
 
-// import {addToCart} from '../redux/CartSlice';
 import { addProductToMyCart } from "../../redux/reducers/MyCartSlice";
 import {useDispatch, useSelector} from 'react-redux';
 import {getFakeProducts} from '../../api/Axios';
 import {styles} from './index.style'
-import { listEmptyComponent } from '../../component/emptyList';
+import { listEmptyComponent } from '../../component/EmptyList';
 
 const Product = () => {
   const [data, setData] = useState([]);

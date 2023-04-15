@@ -6,6 +6,7 @@ import {
   responsiveFontSize
 } from "react-native-responsive-dimensions";
 import Strings from '../../statics/Strings';
+import colors from '../../statics/styles/colors';
 
 
 export const styles = StyleSheet.create({
@@ -89,6 +90,7 @@ export const styles = StyleSheet.create({
       fontSize: 16,
       fontWeight: '600',
       marginTop: 10,
+      color: colors.text3,
     },
     deleteButton: {
       backgroundColor: 'red',

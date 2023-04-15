@@ -1,8 +1,8 @@
 const colors = {
     col1: 'white',
     text1: 'blue',
-    text2: 'grey',
-    // text3: '#344055',
+    text2: 'grey', 
+    text3: '#344055',
     text3: '#7d7d7d',
     text4: '#4F4F4F',
     black: 'black',

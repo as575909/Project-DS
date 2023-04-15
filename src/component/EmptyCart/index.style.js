@@ -15,6 +15,7 @@ export const styles = StyleSheet.create({
     text: {
         fontSize: responsiveFontSize(2.5),
         fontFamily: 'Itim-Regular',
+        color: colors.text3
     },
     empty: {
         width: responsiveWidth(50),

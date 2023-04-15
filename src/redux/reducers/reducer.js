@@ -1,21 +1,24 @@
-// import { ADD_TO_CART, EMPTY_CART, REMOVE_FROM_CART } from "./constant"
+import { createAction } from '@reduxjs/toolkit';
 
+// Define the action creator
+const setConfirm = createAction('confirm/setConfirm');
 
+// Define the initial state
+const initialState = {
+  isConfirmed: false,
+};
 
-// export const cartData = (data = [], action) => {
-//     switch (action.type) {
-//         case ADD_TO_CART:
-//             console.warn("ADD_TO_CART condition ", action)
-//             return [action.data, ...data]
-//             case REMOVE_FROM_CART:
-//                 console.warn("REMOVE_FROM_CART condition ", action);
-//                 data.length= data.length? data.length-1:[]
-//                 return [...data]
-//                 case EMPTY_CART:
-//                     console.warn("EMPTY CART condition ", action);
-//                     data =[]
-//                     return [...data]
-//         default:
-//             return data
-//     }
-// }
+// Define the reducer function
+const confirmReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case setConfirm.type:
+      return {
+        ...state,
+        isConfirmed: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
+export default confirmReducer;

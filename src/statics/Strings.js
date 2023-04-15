@@ -3,10 +3,12 @@ const Strings = {
   home_title_instamart: 'InstaMart!!',
   home_description:
     'Lorem ipsum dolor sit amet. Et commodi enim ut modi maxime quo minus rerum a nihil commodi et aspernatur officiis et repudiandae alias. Quo aperiam consequatur',
+  //--------------------------------------------------------//
   welcome_title: 'InstaMart',
   welcome_tagline: "Find the best items around you at lowest price.",
   welcome_btn_signup: 'Sign up',
   welcome_btn_login: 'Log In',
+  //-----------------------------------------------------------//
   Error1: 'Please fill all details',
   Title1: "Let's get Started",
   Title2: 'Already Have an account?',
@@ -21,9 +23,29 @@ const Strings = {
   LogoutTxt: 'Do you want to LogOut',
   CtnShp: 'Continue Shopping',
   FontFamily: 'Itim-Regular',
+  //---------------------------------------------------------//
+  sigunup_title1: "Let's get Started",
+  sigunup_title2: 'Already Have an account?',
+  sigunup_name_iconname: "user",
+  sigunup_email_iconname: "envelope",
+  sigunup_mob_iconname: "phone",
+  sigunup_password_iconname: "lock",
+  sigunup_cpassword_iconname: "check",
+  sigunup_name_placeholder: "Name",
+  sigunup_email_placeholder: "Email",
+  sigunup_mob_placeholder: "Contact Number",
+  sigunup_password_placeholder: "Password",
+  sigunup_cpassword_placeholder: "Confirm Password",
+  //--------------------------------------------------------//
+  login_title1: 'Welcome Back',
+  login_title2: 'Login into continue',
+  login_forgot_text: 'Forgot Password?',
+  login_dont_text: "Don't have an account?",
+  //--------------------------------------------------------//
   about: 'About Me',
   about_follow_title: 'Connect Me Through',
   about_user_title: ' I am an Application Developer 😎 ',
+  //--------------------------------------------------------//
   contactus: 'Contact Us',
   contact_title: 'Level up your Knowledge',
   contact_reach: 'You can reach us anytime via as575909@gmail.com',
@@ -34,6 +56,7 @@ const Strings = {
   contact_email_placeholder: 'demo@project.com',
   contact_mob_placeholder: '10-Digit',
   contact_help_placeholder: 'Tell us about yourself',
+  //--------------------------------------------------------//
 
 
 

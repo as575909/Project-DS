@@ -48,10 +48,14 @@ import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
 import auth from '@react-native-firebase/auth';
 import { showMessage } from 'react-native-flash-message';
 import { styles } from './index.style';
+import { useDispatch } from 'react-redux';
+import { setConfirm } from '../../../redux/reducers/ConfirmReducer';
+import colors from '../../../statics/styles/colors';
 
-const ForgotPasswordScreen = () => {
+const ForgotPasswordScreen = ({ props, navigation }) => {
+  const dispatch = useDispatch();
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [confirm, setConfirm] = useState(null);
+  // const [confirm, setConfirm] = useState(null);
 
   const handleSendOTP = async () => {
     try {
@@ -59,9 +63,8 @@ const ForgotPasswordScreen = () => {
       console.log('with country code', withCountryCode);
       const confirmation = await auth().signInWithPhoneNumber(withCountryCode);
       console.log('confirmaton... here...', confirmation);
-      setConfirm(confirmation);
+      dispatch(setConfirm(confirmation));
       navigation.navigate('OtpScreen', {
-        confirm: confirmation,
         phoneNumber,
       });
       // navigate to the OTP verification screen
@@ -94,6 +97,7 @@ const ForgotPasswordScreen = () => {
       <TextInput
         style={styles.input}
         placeholder="Phone number"
+        placeholderTextColor={colors.text3}
         keyboardType="phone-pad"
         value={phoneNumber}
         onChangeText={setPhoneNumber}

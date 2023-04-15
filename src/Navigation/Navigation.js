@@ -6,6 +6,7 @@ import AppStack from './AppStack';
 import TabNavigator from './BottomTab';
 import ProductDetails from '../screens/ProductDetails';
 import DrawerNav from './DrawerNav';
+import OTPScreen from '../screens/OnBoardingScreen/OtpScreen';
 
 const Navigation = () => {
   const Stack = createNativeStackNavigator();
@@ -15,7 +16,8 @@ const Navigation = () => {
      
       <Stack.Navigator initialRouteName='AuthStack'>
       
-        <Stack.Screen name='AuthStack' component={AuthStack} options={{ headerShown: false }} /> 
+        <Stack.Screen name='AuthStack' component={AuthStack} options={{ headerShown: false }} />
+        <Stack.Screen name='OtpScreen' component={OTPScreen} options={{ headerShown: false }} /> 
         <Stack.Screen name='TabNavigator' component={TabNavigator} options={{ headerShown: false }} />
         <Stack.Screen name='AppStack' component={AppStack} options={{ headerShown: false }} />
         <Stack.Screen name='ProductDetails' component={ProductDetails}

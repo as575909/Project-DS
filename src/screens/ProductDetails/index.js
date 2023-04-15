@@ -48,7 +48,7 @@ const ProductDetails = ({ navigation, route }) => {
             <Text style={styles.subCourse}>
               Price: {currencySymbol}{item.price.toFixed(2)}/-
             </Text>
-            <Text> Rating: {item.rating.rate} </Text>
+            <Text style={styles.subCourse}> Rating: {item.rating.rate} ⭐ </Text>
             <Text style={styles.subCourse}>
               ({item.rating.count} reviews)
             </Text>

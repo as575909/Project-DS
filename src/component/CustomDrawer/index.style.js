@@ -43,7 +43,9 @@ export const styles = StyleSheet.create({
       footer: {
         padding: moderateScale(20),
         borderTopWidth: moderateScale(1),
-        borderTopColor: colors.footer
+        borderTopColor: colors.footer,
+        //color: colors.footer,
+        backgroundColor: colors.drvoilet,
       },
       share: {
         paddingVertical: moderateScale(15),

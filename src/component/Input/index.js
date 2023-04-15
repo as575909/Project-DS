@@ -14,6 +14,7 @@ export const Input = ({ label, placeholder, value, onChangeText, multiline, numb
           onChangeText={onChangeText}
           numberOfLines={numberOfLines}
           multiline={multiline}
+          placeholderTextColor={'grey'}
         />
       </View>
     );

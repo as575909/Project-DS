@@ -1,8 +1,10 @@
 import { StyleSheet } from "react-native";
+import colors from '../../statics/styles/colors'
 
 
 export const styles = StyleSheet.create({
     mainContainer: {
+      flex: 1,
       height: "100%",
       paddingHorizontal: 30,
       backgroundColor: "#fff",
@@ -36,6 +38,7 @@ export const styles = StyleSheet.create({
       lineHeight: 25,
     },
     inputStyle: {
+     color: colors.text1,
       borderWidth: 1,
       borderColor: "rgba(0, 0, 0, 0.3)",
       paddingHorizontal: 15,

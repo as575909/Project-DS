@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "825723764345",
+    "project_id": "instamart-3c4ad",
+    "storage_bucket": "instamart-3c4ad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:825723764345:android:ff46400918ffe47a1c5ea8",
+        "android_client_info": {
+          "package_name": "com.instamart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "825723764345-csf5uol7nfeg2hd9iukjifhkf4hvuhrf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.instamart",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "825723764345-9orrfji9slgi28ekdobv49lsmpsi0jv5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQwPk7g1tewgbxt365GDeTNQ_a4uj7Ao0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "825723764345-9orrfji9slgi28ekdobv49lsmpsi0jv5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

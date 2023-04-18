@@ -3,10 +3,10 @@ import React from "react";
 import { Images } from "../../assets/images";
 import { styles } from "./index.style";
 
-const UserAvatar = () => {
+const UserAvatar = ({userImg}) => {
   return (
     <View>
-      <Image style={styles.imgStyle} source={Images.me1} />
+      <Image style={styles.imgStyle} source={{ uri: userImg }} />
     </View>
   );
 };

@@ -13,6 +13,7 @@ export const styles = StyleSheet.create({
       },
       imgbg: {
         padding: moderateScale(10),
+        
       },
       avatar: {
         height: responsiveWidth(20),

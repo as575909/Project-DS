@@ -6,5 +6,6 @@ export const styles = StyleSheet.create({
     width: moderateScale(140),
     height: moderateScale(140),
     borderRadius: moderateScale(100),
+    alignSelf: 'center',
   },
 });

@@ -11,7 +11,7 @@ import MyButton from '../../../component/MyButton';
 import Strings from '../../../statics/Strings';
 
 const OTPScreen = ({ route, navigation }) => {
-  // const { phoneNumber } = route.params;
+  const { phoneNumber } = route.params;
   const confirm = useSelector((state) => state.confirm);
   const Code_Length = 6;
   const [code, setCode] = useState('');

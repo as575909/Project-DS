@@ -1,13 +1,17 @@
 import { StyleSheet } from "react-native";
 import {moderateScale} from 'react-native-size-matters';
+import { Dimensions } from 'react-native';
 
+const { width, height } = Dimensions.get('window');
+const containerWidth = width * 1;
+const containerHeight = height * 1.1;
 
 export const styles = StyleSheet.create({
     aboutContainer: {
-      // display: "flex",
+      width: containerWidth,
+      height: containerHeight, 
       justifyContent: 'space-between',
       alignItems: "center",
-      marginTop: moderateScale(50),
     },
 
     mainHeader: {
@@ -49,12 +53,15 @@ export const styles = StyleSheet.create({
       lineHeight: moderateScale(24),
     },
     menuContainer: {
-      width: "100%",
+      width,
       flexDirection: "row",
       justifyContent: "space-evenly",
     },
     bottomContainer:{
      marginTop: moderateScale(40),
+    },
+    btnCtn:{
+      flexDirection: 'row',
     },
   
     

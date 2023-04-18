@@ -23,6 +23,7 @@ const ForgotPasswordScreen = ({ props, navigation }) => {
       const confirmation = await auth().signInWithPhoneNumber(withCountryCode);
       console.log('confirmaton... here...', confirmation);
       dispatch(setConfirm(confirmation));
+      dispatch(setConfirm(phoneNumber));
       navigation.navigate('OtpScreen', {
         phoneNumber,
       });

@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 import { listEmptyComponent } from "../../component/EmptyList";
 import { onBackPress } from '../../utils/backPressHandler';
 import { handleBackPress } from "../../component/Alert";
-import { styles } from "./index.style";
 import BackHandling from "../../utils/BackHandling";
 
 

@@ -108,7 +108,7 @@ const SignInScreen = (props) => {
                     {chPassword == true ? null : <Text style={styles.error}>{errPassword}</Text>}
                 </View>
                 <CustomButton chEmail={chEmail} onPress={login} text={Strings.welcome_btn_login} />
-                <Text style={styles.forgot} onPress={() => navigation.navigate('OtpScreen')}>{Strings.login_forgot_text}</Text>
+                <Text style={styles.forgot} onPress={() => navigation.navigate('ForgotPswrd')}>{Strings.login_forgot_text}</Text>
                 <View style={hr80}></View>
                 <MyText>{Strings.login_dont_text}
                 <MyText style={{color: colors.text1,}} onPress={() => navigation.navigate('signup')}>  {Strings.welcome_btn_signup}</MyText>

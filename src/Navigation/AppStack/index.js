@@ -1,5 +1,6 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from '../../screens/Home';
 import Products from '../../screens/Products';
 import ProductDetails from '../../screens/ProductDetails';
@@ -11,7 +12,8 @@ import TabNavigator from '../BottomTab';
 import colors from '../../statics/styles/colors';
 import DrawerNav from '../DrawerNav';
 
-const Stack = createStackNavigator();
+// const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 const AppStack = () => {
     return (

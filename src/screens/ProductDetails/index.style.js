@@ -2,9 +2,16 @@ import { StyleSheet } from 'react-native';
 import { moderateScale } from 'react-native-size-matters';
 import { responsiveFontSize } from "react-native-responsive-dimensions";
 import colors from "../../statics/styles/colors";
+import { Dimensions } from 'react-native';
+
+const { width, height } = Dimensions.get('window');
+const containerWidth = width * 1;
+const containerHeight = height * 1;
 
 export const styles = StyleSheet.create({
     mainContainer: {
+      width: containerWidth,
+      height: containerHeight, 
       paddingHorizontal: moderateScale(20),
     },
     courseContainer: {

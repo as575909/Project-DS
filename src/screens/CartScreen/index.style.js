@@ -5,6 +5,7 @@ import Strings from '../../statics/Strings';
 import colors from '../../statics/styles/colors';
 
 
+
 export const styles = StyleSheet.create({
     footer: {
       width: '100%',

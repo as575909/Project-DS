@@ -14,4 +14,5 @@ export const webImgs = {
     gitHub: 'https://cdn-icons-png.flaticon.com/128/2111/2111432.png',
     phone_img: 'https://cdn-icons-png.flaticon.com/512/455/455705.png',
     email_img: 'https://cdn-icons-png.flaticon.com/512/666/666162.png',
+    avatarMale: 'https://st2.depositphotos.com/1537427/5927/v/600/depositphotos_59279537-stock-illustration-user-icon.jpg',
   };

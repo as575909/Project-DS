@@ -1,9 +1,16 @@
 import { StyleSheet } from "react-native";
 import colors from '../../statics/styles/colors'
+import { Dimensions } from 'react-native';
+
+const { width, height } = Dimensions.get('window');
+const containerWidth = width * 1;
+const containerHeight = height * 1.1;
 
 
 export const styles = StyleSheet.create({
     mainContainer: {
+      width: containerWidth,
+      height: containerHeight, 
       flex: 1,
       height: "100%",
       paddingHorizontal: 30,

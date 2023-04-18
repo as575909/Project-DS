@@ -6,13 +6,14 @@ import  Strings  from '../../statics/Strings';
 import { Input } from '../../component/Input';
 import { SubmitButton } from '../../component/SubmitButton';
 import { Checkbox } from '../../component/CheckBox';
+import MyText from '../../component/MyText';
 
 // Header component
 const Header = () => {
   return (
     <View>
-      <Text style={styles.mainHeader}> {Strings.contact_title} </Text>
-      <Text style={styles.description}> {Strings.contact_reach} </Text>
+      <MyText style={styles.mainHeader}> {Strings.contact_title} </MyText>
+      <MyText style={styles.description}> {Strings.contact_reach} </MyText>
     </View>
   );
 };

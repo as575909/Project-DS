@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { useDispatch, useSelector } from "react-redux";
-import { addProductToMyCart, removeMyCartItem, deleteMyCartItem } from "../../redux/reducers/MyCartSlice";
+import { addProductToMyCart, removeMyCartItem, removeItem } from "../../redux/reducers/MyCartSlice";
+import { styles } from './index.style';
 
 const QtyMng = ({item}) => {
   // const [quantity, setQuantity] = useState(1);
@@ -12,29 +13,32 @@ const QtyMng = ({item}) => {
   const cartItem = myCartItems.find((cartItem) => cartItem.id === item.id);
     const qty = cartItem ? cartItem.qty : 0;
 
-  const handleIncrementQuantity = () => {
-    dispatch(addProductToMyCart(item))
-    
-  };
-
-  const handleDecrementQuantity = () => {
-    if (qty > 1) {
-      dispatch(removeMyCartItem(item));
-    } else {
-      dispatch(deleteMyCartItem(item.id));
-
-    }
-  };
 
   return (
-    <View>
-      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-        <Button title="-" onPress={handleDecrementQuantity} />
-        <Text style={{ marginHorizontal: 10 }}>{qty}</Text>
-        <Button title="+" onPress={handleIncrementQuantity} />
-      </View>
-     
-    </View>
+    <View style={styles.buttonContainer}>
+              <TouchableOpacity
+                style={styles.buttonStyle}
+                onPress={() => {
+                  if (qty > 1) {
+                    dispatch(removeMyCartItem(item));
+                  } else {
+                    dispatch(removeItem(item.id));
+                  }
+                }}>
+                <Text style={styles.buttonText}> - </Text>
+              </TouchableOpacity>
+
+              <Text style={styles.zero}>{qty}</Text>
+
+              <TouchableOpacity
+                style={styles.buttonStyle}
+                onPress={() => {
+                  dispatch(addProductToMyCart(item))
+
+                }}>
+                <Text style={styles.buttonText}> + </Text>
+              </TouchableOpacity>
+            </View>
   );
 };
 

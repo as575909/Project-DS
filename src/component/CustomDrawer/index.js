@@ -11,6 +11,8 @@ import Strings from '../../statics/Strings';
 import { styles } from './index.style';
 import UserAvatar from '../UserAvatar';
 import style from '../../globals/style';
+import { Images, webImgs } from "../../assets/images";
+import MyText from '../MyText';
 
 const CustomDrawer = (props) => {
 
@@ -24,8 +26,9 @@ const CustomDrawer = (props) => {
 
         <ImageBackground source={bgdrawer} style={styles.imgbg}>
          <TouchableOpacity onPress={()=> props.navigation.navigate('About') }>   
-        <UserAvatar />
-        <Text style={styles.user}>{Strings.home_welcome}, {userName.data[0].Name}</Text>
+         <UserAvatar userImg= {webImgs.avatarMale} />
+        <MyText style={styles.user}>{Strings.home_welcome}, {userName.data[0].Name}</MyText>
+        <MyText style={styles.user}>Android Developer</MyText>
         </TouchableOpacity>
         </ImageBackground>
 

@@ -46,7 +46,6 @@ const choosePhotoFromLibrary = () => {
 
   return (
     <SafeAreaView>
-     
     <View>
       <HomeHeadNav searchChange={() => ("")} search={search} />
       <ScrollView>

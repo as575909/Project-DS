@@ -4,7 +4,7 @@ import auth from '@react-native-firebase/auth';
 import { showMessage } from 'react-native-flash-message';
 import { styles } from './index.style';
 import { useDispatch } from 'react-redux';
-import { setConfirm } from '../../../redux/reducers/ConfirmReducer';
+import { setConfirm, setNumber } from '../../../redux/reducers/ConfirmReducer';
 import colors from '../../../statics/styles/colors';
 import MyText from '../../../component/MyText';
 import MyTextInput from '../../../component/MyTextInput';
@@ -20,13 +20,17 @@ const ForgotPasswordScreen = ({ props, navigation }) => {
     try {
       const withCountryCode = `+91${phoneNumber}`;
       console.log('with country code', withCountryCode);
-      const confirmation = await auth().signInWithPhoneNumber(withCountryCode);
-      console.log('confirmaton... here...', confirmation);
-      dispatch(setConfirm(confirmation));
-      dispatch(setConfirm(phoneNumber));
+      dispatch(setNumber(phoneNumber));
       navigation.navigate('OtpScreen', {
         phoneNumber,
       });
+      const confirmation = await auth().signInWithPhoneNumber(withCountryCode);
+      console.log('confirmaton... here...', confirmation);
+      dispatch(setConfirm(confirmation));
+      // dispatch(setNumber(phoneNumber));
+      // navigation.navigate('OtpScreen', {
+      //   phoneNumber,
+      // });
       // navigate to the OTP verification screen
     
     } catch (error) {

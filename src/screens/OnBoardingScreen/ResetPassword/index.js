@@ -11,17 +11,19 @@ const ResetPasswordScreen = ({ props,route, navigation }) => {
     const [newPass, SetNewPass] = useState();
     const [CreatenewPass, SetCreateNewPass] = useState();
     const userData = useSelector((state) => state.user);
+    console.log(userData);
 
     // const { phoneNumber } = route.params;
     const phoneNumber = useSelector((state) => state.confirm);
     console.log(phoneNumber, " here is Phone Number")
-    let currentUser = userData.data.filter((item) => item.Number === phoneNumber)[0]
+    let currentUser = userData.data.find((item) => item.Number === phoneNumber);
+    console.log("qwerty",currentUser);
 
     const dispatch = useDispatch();
     const OnSave = () => {
         const newObj = {
-            "Email": currentUser.Email,
-            "Number": currentUser.Number,
+            "Email": userData.data[0].Email,
+            "Number": userData.data[0].Number,
             "Password": newPass
         }
         if (newPass === CreatenewPass) {

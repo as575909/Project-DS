@@ -5,17 +5,20 @@ const confirmSlice = createSlice({
   name: 'confirm',
   initialState: {
     isConfirmed: false,
+    isNumber: false,
   },
   reducers: {
     setConfirm: (state, action) => {
       state.isConfirmed = action.payload;
     },
-    clearConfirm: (state) => null,
+    setNumber: (state, action) => {
+      state.isNumber = action.payload;
+    },
   },
 });
 
 
-export const { setConfirm, clearConfirm } = confirmSlice.actions;
+export const { setConfirm, setNumber } = confirmSlice.actions;
 
 export default confirmSlice.reducer;
 

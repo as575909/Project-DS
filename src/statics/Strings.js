@@ -1,5 +1,5 @@
 const Strings = {
-  home_welcome: 'Welcome to ',
+  home_welcome: 'Welcome ',
   home_title_instamart: 'InstaMart!!',
   home_description:
     'Lorem ipsum dolor sit amet. Et commodi enim ut modi maxime quo minus rerum a nihil commodi et aspernatur officiis et repudiandae alias. Quo aperiam consequatur',

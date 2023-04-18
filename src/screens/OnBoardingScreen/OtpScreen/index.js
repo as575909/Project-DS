@@ -20,9 +20,22 @@ const OTPScreen = ({ route, navigation }) => {
   useEffect(() => {
     const interval = setInterval(() => {
       setTimer(timer => timer - 1);
+      if(timer === 0){
+        clearInterval(interval);
+      }
     }, 1000);
     return () => clearInterval(interval);
   }, []);
+
+//   let timeLeft = 60;
+
+// const countdown = setInterval(() => {
+//   timeLeft--;
+//   console.log(timeLeft); // You can replace this with any code to display the countdown
+//   if (timeLeft === 0) {
+//     clearInterval(countdown);
+//   }
+// }, 1000);
 
   const handleVerifyCode = async () => {
     try {

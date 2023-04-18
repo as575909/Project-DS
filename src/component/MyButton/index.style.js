@@ -4,16 +4,18 @@ import { moderateScale } from 'react-native-size-matters';
 
 export const styles = StyleSheet.create({
     button: {
-      backgroundColor: '#0080FF',
-      paddingVertical: moderateScale(15),
-      paddingHorizontal: moderateScale(30),
+       backgroundColor: colors.btnBgColor,
       borderRadius: moderateScale(5),
+      paddingVertical: moderateScale(10),
+      paddingHorizontal: moderateScale(10),
+      justifyContent: "center",
+      alignItems: "center",
+      marginRight: moderateScale(15),
     },
     buttonText: {
-      color: '#fff',
-      fontSize: 18,
-      fontWeight: 'bold',
-      textAlign: 'center',
+       fontSize: moderateScale(18),
+      color: colors.col1,
       fontFamily: "Itim-Regular",
+      textTransform: "capitalize",
     },
   });

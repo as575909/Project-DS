@@ -11,8 +11,8 @@ import MyButton from '../../../component/MyButton';
 import Strings from '../../../statics/Strings';
 
 const OTPScreen = ({ route, navigation }) => {
-  const { phoneNumber } = route.params;
-  const confirm = useSelector((state) => state.confirm);
+  const { confirm, phoneNumber } = route.params;
+  // const confirm = useSelector((state) => state.confirm);
   const Code_Length = 6;
   const [code, setCode] = useState('');
   const [timer, setTimer] = useState(60);
@@ -24,7 +24,7 @@ const OTPScreen = ({ route, navigation }) => {
         clearInterval(interval);
       }
     }, 1000);
-    return () => clearInterval(interval);
+   
   }, []);
 
 //   let timeLeft = 60;
@@ -39,16 +39,20 @@ const OTPScreen = ({ route, navigation }) => {
 
   const handleVerifyCode = async () => {
     try {
-      Alert.alert('Success','OTP verified successfully');
-      navigation.navigate('ResetPswrdScreen');
+      // Alert.alert('Success','OTP verified successfully');
+      // navigation.navigate('ResetPswrdScreen');
+      console.log(Object.keys(confirm), "hiii")
      
       await confirm.confirm(code);
+      Alert.alert('Success','OTP verified successfully');
       showMessage({
         message: 'Verification successful!',
         type: 'success',
       });
       console.log('Verification successful!');
-      navigation.navigate('ResetPswrdScreen');
+      navigation.navigate('ResetPswrdScreen',{
+        params: {phoneNumber},
+      });
     } catch (error) {
       showMessage({
         message: error.message,

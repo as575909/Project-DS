@@ -14,27 +14,27 @@ const loginSlice = createSlice({
             data: [...state.data, action.payload],
          };
       },
-      ResetPassword(state, action) {
-         console.log("pass ... reset", state.data.map((item) => {
-            if (item.Email === action.payload.Email) {
-               return action.payload;
-            }
-            return item
-         }),)
-         return {
-            ...state
+      // ResetPassword(state, action) {
+      //    console.log("pass ... reset", state.data.map((item) => {
+      //       if (item.Email === action.payload.Email) {
+      //          return action.payload;
+      //       }
+      //       return item
+      //    }),)
+      //    return {
+      //       ...state
+      //    }
+      // }
+      updatePassword: (state, action) => {
+         const { phoneNumber, password } = action.payload;
+         const userIndex = state.data.findIndex((user) => user.Number === phoneNumber);
+         if (userIndex !== -1) {
+           state.data[userIndex].Password = password;
          }
-         // return {
-         //    ...state,
-         //    data: state.data.map((item) => {
-         //       if (item.Password === action.payload.newPass) {
-         //          return action.payload;
-         //       }
-         //    }),
-         // };
-      }
+       },
+
    }
 })
 
-export const { adduser, ResetPassword } = loginSlice.actions;
+export const { adduser, updatePassword } = loginSlice.actions;
 export default loginSlice.reducer;

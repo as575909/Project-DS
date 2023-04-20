@@ -3,7 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-nativ
 import { styles } from './index.style';
 import colors from '../../../statics/styles/colors';
 import { useDispatch, useSelector } from "react-redux";
-import { adduser, ResetPassword } from '../../../redux/reducers/LoginReducer';
+import { adduser, ResetPassword, updatePassword } from '../../../redux/reducers/LoginReducer';
 
 
 const ResetPasswordScreen = ({ props,route, navigation }) => {
@@ -13,8 +13,8 @@ const ResetPasswordScreen = ({ props,route, navigation }) => {
     const userData = useSelector((state) => state.user);
     console.log(userData);
 
-    // const { phoneNumber } = route.params;
-    const phoneNumber = useSelector((state) => state.confirm);
+    const { phoneNumber } = route.params;
+    // const phoneNumber = useSelector((state) => state.confirm);
     console.log(phoneNumber, " here is Phone Number")
     let currentUser = userData.data.find((item) => item.Number === phoneNumber);
     console.log("qwerty",currentUser);
@@ -28,8 +28,8 @@ const ResetPasswordScreen = ({ props,route, navigation }) => {
         }
         if (newPass === CreatenewPass) {
            // Alert.alert("Succes to create new pass")
-            dispatch(ResetPassword(newObj)), "reseet"
-            console.log("reset", ResetPassword(newObj))
+           dispatch(updatePassword(userData.data[0].Number, newPass));
+            // console.log("reset", ResetPassword(newObj))
             alert('Password reset successfully!');
             navigation.navigate('login')
         }

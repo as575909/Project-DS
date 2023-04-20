@@ -11,6 +11,7 @@ import CartScreen from '../../screens/CartScreen';
 import TabNavigator from '../BottomTab';
 import colors from '../../statics/styles/colors';
 import DrawerNav from '../DrawerNav';
+import Settings from '../../screens/Settings';
 
 // const Stack = createStackNavigator();
 const Stack = createNativeStackNavigator();
@@ -31,6 +32,7 @@ const AppStack = () => {
             <Stack.Screen name='Contact' component={Contact} options={{ headerShown: false }} />
             <Stack.Screen name='UserData' component={UserData} options={{ headerShown: false }} />
             <Stack.Screen name='cart' component={CartScreen} options={{ headerShown: false }} />
+            <Stack.Screen name='Settings' component={Settings} options={{ headerShown: false }} />
 
         </Stack.Navigator>
     );

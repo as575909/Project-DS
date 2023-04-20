@@ -31,7 +31,7 @@ const HomeHeadNav = (props) => {
             />
           </View>
           
-          <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+          <TouchableOpacity onPress={() => navigation.navigate('Settings')}>
         <Ionicons name="settings" size={32} color="#fff" />
       </TouchableOpacity>
       

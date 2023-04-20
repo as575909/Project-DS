@@ -18,5 +18,6 @@ export const styles = StyleSheet.create({
         fontSize: responsiveFontSize(3),
         fontFamily: "Itim-Regular",
         marginTop: moderateScale(10),
+       
     },
 })

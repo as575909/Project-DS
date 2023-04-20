@@ -37,32 +37,24 @@ const SignInScreen = (props) => {
             console.log(userData.data[i].Email == Email, "email ")
             if (userData.data[i].Email == Email) {
                 found = true;
-                console.log( "Email Matched", userData.data[i].Email == Email)
+                console.log(userData.data[i].Email == Email, "Email Matched")
                 if (userData.data[i].Password == Password) {
-                    found = true;
-                    console.log("Password Matched", userData.data[i].Password == Password)
+                    console.log("password match", userData.data[i].Password == Password)
                     // await AsyncStorage.setItem('isLoggedIn', '1')
-                    if(found === true){
                     await storeData('isLoggedIn', '1')
                     console.log('isLoggedIn')
                     Alert.alert(
                         'Success',
                         `${userData.data[0].Name} you are successfully logged in!`
                     );
-                    navigation.navigate('TabNavigator')
                 }
-                }
-                else{
-                    Alert.alert('Password is Incorrect');
-                    return false;
-                }
-              
+                navigation.navigate('TabNavigator')
             }
             else {
 
-                Alert.alert('Email or Password is Incorrect');
+                Alert.alert('Email or Password is Incorrect')
                 return false;
-               
+                // navigation.navigate('TabNavigator')
             }
         }
     };

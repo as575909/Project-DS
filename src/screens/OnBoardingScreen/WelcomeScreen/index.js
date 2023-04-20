@@ -7,7 +7,6 @@ import {getData} from '../../../utils/asyncStorage';
 import Strings from '../../../statics/Strings';
 import styles from '../../../statics/styles';
 import TabNavigator from '../../../Navigation/BottomTab';
-import SignupScreen from '../SignupScreen';
 
 const WelcomeScreen = ({ }) => {
     const navigation = useNavigation();

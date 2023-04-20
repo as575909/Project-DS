@@ -1,16 +1,15 @@
-import { ImageBackground, StyleSheet, Text, View, Image, TouchableOpacity, Alert } from 'react-native';
+import { ImageBackground, Text, View, TouchableOpacity, Alert } from 'react-native';
 import React from 'react';
 import { DrawerActions } from "@react-navigation/native";
 import { DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { clearAll } from '../../utils/asyncStorage';
 import { useSelector } from 'react-redux';
 import bgdrawer from '../../assets/images/bgdrawer.jpg';
-import manAvatar from '../../assets/images/manAvatar.jpg';
 import Strings from '../../statics/Strings';
 import { styles } from './index.style';
 import UserAvatar from '../UserAvatar';
-import style from '../../globals/style';
 import { Images, webImgs } from "../../assets/images";
 import MyText from '../MyText';
 

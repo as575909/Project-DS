@@ -137,8 +137,8 @@ const SignupScreen = ({ }) => {
         <View style={styles.container2}>
             <ScrollView>
                 <View style={styles.topContainer}>
-                    <Text style={styles.title}>{Strings.sigunup_title1}</Text>
-                    <Text style={styles.subtitle}>{Strings.welcome_btn_signup}</Text>
+                    <MyText style={styles.title}>{Strings.sigunup_title1}</MyText>
+                    <MyText style={styles.subtitle}>{Strings.welcome_btn_signup}</MyText>
                 </View>
                 <View style={styles.inputout}>
                     <InputWithIcon iconName={Strings.sigunup_name_iconname} placeholder={Strings.sigunup_name_placeholder} onChangeText={setName} />

@@ -15,6 +15,7 @@ import Strings from '../statics/Strings';
 import { moderateScale } from 'react-native-size-matters';
 import TabNavigator from './BottomTab';
 import Settings from '../screens/Settings';
+import EditProfile from '../screens/EditProfile';
 
 const Drawer = createDrawerNavigator();
 
@@ -27,7 +28,7 @@ function DrawerNav() {
         drawerActiveBackgroundColor: colors.drvoilet,
         drawerActiveTintColor: colors.col1,
         drawerInactiveTintColor: colors.drcg,
-        
+
         // drawerStyle: {
         //   position: 'absolute',
         // },
@@ -60,7 +61,7 @@ function DrawerNav() {
             fontFamily: Strings.FontFamily,
           },
           headerTitleAlign: "center",
-         
+
         }} />
 
       <Drawer.Screen name="MyCart" component={CartScreen}
@@ -124,17 +125,29 @@ function DrawerNav() {
           headerTitleAlign: "center",
         }} />
 
-      {/* <Drawer.Screen name="Tab" component={TabNavigator}
+      <Drawer.Screen name="Profile" component={Profile}
         options={{
           drawerIcon: ({ color }) => (
-            <Ionicons name='settings-outline' size={22} color={color} />
+            <Ionicons name='person-outline' size={22} color={color} />
           ),
           headerTitleStyle: {
             fontSize: moderateScale(25),
             fontFamily: Strings.FontFamily,
           },
           headerTitleAlign: "center",
-        }} /> */}
+        }} />
+
+      <Drawer.Screen name="EditProfile" component={EditProfile}
+        options={{
+          drawerIcon: ({ color }) => (
+            <Ionicons name='person-outline' size={22} color={color} />
+          ),
+          headerTitleStyle: {
+            fontSize: moderateScale(25),
+            fontFamily: Strings.FontFamily,
+          },
+          headerTitleAlign: "center",
+        }} />
 
 
     </Drawer.Navigator>

@@ -9,9 +9,10 @@ import colors from '../../../statics/styles/colors';
 import MyText from '../../../component/MyText';
 import MyTextInput from '../../../component/MyTextInput';
 import MyButton from '../../../component/MyButton';
-import Strings from '../../../statics/Strings';
+import { useTranslation } from "react-i18next";
 
 const ForgotPasswordScreen = ({ route, navigation }) => {
+  const {t} = useTranslation();
   const dispatch = useDispatch();
   const [phoneNumber, setPhoneNumber] = useState('');
   const [confirm, setConfirm] = useState(null);
@@ -38,17 +39,17 @@ const ForgotPasswordScreen = ({ route, navigation }) => {
   };
   return (
     <View style={styles.container}>
-      <MyText style={styles.title}>{Strings.forgot_title1}</MyText>
-      <MyText style={styles.subtitle}>{Strings.forgot_title2}</MyText>
+      <MyText style={styles.title}>{t("forgot_title1")}</MyText>
+      <MyText style={styles.subtitle}>{t("forgot_title2")}</MyText>
       <MyTextInput
         style={styles.input}
-        placeholder={Strings.sigunup_mob_placeholder}
+        placeholder={t("sigunup_mob_placeholder")}
         placeholderTextColor={colors.text3}
         keyboardType="phone-pad"
         value={phoneNumber}
         onChangeText={setPhoneNumber}
       />
-      <MyButton onPress={handleSendOTP} text={Strings.forgot_sendOtp_btn} />
+      <MyButton onPress={handleSendOTP} text={t("forgot_sendOtp_btn")} />
     </View>
   );
 };

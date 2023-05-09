@@ -13,8 +13,10 @@ import Strings from '../../../statics/Strings';
 import InputWithIcon from '../../../component/InputWithIcon';
 import CustomButton from '../../../component/CustomButton';
 import MyText from '../../../component/MyText';
+import { useTranslation } from "react-i18next";
 
 const SignInScreen = (props) => {
+    const {t} = useTranslation();
     const navigation = useNavigation();
 
     const [Email, setEmail] = useState("");
@@ -98,20 +100,20 @@ const SignInScreen = (props) => {
         <View style={styles.container}>
             <ScrollView>
                 <View style={styles.topContainer}>
-                    <Text style={styles.title}>{Strings.login_title1}</Text>
-                    <Text style={styles.subtitle}>{Strings.login_title2}</Text>
+                    <Text style={styles.title}>{t("login_title1")}</Text>
+                    <Text style={styles.subtitle}>{t("login_title2")}</Text>
                 </View>
                 <View style={styles.inputout}>
-                    <InputWithIcon iconName={Strings.sigunup_email_iconname} placeholder={Strings.sigunup_email_placeholder} onChangeText={setEmail} onEndEditing={validateEmail} keyboardType="email-address" />
+                    <InputWithIcon iconName={Strings.sigunup_email_iconname} placeholder={t("sigunup_email_placeholder")} onChangeText={setEmail} onEndEditing={validateEmail} keyboardType="email-address" />
                     {chEmail ? null : <Text style={styles.error}>{errEmail}</Text>}
-                    <InputWithIcon iconName={Strings.sigunup_password_iconname} placeholder={Strings.sigunup_password_placeholder} onChangeText={setPassword} onEndEditing={validatePassword} secureTextEntry />
+                    <InputWithIcon iconName={Strings.sigunup_password_iconname} placeholder={t("sigunup_password_placeholder")} onChangeText={setPassword} onEndEditing={validatePassword} secureTextEntry />
                     {chPassword == true ? null : <Text style={styles.error}>{errPassword}</Text>}
                 </View>
-                <CustomButton chEmail={chEmail} onPress={login} text={Strings.welcome_btn_login} />
-                <Text style={styles.forgot} onPress={() => navigation.navigate('ForgotPswrd')}>{Strings.login_forgot_text}</Text>
+                <CustomButton chEmail={chEmail} onPress={login} text={t("welcome_btn_login")} />
+                <Text style={styles.forgot} onPress={() => navigation.navigate('ForgotPswrd')}>{t("login_forgot_text")}</Text>
                 <View style={hr80}></View>
-                <MyText>{Strings.login_dont_text}
-                <MyText style={{color: colors.text1,}} onPress={() => navigation.navigate('signup')}>  {Strings.welcome_btn_signup}</MyText>
+                <MyText>{t("login_dont_text")}
+                <MyText style={{color: colors.text1,}} onPress={() => navigation.navigate('signup')}>  {t("welcome_btn_signup")}</MyText>
                 </MyText>
             </ScrollView>
         </View>

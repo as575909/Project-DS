@@ -55,6 +55,8 @@
     "otp_verify_btn": "Verify",
     "otp_subtitle_text1": "Didn't receive OTP? Resend in",
     "otp_subtitle_text2": "seconds",
+    "reset_title1": "Reset Password",
+    "reset_title2": "Enter your new password below:",
     "about": "About Me",
     "about_follow_title": "Connect Me Through",
     "about_user_title": " I am an Application Developer 😎 ",

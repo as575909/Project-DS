@@ -13,23 +13,20 @@ import { styles } from './index.style';
 import CustomButton from '../../../component/CustomButton';
 import MyText from '../../../component/MyText';
 import colors from '../../../statics/styles/colors';
+import { useTranslation } from "react-i18next";
 
 const SignupScreen = ({ }) => {
-
+    const {t} = useTranslation();
     const [Name, setName] = useState('');
-
     const [Email, setEmail] = useState("");
     const [chEmail, setchEmail] = useState("true");
     const [errEmail, seterrEmail] = useState("");
-
     const [rePassword, resetPassword] = useState("");
     const [chrePassword, setchrePassword] = useState("true");
     const [errRePassword, seterrRePassword] = useState("");
-
     const [Password, setPassword] = useState("");
     const [chPassword, setchPassword] = useState("true");
     const [errPassword, seterrPassword] = useState("");
-
     const [PhoneNum, setPhoneNum] = useState("");
     const [chPhoneNum, setchPhoneNum] = useState("true");
     const [errPhoneNum, seterrPhoneNum] = useState("");
@@ -52,13 +49,13 @@ const SignupScreen = ({ }) => {
         if (userObj.Name && userObj.Email && userObj.Password && userObj.Number != " ") {
 
             Alert.alert(
-                Strings.Success,
+                t("Success"),
                 `User ${userObj.Name} was successfully created!`,
             );
             navigation.navigate('login')
         }
         else {
-            alert(Strings.Error1)
+            alert(t("Error1"))
         }
         dispatch(adduser(userObj))
     }
@@ -137,24 +134,24 @@ const SignupScreen = ({ }) => {
         <View style={styles.container2}>
             <ScrollView>
                 <View style={styles.topContainer}>
-                    <MyText style={styles.title}>{Strings.sigunup_title1}</MyText>
-                    <MyText style={styles.subtitle}>{Strings.welcome_btn_signup}</MyText>
+                    <MyText style={styles.title}>{t("sigunup_title1")}</MyText>
+                    <MyText style={styles.subtitle}>{t("welcome_btn_signup")}</MyText>
                 </View>
                 <View style={styles.inputout}>
-                    <InputWithIcon iconName={Strings.sigunup_name_iconname} placeholder={Strings.sigunup_name_placeholder} onChangeText={setName} />
-                    <InputWithIcon iconName={Strings.sigunup_email_iconname} placeholder={Strings.sigunup_email_placeholder} onChangeText={setEmail} onEndEditing={validateEmail} keyboardType="email-address" />
+                    <InputWithIcon iconName={Strings.sigunup_name_iconname} placeholder={t("sigunup_name_placeholder")} onChangeText={setName} />
+                    <InputWithIcon iconName={Strings.sigunup_email_iconname} placeholder={t("sigunup_email_placeholder")} onChangeText={setEmail} onEndEditing={validateEmail} keyboardType="email-address" />
                     {chEmail ? null : <Text style={styles.error}>{errEmail}</Text>}
-                    <InputWithIcon iconName={Strings.sigunup_mob_iconname} placeholder={Strings.sigunup_mob_placeholder} onChangeText={setPhoneNum} onEndEditing={validatePhoneNum} keyboardType="phone-pad" />
+                    <InputWithIcon iconName={Strings.sigunup_mob_iconname} placeholder={t("sigunup_mob_placeholder")} onChangeText={setPhoneNum} onEndEditing={validatePhoneNum} keyboardType="phone-pad" />
                     {chPhoneNum == true ? null : <Text style={styles.error}>{errPhoneNum}</Text>}
-                    <InputWithIcon iconName={Strings.sigunup_password_iconname} placeholder={Strings.sigunup_password_placeholder} onChangeText={setPassword} onEndEditing={validatePassword} secureTextEntry />
+                    <InputWithIcon iconName={Strings.sigunup_password_iconname} placeholder={t("sigunup_password_placeholder")} onChangeText={setPassword} onEndEditing={validatePassword} secureTextEntry />
                     {chPassword == true ? null : <Text style={styles.error}>{errPassword}</Text>}
-                    <InputWithIcon iconName={Strings.sigunup_cpassword_iconname} placeholder={Strings.sigunup_cpassword_placeholder} onChangeText={resetPassword} onEndEditing={validateRePassword} secureTextEntry />
+                    <InputWithIcon iconName={Strings.sigunup_cpassword_iconname} placeholder={t("sigunup_cpassword_placeholder")} onChangeText={resetPassword} onEndEditing={validateRePassword} secureTextEntry />
                     {chrePassword == true ? null : <Text style={styles.error} >{errRePassword}</Text>}
                 </View>
-                <CustomButton chEmail={chEmail} onPress={onSubmit} text={Strings.welcome_btn_signup} />
+                <CustomButton chEmail={chEmail} onPress={onSubmit} text={t("welcome_btn_signup")} />
                 <View style={hr80}></View>
-                <MyText>{Strings.sigunup_title2}
-                    <MyText style={{ color: colors.text1, }} onPress={() => navigation.navigate('login')}>  {Strings.welcome_btn_login}</MyText>
+                <MyText>{t("sigunup_title2")}
+                    <MyText style={{ color: colors.text1, }} onPress={() => navigation.navigate('login')}>  {t("welcome_btn_login")}</MyText>
                 </MyText>
             </ScrollView>
         </View>

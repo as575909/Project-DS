@@ -1,25 +1,9 @@
-// // import {createStore} from 'redux'
-// import {configureStore} from '@reduxjs/toolkit'
-// import rootReducer from './rootReducer';
-// import productSaga from './productSaga'
-// import createSagaMiddleware from 'redux-saga';
-
-// // const store = createStore(rootReducer);
-// const sagaMiddleware = createSagaMiddleware();
-// const store  = configureStore({
-//     reducer:rootReducer,
-//     middleware:()=>[sagaMiddleware]
-// });
-
-// sagaMiddleware.run(productSaga);
-
-// export default store;
-
 import { configureStore } from '@reduxjs/toolkit'
 import rootReducer from './rootReducer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { persistReducer, persistStore } from 'redux-persist';
-
+import createSagaMiddleware from 'redux-saga';
+import SagaData from './saga';
 import {
   FLUSH,
   REHYDRATE,
@@ -33,7 +17,6 @@ const persistConfig = {
   key: 'root',
   storage: AsyncStorage
 }
-
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 
@@ -47,13 +30,13 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 // };
 
 
-
 // const store = configureStore(
 //   {
 //      reducer: persistedReducer,
 //   }
 // )
 
+const sagaMiddleware = createSagaMiddleware();
 const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
@@ -61,9 +44,10 @@ const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }),
+    }).concat(sagaMiddleware),
 })
 
+sagaMiddleware.run(SagaData);
 let persistor = persistStore(store);
 
 

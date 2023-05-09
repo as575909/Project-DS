@@ -8,9 +8,10 @@ import { useSelector } from 'react-redux';
 import colors from '../../../statics/styles/colors';
 import MyText from '../../../component/MyText';
 import MyButton from '../../../component/MyButton';
-import Strings from '../../../statics/Strings';
+import { useTranslation } from "react-i18next";
 
 const OTPScreen = ({ route, navigation }) => {
+  const {t} = useTranslation();
   const { confirm, phoneNumber } = route.params;
   // const confirm = useSelector((state) => state.confirm);
   const Code_Length = 6;
@@ -72,8 +73,8 @@ const OTPScreen = ({ route, navigation }) => {
 
   return (
     <View style={styles.container}>
-      <MyText style={styles.title}>{Strings.otp_title1}</MyText>
-      <MyText style={styles.subtitle}>{Strings.otp_title2}</MyText>
+      <MyText style={styles.title}>{t("otp_title1")}</MyText>
+      <MyText style={styles.subtitle}>{t("otp_title2")}</MyText>
 
       <View style={styles.input}>
         <OTPInput
@@ -83,10 +84,10 @@ const OTPScreen = ({ route, navigation }) => {
           inputStyle={styles.otp}
         />
       </View>
-      <MyButton onPress={handleVerifyCode} text={Strings.otp_verify_btn} />
+      <MyButton onPress={handleVerifyCode} text={t("otp_verify_btn")} />
 
       <View style={styles.resendContainer}>
-        <Text style={styles.subtitle}>{Strings.otp_subtitle_text1} {timer} {Strings.otp_subtitle_text2}</Text>
+        <Text style={styles.subtitle}>{t("otp_subtitle_text1")} {timer} {t("otp_subtitle_text2")}</Text>
         {timer == 0 && (
           <MyButton onPress={handleResendOTP} text='Resend OTP' />
         )}
